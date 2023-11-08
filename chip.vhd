@@ -10,7 +10,8 @@ ENTITY chip IS
         clk : IN STD_LOGIC;
         reset_n : IN STD_LOGIC;
         sw : IN STD_LOGIC;
-        switches : IN STD_LOGIC_VECTOR(1 DOWNTO 0);
+        switches : IN STD_LOGIC_VECTOR(17 DOWNTO 0);
+        buttons : in std_logic_vector(3 downto 0);
         leds : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
         rled : OUT STD_LOGIC
     );
@@ -19,12 +20,13 @@ END ENTITY chip;
 ARCHITECTURE rtl_and_struct OF chip IS
     SIGNAL rled_tmp : STD_LOGIC;
     COMPONENT blinky IS
-        PORT (
-            clk_clk : IN STD_LOGIC := 'X'; -- clk
-            reset_reset_n : IN STD_LOGIC := 'X'; -- reset_n
-            leds_external_connection_export : OUT STD_LOGIC_VECTOR(1 DOWNTO 0); -- export
-            switches_external_connection_export : IN STD_LOGIC_VECTOR(1 DOWNTO 0) := (OTHERS => 'X') -- export
-        );
+    port (
+		buttons_external_connection_export  : in  std_logic_vector(3 downto 0)  := (others => '0'); --  buttons_external_connection.export
+		clk_clk                             : in  std_logic                     := '0';             --                          clk.clk
+		leds_external_connection_export     : out std_logic_vector(1 downto 0);                     --     leds_external_connection.export
+		reset_reset_n                       : in  std_logic                     := '0';             --                        reset.reset_n
+		switches_external_connection_export : in  std_logic_vector(17 downto 0) := (others => '0')  -- switches_external_connection.export
+	);
     END COMPONENT blinky;
 BEGIN
     u0 : COMPONENT blinky
@@ -32,7 +34,8 @@ BEGIN
             clk_clk => clk,
             reset_reset_n => reset_n,
             leds_external_connection_export => leds,
-            switches_external_connection_export => switches
+            switches_external_connection_export => switches,
+            buttons_external_connection_export => buttons
         );
     -- begin custom hardware
     -- turning on red LED when the most left switch is up

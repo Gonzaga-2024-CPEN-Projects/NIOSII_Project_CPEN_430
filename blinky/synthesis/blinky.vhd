@@ -8,14 +8,25 @@ use IEEE.numeric_std.all;
 
 entity blinky is
 	port (
-		clk_clk                             : in  std_logic                    := '0';             --                          clk.clk
-		leds_external_connection_export     : out std_logic_vector(1 downto 0);                    --     leds_external_connection.export
-		reset_reset_n                       : in  std_logic                    := '0';             --                        reset.reset_n
-		switches_external_connection_export : in  std_logic_vector(1 downto 0) := (others => '0')  -- switches_external_connection.export
+		buttons_external_connection_export  : in  std_logic_vector(3 downto 0)  := (others => '0'); --  buttons_external_connection.export
+		clk_clk                             : in  std_logic                     := '0';             --                          clk.clk
+		leds_external_connection_export     : out std_logic_vector(1 downto 0);                     --     leds_external_connection.export
+		reset_reset_n                       : in  std_logic                     := '0';             --                        reset.reset_n
+		switches_external_connection_export : in  std_logic_vector(17 downto 0) := (others => '0')  -- switches_external_connection.export
 	);
 end entity blinky;
 
 architecture rtl of blinky is
+	component blinky_buttons is
+		port (
+			clk      : in  std_logic                     := 'X';             -- clk
+			reset_n  : in  std_logic                     := 'X';             -- reset_n
+			address  : in  std_logic_vector(1 downto 0)  := (others => 'X'); -- address
+			readdata : out std_logic_vector(31 downto 0);                    -- readdata
+			in_port  : in  std_logic_vector(3 downto 0)  := (others => 'X')  -- export
+		);
+	end component blinky_buttons;
+
 	component blinky_cpu is
 		port (
 			clk                                 : in  std_logic                     := 'X';             -- clk
@@ -97,7 +108,7 @@ architecture rtl of blinky is
 			reset_n  : in  std_logic                     := 'X';             -- reset_n
 			address  : in  std_logic_vector(1 downto 0)  := (others => 'X'); -- address
 			readdata : out std_logic_vector(31 downto 0);                    -- readdata
-			in_port  : in  std_logic_vector(1 downto 0)  := (others => 'X')  -- export
+			in_port  : in  std_logic_vector(17 downto 0) := (others => 'X')  -- export
 		);
 	end component blinky_switches;
 
@@ -117,6 +128,8 @@ architecture rtl of blinky is
 			cpu_instruction_master_waitrequest      : out std_logic;                                        -- waitrequest
 			cpu_instruction_master_read             : in  std_logic                     := 'X';             -- read
 			cpu_instruction_master_readdata         : out std_logic_vector(31 downto 0);                    -- readdata
+			buttons_s1_address                      : out std_logic_vector(1 downto 0);                     -- address
+			buttons_s1_readdata                     : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
 			cpu_debug_mem_slave_address             : out std_logic_vector(8 downto 0);                     -- address
 			cpu_debug_mem_slave_write               : out std_logic;                                        -- write
 			cpu_debug_mem_slave_read                : out std_logic;                                        -- read
@@ -265,6 +278,8 @@ architecture rtl of blinky is
 	signal mm_interconnect_0_leds_s1_address                             : std_logic_vector(1 downto 0);  -- mm_interconnect_0:leds_s1_address -> leds:address
 	signal mm_interconnect_0_leds_s1_write                               : std_logic;                     -- mm_interconnect_0:leds_s1_write -> mm_interconnect_0_leds_s1_write:in
 	signal mm_interconnect_0_leds_s1_writedata                           : std_logic_vector(31 downto 0); -- mm_interconnect_0:leds_s1_writedata -> leds:writedata
+	signal mm_interconnect_0_buttons_s1_readdata                         : std_logic_vector(31 downto 0); -- buttons:readdata -> mm_interconnect_0:buttons_s1_readdata
+	signal mm_interconnect_0_buttons_s1_address                          : std_logic_vector(1 downto 0);  -- mm_interconnect_0:buttons_s1_address -> buttons:address
 	signal irq_mapper_receiver0_irq                                      : std_logic;                     -- jtag_uart:av_irq -> irq_mapper:receiver0_irq
 	signal cpu_irq_irq                                                   : std_logic_vector(31 downto 0); -- irq_mapper:sender_irq -> cpu:irq
 	signal rst_controller_reset_out_reset                                : std_logic;                     -- rst_controller:reset_out -> [irq_mapper:reset, mm_interconnect_0:cpu_reset_reset_bridge_in_reset_reset, onchip_ram:reset, rst_controller_reset_out_reset:in, rst_translator:in_reset]
@@ -273,9 +288,18 @@ architecture rtl of blinky is
 	signal mm_interconnect_0_jtag_uart_avalon_jtag_slave_read_ports_inv  : std_logic;                     -- mm_interconnect_0_jtag_uart_avalon_jtag_slave_read:inv -> jtag_uart:av_read_n
 	signal mm_interconnect_0_jtag_uart_avalon_jtag_slave_write_ports_inv : std_logic;                     -- mm_interconnect_0_jtag_uart_avalon_jtag_slave_write:inv -> jtag_uart:av_write_n
 	signal mm_interconnect_0_leds_s1_write_ports_inv                     : std_logic;                     -- mm_interconnect_0_leds_s1_write:inv -> leds:write_n
-	signal rst_controller_reset_out_reset_ports_inv                      : std_logic;                     -- rst_controller_reset_out_reset:inv -> [cpu:reset_n, jtag_uart:rst_n, leds:reset_n, switches:reset_n]
+	signal rst_controller_reset_out_reset_ports_inv                      : std_logic;                     -- rst_controller_reset_out_reset:inv -> [buttons:reset_n, cpu:reset_n, jtag_uart:rst_n, leds:reset_n, switches:reset_n]
 
 begin
+
+	buttons : component blinky_buttons
+		port map (
+			clk      => clk_clk,                                  --                 clk.clk
+			reset_n  => rst_controller_reset_out_reset_ports_inv, --               reset.reset_n
+			address  => mm_interconnect_0_buttons_s1_address,     --                  s1.address
+			readdata => mm_interconnect_0_buttons_s1_readdata,    --                    .readdata
+			in_port  => buttons_external_connection_export        -- external_connection.export
+		);
 
 	cpu : component blinky_cpu
 		port map (
@@ -373,6 +397,8 @@ begin
 			cpu_instruction_master_waitrequest      => cpu_instruction_master_waitrequest,                        --                                .waitrequest
 			cpu_instruction_master_read             => cpu_instruction_master_read,                               --                                .read
 			cpu_instruction_master_readdata         => cpu_instruction_master_readdata,                           --                                .readdata
+			buttons_s1_address                      => mm_interconnect_0_buttons_s1_address,                      --                      buttons_s1.address
+			buttons_s1_readdata                     => mm_interconnect_0_buttons_s1_readdata,                     --                                .readdata
 			cpu_debug_mem_slave_address             => mm_interconnect_0_cpu_debug_mem_slave_address,             --             cpu_debug_mem_slave.address
 			cpu_debug_mem_slave_write               => mm_interconnect_0_cpu_debug_mem_slave_write,               --                                .write
 			cpu_debug_mem_slave_read                => mm_interconnect_0_cpu_debug_mem_slave_read,                --                                .read
