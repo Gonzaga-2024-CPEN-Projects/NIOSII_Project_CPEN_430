@@ -8,7 +8,7 @@ use IEEE.numeric_std.all;
 
 entity blinky is
 	port (
-		buttons_external_connection_export  : in  std_logic_vector(3 downto 0)  := (others => '0'); --  buttons_external_connection.export
+		buttons_external_connection_export  : in  std_logic_vector(2 downto 0)  := (others => '0'); --  buttons_external_connection.export
 		clk_clk                             : in  std_logic                     := '0';             --                          clk.clk
 		leds_external_connection_export     : out std_logic_vector(1 downto 0);                     --     leds_external_connection.export
 		reset_reset_n                       : in  std_logic                     := '0';             --                        reset.reset_n
@@ -23,7 +23,7 @@ architecture rtl of blinky is
 			reset_n  : in  std_logic                     := 'X';             -- reset_n
 			address  : in  std_logic_vector(1 downto 0)  := (others => 'X'); -- address
 			readdata : out std_logic_vector(31 downto 0);                    -- readdata
-			in_port  : in  std_logic_vector(3 downto 0)  := (others => 'X')  -- export
+			in_port  : in  std_logic_vector(2 downto 0)  := (others => 'X')  -- export
 		);
 	end component blinky_buttons;
 

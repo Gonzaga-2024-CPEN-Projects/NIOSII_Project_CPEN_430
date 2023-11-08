@@ -134,18 +134,18 @@ module blinky_mm_interconnect_0_router
     // Figure out the number of bits to mask off for each slave span
     // during address decoding
     // -------------------------------------------------------
-    localparam PAD0 = log2ceil(64'h10 - 64'h0); 
-    localparam PAD1 = log2ceil(64'h20000 - 64'h10000); 
-    localparam PAD2 = log2ceil(64'h21000 - 64'h20800); 
-    localparam PAD3 = log2ceil(64'h21010 - 64'h21000); 
-    localparam PAD4 = log2ceil(64'h21020 - 64'h21010); 
-    localparam PAD5 = log2ceil(64'h21028 - 64'h21020); 
+    localparam PAD0 = log2ceil(64'h20000 - 64'h10000); 
+    localparam PAD1 = log2ceil(64'h21000 - 64'h20800); 
+    localparam PAD2 = log2ceil(64'h21010 - 64'h21000); 
+    localparam PAD3 = log2ceil(64'h21020 - 64'h21010); 
+    localparam PAD4 = log2ceil(64'h21030 - 64'h21020); 
+    localparam PAD5 = log2ceil(64'h21038 - 64'h21030); 
     // -------------------------------------------------------
     // Work out which address bits are significant based on the
     // address range of the slaves. If the required width is too
     // large or too small, we use the address field width instead.
     // -------------------------------------------------------
-    localparam ADDR_RANGE = 64'h21028;
+    localparam ADDR_RANGE = 64'h21038;
     localparam RANGE_ADDR_WIDTH = log2ceil(ADDR_RANGE);
     localparam OPTIMIZED_ADDR_H = (RANGE_ADDR_WIDTH > PKT_ADDR_W) ||
                                   (RANGE_ADDR_WIDTH == 0) ?
@@ -198,38 +198,38 @@ module blinky_mm_interconnect_0_router
         // Sets the channel and destination ID based on the address
         // --------------------------------------------------
 
-    // ( 0x0 .. 0x10 )
-    if ( {address[RG:PAD0],{PAD0{1'b0}}} == 18'h0  && read_transaction  ) begin
-            src_channel = 6'b100000;
-            src_data[PKT_DEST_ID_H:PKT_DEST_ID_L] = 0;
-    end
-
     // ( 0x10000 .. 0x20000 )
-    if ( {address[RG:PAD1],{PAD1{1'b0}}} == 18'h10000   ) begin
+    if ( {address[RG:PAD0],{PAD0{1'b0}}} == 18'h10000   ) begin
             src_channel = 6'b000100;
             src_data[PKT_DEST_ID_H:PKT_DEST_ID_L] = 4;
     end
 
     // ( 0x20800 .. 0x21000 )
-    if ( {address[RG:PAD2],{PAD2{1'b0}}} == 18'h20800   ) begin
+    if ( {address[RG:PAD1],{PAD1{1'b0}}} == 18'h20800   ) begin
             src_channel = 6'b000010;
             src_data[PKT_DEST_ID_H:PKT_DEST_ID_L] = 1;
     end
 
     // ( 0x21000 .. 0x21010 )
-    if ( {address[RG:PAD3],{PAD3{1'b0}}} == 18'h21000   ) begin
+    if ( {address[RG:PAD2],{PAD2{1'b0}}} == 18'h21000  && read_transaction  ) begin
+            src_channel = 6'b100000;
+            src_data[PKT_DEST_ID_H:PKT_DEST_ID_L] = 0;
+    end
+
+    // ( 0x21010 .. 0x21020 )
+    if ( {address[RG:PAD3],{PAD3{1'b0}}} == 18'h21010   ) begin
             src_channel = 6'b010000;
             src_data[PKT_DEST_ID_H:PKT_DEST_ID_L] = 3;
     end
 
-    // ( 0x21010 .. 0x21020 )
-    if ( {address[RG:PAD4],{PAD4{1'b0}}} == 18'h21010  && read_transaction  ) begin
+    // ( 0x21020 .. 0x21030 )
+    if ( {address[RG:PAD4],{PAD4{1'b0}}} == 18'h21020  && read_transaction  ) begin
             src_channel = 6'b001000;
             src_data[PKT_DEST_ID_H:PKT_DEST_ID_L] = 5;
     end
 
-    // ( 0x21020 .. 0x21028 )
-    if ( {address[RG:PAD5],{PAD5{1'b0}}} == 18'h21020   ) begin
+    // ( 0x21030 .. 0x21038 )
+    if ( {address[RG:PAD5],{PAD5{1'b0}}} == 18'h21030   ) begin
             src_channel = 6'b000001;
             src_data[PKT_DEST_ID_H:PKT_DEST_ID_L] = 2;
     end

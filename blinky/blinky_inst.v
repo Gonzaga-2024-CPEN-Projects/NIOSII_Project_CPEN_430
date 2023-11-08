@@ -1,8 +1,8 @@
 	blinky u0 (
+		.buttons_external_connection_export  (<connected-to-buttons_external_connection_export>),  //  buttons_external_connection.export
 		.clk_clk                             (<connected-to-clk_clk>),                             //                          clk.clk
 		.leds_external_connection_export     (<connected-to-leds_external_connection_export>),     //     leds_external_connection.export
 		.reset_reset_n                       (<connected-to-reset_reset_n>),                       //                        reset.reset_n
-		.switches_external_connection_export (<connected-to-switches_external_connection_export>), // switches_external_connection.export
-		.buttons_external_connection_export  (<connected-to-buttons_external_connection_export>)   //  buttons_external_connection.export
+		.switches_external_connection_export (<connected-to-switches_external_connection_export>)  // switches_external_connection.export
 	);
 

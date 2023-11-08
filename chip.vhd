@@ -11,7 +11,7 @@ ENTITY chip IS
         reset_n : IN STD_LOGIC;
         sw : IN STD_LOGIC;
         switches : IN STD_LOGIC_VECTOR(17 DOWNTO 0);
-        buttons : in std_logic_vector(3 downto 0);
+        buttons : in std_logic_vector(2 downto 0);
         leds : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
         rled : OUT STD_LOGIC
     );
@@ -21,7 +21,7 @@ ARCHITECTURE rtl_and_struct OF chip IS
     SIGNAL rled_tmp : STD_LOGIC;
     COMPONENT blinky IS
     port (
-		buttons_external_connection_export  : in  std_logic_vector(3 downto 0)  := (others => '0'); --  buttons_external_connection.export
+		buttons_external_connection_export  : in  std_logic_vector(2 downto 0)  := (others => '0'); --  buttons_external_connection.export
 		clk_clk                             : in  std_logic                     := '0';             --                          clk.clk
 		leds_external_connection_export     : out std_logic_vector(1 downto 0);                     --     leds_external_connection.export
 		reset_reset_n                       : in  std_logic                     := '0';             --                        reset.reset_n
