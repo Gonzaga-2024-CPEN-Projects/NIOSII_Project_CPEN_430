@@ -1,0 +1,19 @@
+#include <sys/alt_stdio.h>
+#include "system.h"
+#include "altera_avalon_pio_regs.h"
+int main()
+{
+	int buttons_data;
+	int delay;
+	alt_putstr("Ciao from Nios II!\n");
+	while(1) {
+			buttons_data = IORD_ALTERA_AVALON_PIO_DATA(BUTTONS_BASE);
+			IOWR_ALTERA_AVALON_PIO_DATA(LEDS_BASE, switch_data & led_pattern);
+			delay = 0;
+			while(delay < 200000) {
+				delay++;
+			}
+			led_pattern ^= switch_data; // toggle LEDs on selected switches
+	}
+	return 0;
+}

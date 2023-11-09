@@ -5,7 +5,7 @@ Archive member included to satisfy reference by file (symbol)
 ../button_test_bsp/\libhal_bsp.a(alt_main.o)
                               ../button_test_bsp//obj/HAL/src/crt0.o (alt_main)
 ../button_test_bsp/\libhal_bsp.a(alt_putstr.o)
-                              obj/default/hello_world.o (alt_putstr)
+                              obj/default/button_test.o (alt_putstr)
 ../button_test_bsp/\libhal_bsp.a(alt_sys_init.o)
                               ../button_test_bsp/\libhal_bsp.a(alt_main.o) (alt_irq_init)
 ../button_test_bsp/\libhal_bsp.a(altera_avalon_jtag_uart_fd.o)
@@ -165,7 +165,7 @@ onchip_ram       0x0000000000010020 0x000000000000ffe0
 Linker script and memory map
 
 LOAD ../button_test_bsp//obj/HAL/src/crt0.o
-LOAD obj/default/hello_world.o
+LOAD obj/default/button_test.o
 LOAD c:/intelfpga/18.0/nios2eds/bin/gnu/h-x86_64-mingw32/bin/../lib/gcc/nios2-elf/5.3.0/../../../../../H-x86_64-mingw32/nios2-elf/lib/mno-hw-mul\libstdc++.a
 LOAD c:/intelfpga/18.0/nios2eds/bin/gnu/h-x86_64-mingw32/bin/../lib/gcc/nios2-elf/5.3.0/../../../../../H-x86_64-mingw32/nios2-elf/lib/mno-hw-mul\libm.a
 LOAD c:/intelfpga/18.0/nios2eds/bin/gnu/h-x86_64-mingw32/bin/../lib/gcc/nios2-elf/5.3.0/mno-hw-mul\libgcc.a
@@ -288,7 +288,7 @@ LOAD c:/intelfpga/18.0/nios2eds/bin/gnu/h-x86_64-mingw32/bin/../lib/gcc/nios2-el
  *(.text .stub .text.* .gnu.linkonce.t.*)
  .text          0x0000000000010230       0x3c ../button_test_bsp//obj/HAL/src/crt0.o
                 0x0000000000010230                _start
- .text          0x000000000001026c       0x7c obj/default/hello_world.o
+ .text          0x000000000001026c       0x7c obj/default/button_test.o
                 0x000000000001026c                main
  .text          0x00000000000102e8       0xec ../button_test_bsp/\libhal_bsp.a(alt_load.o)
                 0x0000000000010350                alt_load
@@ -582,7 +582,7 @@ LOAD c:/intelfpga/18.0/nios2eds/bin/gnu/h-x86_64-mingw32/bin/../lib/gcc/nios2-el
                 0x00000000000157a4                PROVIDE (__ram_rodata_start, ABSOLUTE (.))
                 0x00000000000157a4                . = ALIGN (0x4)
  *(.rodata .rodata.* .gnu.linkonce.r.*)
- .rodata        0x00000000000157a4       0x14 obj/default/hello_world.o
+ .rodata        0x00000000000157a4       0x14 obj/default/button_test.o
  .rodata        0x00000000000157b8        0xf ../button_test_bsp/\libhal_bsp.a(alt_main.o)
  *fill*         0x00000000000157c7        0x1 
  .rodata        0x00000000000157c8        0xf ../button_test_bsp/\libhal_bsp.a(alt_sys_init.o)
@@ -605,7 +605,7 @@ LOAD c:/intelfpga/18.0/nios2eds/bin/gnu/h-x86_64-mingw32/bin/../lib/gcc/nios2-el
  *(.data1)
  *(.data .data.* .gnu.linkonce.d.*)
  .data          0x00000000000157e8        0x0 ../button_test_bsp//obj/HAL/src/crt0.o
- .data          0x00000000000157e8        0x0 obj/default/hello_world.o
+ .data          0x00000000000157e8        0x0 obj/default/button_test.o
  .data          0x00000000000157e8        0x0 ../button_test_bsp/\libhal_bsp.a(alt_load.o)
  .data          0x00000000000157e8        0x0 ../button_test_bsp/\libhal_bsp.a(alt_main.o)
  .data          0x00000000000157e8        0x0 ../button_test_bsp/\libhal_bsp.a(alt_putstr.o)
@@ -756,7 +756,7 @@ LOAD c:/intelfpga/18.0/nios2eds/bin/gnu/h-x86_64-mingw32/bin/../lib/gcc/nios2-el
  *(.dynbss)
  *(.bss .bss.* .gnu.linkonce.b.*)
  .bss           0x0000000000018cec        0x0 ../button_test_bsp//obj/HAL/src/crt0.o
- .bss           0x0000000000018cec        0x0 obj/default/hello_world.o
+ .bss           0x0000000000018cec        0x0 obj/default/button_test.o
  .bss           0x0000000000018cec        0x0 ../button_test_bsp/\libhal_bsp.a(alt_load.o)
  .bss           0x0000000000018cec        0x0 ../button_test_bsp/\libhal_bsp.a(alt_main.o)
  .bss           0x0000000000018cec        0x0 ../button_test_bsp/\libhal_bsp.a(alt_putstr.o)
@@ -870,7 +870,7 @@ LOAD c:/intelfpga/18.0/nios2eds/bin/gnu/h-x86_64-mingw32/bin/../lib/gcc/nios2-el
 
 .comment        0x0000000000000000       0x23
  *(.comment)
- .comment       0x0000000000000000       0x23 obj/default/hello_world.o
+ .comment       0x0000000000000000       0x23 obj/default/button_test.o
                                          0x24 (size before relaxing)
  .comment       0x0000000000000023       0x24 ../button_test_bsp/\libhal_bsp.a(alt_load.o)
  .comment       0x0000000000000023       0x24 ../button_test_bsp/\libhal_bsp.a(alt_main.o)
@@ -962,7 +962,7 @@ LOAD c:/intelfpga/18.0/nios2eds/bin/gnu/h-x86_64-mingw32/bin/../lib/gcc/nios2-el
  .debug_aranges
                 0x0000000000000000       0x28 ../button_test_bsp//obj/HAL/src/crt0.o
  .debug_aranges
-                0x0000000000000028       0x20 obj/default/hello_world.o
+                0x0000000000000028       0x20 obj/default/button_test.o
  .debug_aranges
                 0x0000000000000048       0x20 ../button_test_bsp/\libhal_bsp.a(alt_load.o)
  .debug_aranges
@@ -1118,7 +1118,7 @@ LOAD c:/intelfpga/18.0/nios2eds/bin/gnu/h-x86_64-mingw32/bin/../lib/gcc/nios2-el
 .debug_info     0x0000000000000000    0x16b44
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x0000000000000000       0x7f ../button_test_bsp//obj/HAL/src/crt0.o
- .debug_info    0x000000000000007f       0xa6 obj/default/hello_world.o
+ .debug_info    0x000000000000007f       0xa6 obj/default/button_test.o
  .debug_info    0x0000000000000125      0x145 ../button_test_bsp/\libhal_bsp.a(alt_load.o)
  .debug_info    0x000000000000026a      0x131 ../button_test_bsp/\libhal_bsp.a(alt_main.o)
  .debug_info    0x000000000000039b      0x8a8 ../button_test_bsp/\libhal_bsp.a(alt_putstr.o)
@@ -1197,7 +1197,7 @@ LOAD c:/intelfpga/18.0/nios2eds/bin/gnu/h-x86_64-mingw32/bin/../lib/gcc/nios2-el
 .debug_abbrev   0x0000000000000000     0x6096
  *(.debug_abbrev)
  .debug_abbrev  0x0000000000000000       0x12 ../button_test_bsp//obj/HAL/src/crt0.o
- .debug_abbrev  0x0000000000000012       0x60 obj/default/hello_world.o
+ .debug_abbrev  0x0000000000000012       0x60 obj/default/button_test.o
  .debug_abbrev  0x0000000000000072       0x9f ../button_test_bsp/\libhal_bsp.a(alt_load.o)
  .debug_abbrev  0x0000000000000111       0xba ../button_test_bsp/\libhal_bsp.a(alt_main.o)
  .debug_abbrev  0x00000000000001cb      0x1af ../button_test_bsp/\libhal_bsp.a(alt_putstr.o)
@@ -1276,7 +1276,7 @@ LOAD c:/intelfpga/18.0/nios2eds/bin/gnu/h-x86_64-mingw32/bin/../lib/gcc/nios2-el
 .debug_line     0x0000000000000000     0x6927
  *(.debug_line)
  .debug_line    0x0000000000000000       0x66 ../button_test_bsp//obj/HAL/src/crt0.o
- .debug_line    0x0000000000000066       0x70 obj/default/hello_world.o
+ .debug_line    0x0000000000000066       0x70 obj/default/button_test.o
  .debug_line    0x00000000000000d6       0x8e ../button_test_bsp/\libhal_bsp.a(alt_load.o)
  .debug_line    0x0000000000000164       0xa4 ../button_test_bsp/\libhal_bsp.a(alt_main.o)
  .debug_line    0x0000000000000208      0x113 ../button_test_bsp/\libhal_bsp.a(alt_putstr.o)
@@ -1354,7 +1354,7 @@ LOAD c:/intelfpga/18.0/nios2eds/bin/gnu/h-x86_64-mingw32/bin/../lib/gcc/nios2-el
 
 .debug_frame    0x0000000000000000     0x156c
  *(.debug_frame)
- .debug_frame   0x0000000000000000       0x2c obj/default/hello_world.o
+ .debug_frame   0x0000000000000000       0x2c obj/default/button_test.o
  .debug_frame   0x000000000000002c       0x5c ../button_test_bsp/\libhal_bsp.a(alt_load.o)
  .debug_frame   0x0000000000000088       0x2c ../button_test_bsp/\libhal_bsp.a(alt_main.o)
  .debug_frame   0x00000000000000b4       0x38 ../button_test_bsp/\libhal_bsp.a(alt_putstr.o)
@@ -1426,7 +1426,7 @@ LOAD c:/intelfpga/18.0/nios2eds/bin/gnu/h-x86_64-mingw32/bin/../lib/gcc/nios2-el
 
 .debug_str      0x0000000000000000     0x276f
  *(.debug_str)
- .debug_str     0x0000000000000000      0x108 obj/default/hello_world.o
+ .debug_str     0x0000000000000000      0x108 obj/default/button_test.o
                                         0x134 (size before relaxing)
  .debug_str     0x0000000000000108      0x151 ../button_test_bsp/\libhal_bsp.a(alt_load.o)
                                         0x223 (size before relaxing)

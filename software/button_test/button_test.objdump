@@ -95,7 +95,7 @@ SYMBOL TABLE:
 00010268 l       .text	00000000 alt_after_alt_main
 00000000 l    df *ABS*	00000000 alt_irq_handler.c
 00000000 l    df *ABS*	00000000 alt_instruction_exception_entry.c
-00000000 l    df *ABS*	00000000 hello_world.c
+00000000 l    df *ABS*	00000000 button_test.c
 00000000 l    df *ABS*	00000000 alt_load.c
 000102e8 l     F .text	00000068 alt_load_section
 00000000 l    df *ABS*	00000000 alt_main.c
@@ -6013,7 +6013,7 @@ alt_exception_cause_generated_bad_addr(alt_exception_cause cause)
    139b4:	d9400015 	stw	r5,0(sp)
    139b8:	d9800115 	stw	r6,4(sp)
    139bc:	d9c00215 	stw	r7,8(sp)
-   139c0:	00000000 	call	0 <__reset-0x10000>
+   139c0:	00000000 	call	0 <__alt_mem_onchip_ram-0x10000>
    139c4:	d9400017 	ldw	r5,0(sp)
    139c8:	d9800117 	ldw	r6,4(sp)
    139cc:	d9c00217 	ldw	r7,8(sp)
@@ -6097,7 +6097,7 @@ alt_exception_cause_generated_bad_addr(alt_exception_cause cause)
    13afc:	10003226 	beq	r2,zero,13bc8 <__call_exitprocs+0x178>
    13b00:	a009883a 	mov	r4,r20
    13b04:	98800015 	stw	r2,0(r19)
-   13b08:	00000000 	call	0 <__reset-0x10000>
+   13b08:	00000000 	call	0 <__alt_mem_onchip_ram-0x10000>
    13b0c:	9d000017 	ldw	r20,0(r19)
    13b10:	a03fe41e 	bne	r20,zero,13aa4 <__alt_data_end+0xffff3aa4>
    13b14:	dfc00a17 	ldw	ra,40(sp)

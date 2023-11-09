@@ -1,0 +1,27 @@
+12:39:25 **** Incremental Build of configuration Nios II for project button_test ****
+make all 
+Info: Building ../button_test_bsp/
+C:/intelFPGA/18.0/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../button_test_bsp/
+[BSP build complete]
+Info: Compiling button_test.c to obj/default/button_test.o
+nios2-elf-gcc -xc -MP -MMD -c -I../button_test_bsp//HAL/inc -I../button_test_bsp/ -I../button_test_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED    -O0 -g -Wall   -mno-hw-div -mno-hw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/button_test.o button_test.c
+Info: Linking button_test.elf
+nios2-elf-g++  -T'../button_test_bsp//linker.x' -msys-crt0='../button_test_bsp//obj/HAL/src/crt0.o' -msys-lib=hal_bsp -L../button_test_bsp/   -Wl,-Map=button_test.map   -O0 -g -Wall   -mno-hw-div -mno-hw-mul -mno-hw-mulx -mgpopt=global  -o button_test.elf obj/default/button_test.o -lm -msys-lib=m
+nios2-elf-insert button_test.elf --thread_model hal --cpu_name cpu --qsys true --simulation_enabled false --stderr_dev jtag_uart --stdin_dev jtag_uart --stdout_dev jtag_uart --sopc_system_name blinky --quartus_project_dir "C:/Users/iflury/Documents/NIOSII_Project_CPEN_430" --jdi ../..//output_files/chip.jdi --sopcinfo C:/Users/iflury/Documents/NIOSII_Project_CPEN_430/software/button_test_bsp/../../blinky.sopcinfo
+Info: (button_test.elf) 28 KBytes program size (code + initialized data).
+Info:                   28 KBytes free for stack + heap.
+Info: Creating button_test.objdump
+nios2-elf-objdump --disassemble --syms --all-header --source button_test.elf >button_test.objdump
+[button_test build complete]
+12:39:34 **** Build of configuration Nios II for project button_test ****
+make all 
+Info: Building ../button_test_bsp/
+C:/intelFPGA/18.0/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../button_test_bsp/
+[BSP build complete]
+[button_test build complete]
+12:39:35 **** Incremental Build of configuration Nios II for project button_test ****
+make all 
+Info: Building ../button_test_bsp/
+C:/intelFPGA/18.0/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../button_test_bsp/
+[BSP build complete]
+[button_test build complete]

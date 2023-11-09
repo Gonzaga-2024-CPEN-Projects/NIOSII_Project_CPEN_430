@@ -142,7 +142,7 @@ ACDS_VERSION := 18.0
 ELF := button_test.elf
 
 # Paths to C, C++, and assembly source files.
-C_SRCS := hello_world.c
+C_SRCS := button_test.c
 CXX_SRCS :=
 ASM_SRCS :=
 
