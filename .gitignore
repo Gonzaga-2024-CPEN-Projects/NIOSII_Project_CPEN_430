@@ -15,3 +15,6 @@
 **/output_files/
 **/work/
 **/.metadata/
+**/HAL/
+**/inc/
+**/obj/
