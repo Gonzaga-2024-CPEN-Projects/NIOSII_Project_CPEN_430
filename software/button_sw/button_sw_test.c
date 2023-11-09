@@ -11,7 +11,7 @@ int main()
 			switch_data = IORD_ALTERA_AVALON_PIO_DATA(SWITCHES_BASE);
 			buttons_data = IORD_ALTERA_AVALON_PIO_DATA(BUTTONS_BASE);
 
-			if (switch_data & 0x10000) {
+			if ((switch_data & 0x1FFFF) > 0) {
 				IOWR_ALTERA_AVALON_PIO_DATA(LEDS_BASE, 0x03);
 			} else {
 				IOWR_ALTERA_AVALON_PIO_DATA(LEDS_BASE, 0x00);
