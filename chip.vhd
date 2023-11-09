@@ -11,7 +11,8 @@ reset_n: in std_logic;
 sw : in std_logic;
 switches: in std_logic_vector(1 downto 0);
 leds: out std_logic_vector(1 downto 0);
-rled: out std_logic
+rled: out std_logic;
+sev_seg_0 : out std_logic_vector(6 downto 0)
 );
 end entity chip;
 architecture rtl_and_struct of chip is
@@ -21,7 +22,8 @@ port (
 clk_clk : in std_logic := 'X'; -- clk
 reset_reset_n : in std_logic := 'X'; -- reset_n
 leds_external_connection_export : out std_logic_vector(1 downto 0); -- export
-switches_external_connection_export : in std_logic_vector(1 downto 0) := (others => 'X') -- export
+switches_external_connection_export : in std_logic_vector(1 downto 0) := (others => 'X'); -- export
+sev_seg_0_external_connection_export : out std_logic_vector(6 downto 0)
 );
 end component blinky;
 begin
@@ -30,7 +32,8 @@ port map (
 clk_clk => clk,
 reset_reset_n => reset_n,
 leds_external_connection_export => leds,
-switches_external_connection_export => switches
+switches_external_connection_export => switches,
+sev_seg_0_external_connection_export => sev_seg_0
 );
 -- begin custom hardware
 -- turning on red LED when the most left switch is up

@@ -9,6 +9,7 @@ int main()
 	alt_putstr("Ciao from Nios II!\n");
 	while(1) {
 			switch_data = IORD_ALTERA_AVALON_PIO_DATA(SWITCHES_BASE);
+			IOWR_ALTERA_AVALON_PIO_DATA(SEV_SEG_0_BASE, 0xFE);
 			IOWR_ALTERA_AVALON_PIO_DATA(LEDS_BASE, switch_data & led_pattern);
 			delay = 0;
 			while(delay < 200000) {

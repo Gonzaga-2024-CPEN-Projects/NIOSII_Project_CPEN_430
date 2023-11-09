@@ -7,7 +7,7 @@
 <stringAttribute key="byteStreamDeviceInstanceID" value="0"/>
 <booleanAttribute key="disableNios2ConsoleView" value="false"/>
 <booleanAttribute key="downloadProgram" value="true"/>
-<stringAttribute key="elfFile" value="C:\Users\iflury\Documents\NIOSII_Project_CPEN_430\software\blinky-sw\blinky-sw.elf"/>
+<stringAttribute key="elfFile" value="C:\Users\nlinthacum\Desktop\NIOSII_Project_CPEN_430\software\blinky-sw\blinky-sw.elf"/>
 <stringAttribute key="org.eclipse.cdt.debug.mi.core.GDB_INIT" value=""/>
 <stringAttribute key="org.eclipse.cdt.launch.DEBUGGER_ID" value="com.altera.debug.cdi.gdb.plugin.Nios2GdbCdiDebugger"/>
 <stringAttribute key="org.eclipse.cdt.launch.DEBUGGER_START_MODE" value="run"/>
