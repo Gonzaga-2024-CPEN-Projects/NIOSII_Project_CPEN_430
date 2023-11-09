@@ -68,9 +68,9 @@ set_instance_assignment -name IO_STANDARD "2.5 V" -to rled
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
-set_location_assignment PIN_M23 -to buttons[0]
-set_location_assignment PIN_M21 -to buttons[1]
-set_location_assignment PIN_N21 -to buttons[2]
+set_location_assignment PIN_M21 -to buttons[0]
+set_location_assignment PIN_N21 -to buttons[1]
+set_location_assignment PIN_R24 -to buttons[2]
 set_location_assignment PIN_R24 -to buttons[3]
 set_instance_assignment -name IO_STANDARD "2.5 V" -to buttons[0]
 set_instance_assignment -name IO_STANDARD "2.5 V" -to buttons[1]
