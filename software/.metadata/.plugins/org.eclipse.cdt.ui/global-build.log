@@ -1,16 +1,25 @@
-16:37:22 **** Incremental Build of configuration Nios II for project blinky-sw ****
+13:03:18 **** Incremental Build of configuration Nios II for project blinky-sw ****
+make all 
+Info: Building ../blinky-sw_bsp/
+C:/intelFPGA/18.0/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../blinky-sw_bsp/
+[BSP build complete]
+Info: Compiling blinky.c to obj/default/blinky.o
+nios2-elf-gcc -xc -MP -MMD -c -I../blinky-sw_bsp//HAL/inc -I../blinky-sw_bsp/ -I../blinky-sw_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED    -O0 -g -Wall   -mno-hw-div -mno-hw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/blinky.o blinky.c
+Info: Linking blinky-sw.elf
+nios2-elf-g++  -T'../blinky-sw_bsp//linker.x' -msys-crt0='../blinky-sw_bsp//obj/HAL/src/crt0.o' -msys-lib=hal_bsp -L../blinky-sw_bsp/   -Wl,-Map=blinky-sw.map   -O0 -g -Wall   -mno-hw-div -mno-hw-mul -mno-hw-mulx -mgpopt=global  -o blinky-sw.elf obj/default/blinky.o -lm -msys-lib=m
+nios2-elf-insert blinky-sw.elf --thread_model hal --cpu_name cpu --qsys true --simulation_enabled false --stderr_dev jtag_uart --stdin_dev jtag_uart --stdout_dev jtag_uart --sopc_system_name blinky --quartus_project_dir "D:/CPEN430/NIOSII_Project_CPEN_430" --jdi ../..//output_files/chip.jdi --sopcinfo D:/CPEN430/NIOSII_Project_CPEN_430/software/blinky-sw_bsp/../../blinky.sopcinfo
+Info: (blinky-sw.elf) 28 KBytes program size (code + initialized data).
+Info:                 28 KBytes free for stack + heap.
+Info: Creating blinky-sw.objdump
+nios2-elf-objdump --disassemble --syms --all-header --source blinky-sw.elf >blinky-sw.objdump
+[blinky-sw build complete]
+13:03:30 **** Build of configuration Nios II for project blinky-sw ****
 make all 
 Info: Building ../blinky-sw_bsp/
 C:/intelFPGA/18.0/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../blinky-sw_bsp/
 [BSP build complete]
 [blinky-sw build complete]
-16:37:27 **** Build of configuration Nios II for project blinky-sw ****
-make all 
-Info: Building ../blinky-sw_bsp/
-C:/intelFPGA/18.0/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../blinky-sw_bsp/
-[BSP build complete]
-[blinky-sw build complete]
-16:37:42 **** Incremental Build of configuration Nios II for project blinky-sw ****
+13:03:35 **** Incremental Build of configuration Nios II for project blinky-sw ****
 make all 
 Info: Building ../blinky-sw_bsp/
 C:/intelFPGA/18.0/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../blinky-sw_bsp/

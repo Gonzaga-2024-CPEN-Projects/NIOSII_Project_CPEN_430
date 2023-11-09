@@ -4,7 +4,7 @@
  * Machine generated for CPU 'cpu' in SOPC Builder design 'blinky'
  * SOPC Builder design path: ../../blinky.sopcinfo
  *
- * Generated: Tue Nov 07 12:30:02 PST 2023
+ * Generated: Thu Nov 09 13:02:40 PST 2023
  */
 
 /*
@@ -214,7 +214,7 @@
 #define LEDS_BIT_CLEARING_EDGE_REGISTER 0
 #define LEDS_BIT_MODIFYING_OUTPUT_REGISTER 0
 #define LEDS_CAPTURE 0
-#define LEDS_DATA_WIDTH 2
+#define LEDS_DATA_WIDTH 3
 #define LEDS_DO_TEST_BENCH_WIRING 0
 #define LEDS_DRIVEN_SIM_VALUE 0
 #define LEDS_EDGE_TYPE "NONE"
@@ -270,7 +270,7 @@
 #define SWITCHES_BIT_CLEARING_EDGE_REGISTER 0
 #define SWITCHES_BIT_MODIFYING_OUTPUT_REGISTER 0
 #define SWITCHES_CAPTURE 0
-#define SWITCHES_DATA_WIDTH 2
+#define SWITCHES_DATA_WIDTH 3
 #define SWITCHES_DO_TEST_BENCH_WIRING 0
 #define SWITCHES_DRIVEN_SIM_VALUE 0
 #define SWITCHES_EDGE_TYPE "NONE"

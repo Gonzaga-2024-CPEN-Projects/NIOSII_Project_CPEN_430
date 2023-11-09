@@ -4,7 +4,7 @@
  * Machine generated for CPU 'cpu' in SOPC Builder design 'blinky'
  * SOPC Builder design path: ../../blinky.sopcinfo
  *
- * Generated: Tue Nov 07 12:30:02 PST 2023
+ * Generated: Thu Nov 09 12:30:27 PST 2023
  */
 
 /*
