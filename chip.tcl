@@ -16,7 +16,11 @@ set_instance_assignment -name IO_STANDARD "2.5 V" -to leds[1]
 set_location_assignment PIN_AB28 -to switches[0]
 set_location_assignment PIN_AC28 -to switches[1] 
 set_instance_assignment -name IO_STANDARD "2.5 V" -to switches[0] 
-set_instance_assignment -name IO_STANDARD "2.5 V" -to switches[1] 
+set_instance_assignment -name IO_STANDARD "2.5 V" -to switches[1]
+
+set_location_assignment PIN_Y24 -to switches[16]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to switches[16]
+ 
 set_location_assignment PIN_G19 -to rled 
 set_instance_assignment -name IO_STANDARD "2.5 V" -to rled
 
