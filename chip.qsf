@@ -69,4 +69,11 @@ set_instance_assignment -name IO_STANDARD "2.5 V" -to rled
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
+set_location_assignment PIN_G18 -to sev_seg_0[0]
+set_location_assignment PIN_F22 -to sev_seg_0[1]
+set_location_assignment PIN_E17 -to sev_seg_0[2]
+set_location_assignment PIN_L26 -to sev_seg_0[3]
+set_location_assignment PIN_L25 -to sev_seg_0[4]
+set_location_assignment PIN_J22 -to sev_seg_0[5]
+set_location_assignment PIN_H22 -to sev_seg_0[6]
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

@@ -2,10 +2,10 @@
 <sch:Settings xmlns:sch="http://www.altera.com/embeddedsw/bsp/schema">
         <BspType>hal</BspType>
         <BspVersion>default</BspVersion>
-        <BspGeneratedTimeStamp>Nov 7, 2023 12:29:58 PM</BspGeneratedTimeStamp>
-        <BspGeneratedUnixTimeStamp>1699388998789</BspGeneratedUnixTimeStamp>
-        <BspGeneratedLocation>D:\CPEN430\niostutorial\software\blinky-sw_bsp</BspGeneratedLocation>
-        <BspSettingsFile>.\settings.bsp</BspSettingsFile>
+        <BspGeneratedTimeStamp>Nov 21, 2023 11:02:56 AM</BspGeneratedTimeStamp>
+        <BspGeneratedUnixTimeStamp>1700593376180</BspGeneratedUnixTimeStamp>
+        <BspGeneratedLocation>C:\Users\nlinthacum\Desktop\NIOSII_Project_CPEN_430\software\blinky-sw_bsp</BspGeneratedLocation>
+        <BspSettingsFile>settings.bsp</BspSettingsFile>
         <SopcDesignFile>..\..\blinky.sopcinfo</SopcDesignFile>
         <JdiFile>default</JdiFile>
         <Cpu>cpu</Cpu>
@@ -905,20 +905,32 @@
                 <attributes>memory</attributes>
         </MemoryMap>
         <MemoryMap>
-                <slaveDescriptor>leds</slaveDescriptor>
+                <slaveDescriptor>randoms</slaveDescriptor>
                 <addressRange>0x00021000 - 0x0002100F</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
-                <slaveDescriptor>switches</slaveDescriptor>
+                <slaveDescriptor>sev_seg_0</slaveDescriptor>
                 <addressRange>0x00021010 - 0x0002101F</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
+                <slaveDescriptor>leds</slaveDescriptor>
+                <addressRange>0x00021020 - 0x0002102F</addressRange>
+                <addressSpan>16</addressSpan>
+                <attributes/>
+        </MemoryMap>
+        <MemoryMap>
+                <slaveDescriptor>switches</slaveDescriptor>
+                <addressRange>0x00021030 - 0x0002103F</addressRange>
+                <addressSpan>16</addressSpan>
+                <attributes/>
+        </MemoryMap>
+        <MemoryMap>
                 <slaveDescriptor>jtag_uart</slaveDescriptor>
-                <addressRange>0x00021020 - 0x00021027</addressRange>
+                <addressRange>0x00021040 - 0x00021047</addressRange>
                 <addressSpan>8</addressSpan>
                 <attributes>printable</attributes>
         </MemoryMap>
