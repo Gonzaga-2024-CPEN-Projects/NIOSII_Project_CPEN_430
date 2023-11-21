@@ -1,5 +1,8 @@
 	component blinky is
 		port (
+			audio_0_external_interface_BCLK     : in  std_logic                    := 'X';             -- BCLK
+			audio_0_external_interface_DACDAT   : out std_logic;                                       -- DACDAT
+			audio_0_external_interface_DACLRCK  : in  std_logic                    := 'X';             -- DACLRCK
 			clk_clk                             : in  std_logic                    := 'X';             -- clk
 			leds_external_connection_export     : out std_logic_vector(1 downto 0);                    -- export
 			reset_reset_n                       : in  std_logic                    := 'X';             -- reset_n

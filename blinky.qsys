@@ -9,6 +9,22 @@
    categories="System" />
  <parameter name="bonusData"><![CDATA[bonusData 
 {
+   element audio_0
+   {
+      datum _sortIndex
+      {
+         value = "6";
+         type = "int";
+      }
+   }
+   element audio_0.avalon_audio_slave
+   {
+      datum baseAddress
+      {
+         value = "135200";
+         type = "String";
+      }
+   }
    element clk_main
    {
       datum _sortIndex
@@ -45,7 +61,7 @@
    {
       datum baseAddress
       {
-         value = "135200";
+         value = "135216";
          type = "String";
       }
    }
@@ -118,6 +134,11 @@
  <parameter name="timeStamp" value="0" />
  <parameter name="useTestBenchNamingPattern" value="false" />
  <instanceScript></instanceScript>
+ <interface
+   name="audio_0_external_interface"
+   internal="audio_0.external_interface"
+   type="conduit"
+   dir="end" />
  <interface name="clk" internal="clk_main.clk_in" type="clock" dir="end" />
  <interface
    name="leds_external_connection"
@@ -130,6 +151,18 @@
    internal="switches.external_connection"
    type="conduit"
    dir="end" />
+ <module
+   name="audio_0"
+   kind="altera_up_avalon_audio"
+   version="18.0"
+   enabled="1">
+  <parameter name="AUTO_CLK_CLOCK_RATE" value="50000000" />
+  <parameter name="AUTO_DEVICE_FAMILY" value="Cyclone IV E" />
+  <parameter name="audio_in" value="false" />
+  <parameter name="audio_out" value="true" />
+  <parameter name="avalon_bus_type" value="Memory Mapped" />
+  <parameter name="dw" value="16" />
+ </module>
  <module name="clk_main" kind="clock_source" version="18.0" enabled="1">
   <parameter name="clockFrequency" value="50000000" />
   <parameter name="clockFrequencyKnown" value="true" />
@@ -156,7 +189,7 @@
   <parameter name="dataAddrWidth" value="18" />
   <parameter name="dataMasterHighPerformanceAddrWidth" value="1" />
   <parameter name="dataMasterHighPerformanceMapParam" value="" />
-  <parameter name="dataSlaveMapParam"><![CDATA[<address-map><slave name='onchip_ram.s1' start='0x10000' end='0x20000' type='altera_avalon_onchip_memory2.s1' /><slave name='cpu.debug_mem_slave' start='0x20800' end='0x21000' type='altera_nios2_gen2.debug_mem_slave' /><slave name='leds.s1' start='0x21000' end='0x21010' type='altera_avalon_pio.s1' /><slave name='switches.s1' start='0x21010' end='0x21020' type='altera_avalon_pio.s1' /><slave name='jtag_uart.avalon_jtag_slave' start='0x21020' end='0x21028' type='altera_avalon_jtag_uart.avalon_jtag_slave' /></address-map>]]></parameter>
+  <parameter name="dataSlaveMapParam"><![CDATA[<address-map><slave name='onchip_ram.s1' start='0x10000' end='0x20000' type='altera_avalon_onchip_memory2.s1' /><slave name='cpu.debug_mem_slave' start='0x20800' end='0x21000' type='altera_nios2_gen2.debug_mem_slave' /><slave name='leds.s1' start='0x21000' end='0x21010' type='altera_avalon_pio.s1' /><slave name='switches.s1' start='0x21010' end='0x21020' type='altera_avalon_pio.s1' /><slave name='audio_0.avalon_audio_slave' start='0x21020' end='0x21030' type='altera_up_avalon_audio.avalon_audio_slave' /><slave name='jtag_uart.avalon_jtag_slave' start='0x21030' end='0x21038' type='altera_avalon_jtag_uart.avalon_jtag_slave' /></address-map>]]></parameter>
   <parameter name="data_master_high_performance_paddr_base" value="0" />
   <parameter name="data_master_high_performance_paddr_size" value="0" />
   <parameter name="data_master_paddr_base" value="0" />
@@ -202,7 +235,7 @@
   <parameter name="instruction_master_high_performance_paddr_size" value="0" />
   <parameter name="instruction_master_paddr_base" value="0" />
   <parameter name="instruction_master_paddr_size" value="0" />
-  <parameter name="internalIrqMaskSystemInfo" value="1" />
+  <parameter name="internalIrqMaskSystemInfo" value="3" />
   <parameter name="io_regionbase" value="0" />
   <parameter name="io_regionsize" value="0" />
   <parameter name="master_addr_map" value="false" />
@@ -397,9 +430,18 @@
    kind="avalon"
    version="18.0"
    start="cpu.data_master"
-   end="jtag_uart.avalon_jtag_slave">
+   end="audio_0.avalon_audio_slave">
   <parameter name="arbitrationPriority" value="1" />
   <parameter name="baseAddress" value="0x00021020" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="18.0"
+   start="cpu.data_master"
+   end="jtag_uart.avalon_jtag_slave">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x00021030" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -456,11 +498,19 @@
  <connection kind="clock" version="18.0" start="clk_main.clk" end="jtag_uart.clk" />
  <connection kind="clock" version="18.0" start="clk_main.clk" end="switches.clk" />
  <connection kind="clock" version="18.0" start="clk_main.clk" end="leds.clk" />
+ <connection kind="clock" version="18.0" start="clk_main.clk" end="audio_0.clk" />
  <connection
    kind="clock"
    version="18.0"
    start="clk_main.clk"
    end="onchip_ram.clk1" />
+ <connection
+   kind="interrupt"
+   version="18.0"
+   start="cpu.irq"
+   end="audio_0.interrupt">
+  <parameter name="irqNumber" value="1" />
+ </connection>
  <connection kind="interrupt" version="18.0" start="cpu.irq" end="jtag_uart.irq">
   <parameter name="irqNumber" value="0" />
  </connection>
@@ -484,6 +534,11 @@
    version="18.0"
    start="clk_main.clk_reset"
    end="leds.reset" />
+ <connection
+   kind="reset"
+   version="18.0"
+   start="clk_main.clk_reset"
+   end="audio_0.reset" />
  <connection
    kind="reset"
    version="18.0"

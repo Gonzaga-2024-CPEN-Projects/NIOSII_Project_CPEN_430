@@ -8,6 +8,9 @@ use IEEE.numeric_std.all;
 
 entity blinky is
 	port (
+		audio_0_external_interface_BCLK     : in  std_logic                    := '0';             --   audio_0_external_interface.BCLK
+		audio_0_external_interface_DACDAT   : out std_logic;                                       --                             .DACDAT
+		audio_0_external_interface_DACLRCK  : in  std_logic                    := '0';             --                             .DACLRCK
 		clk_clk                             : in  std_logic                    := '0';             --                          clk.clk
 		leds_external_connection_export     : out std_logic_vector(1 downto 0);                    --     leds_external_connection.export
 		reset_reset_n                       : in  std_logic                    := '0';             --                        reset.reset_n
@@ -16,6 +19,23 @@ entity blinky is
 end entity blinky;
 
 architecture rtl of blinky is
+	component blinky_audio_0 is
+		port (
+			clk         : in  std_logic                     := 'X';             -- clk
+			reset       : in  std_logic                     := 'X';             -- reset
+			address     : in  std_logic_vector(1 downto 0)  := (others => 'X'); -- address
+			chipselect  : in  std_logic                     := 'X';             -- chipselect
+			read        : in  std_logic                     := 'X';             -- read
+			write       : in  std_logic                     := 'X';             -- write
+			writedata   : in  std_logic_vector(31 downto 0) := (others => 'X'); -- writedata
+			readdata    : out std_logic_vector(31 downto 0);                    -- readdata
+			irq         : out std_logic;                                        -- irq
+			AUD_BCLK    : in  std_logic                     := 'X';             -- export
+			AUD_DACDAT  : out std_logic;                                        -- export
+			AUD_DACLRCK : in  std_logic                     := 'X'              -- export
+		);
+	end component blinky_audio_0;
+
 	component blinky_cpu is
 		port (
 			clk                                 : in  std_logic                     := 'X';             -- clk
@@ -117,6 +137,12 @@ architecture rtl of blinky is
 			cpu_instruction_master_waitrequest      : out std_logic;                                        -- waitrequest
 			cpu_instruction_master_read             : in  std_logic                     := 'X';             -- read
 			cpu_instruction_master_readdata         : out std_logic_vector(31 downto 0);                    -- readdata
+			audio_0_avalon_audio_slave_address      : out std_logic_vector(1 downto 0);                     -- address
+			audio_0_avalon_audio_slave_write        : out std_logic;                                        -- write
+			audio_0_avalon_audio_slave_read         : out std_logic;                                        -- read
+			audio_0_avalon_audio_slave_readdata     : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
+			audio_0_avalon_audio_slave_writedata    : out std_logic_vector(31 downto 0);                    -- writedata
+			audio_0_avalon_audio_slave_chipselect   : out std_logic;                                        -- chipselect
 			cpu_debug_mem_slave_address             : out std_logic_vector(8 downto 0);                     -- address
 			cpu_debug_mem_slave_write               : out std_logic;                                        -- write
 			cpu_debug_mem_slave_read                : out std_logic;                                        -- read
@@ -154,6 +180,7 @@ architecture rtl of blinky is
 			clk           : in  std_logic                     := 'X'; -- clk
 			reset         : in  std_logic                     := 'X'; -- reset
 			receiver0_irq : in  std_logic                     := 'X'; -- irq
+			receiver1_irq : in  std_logic                     := 'X'; -- irq
 			sender_irq    : out std_logic_vector(31 downto 0)         -- irq
 		);
 	end component blinky_irq_mapper;
@@ -236,6 +263,12 @@ architecture rtl of blinky is
 	signal cpu_instruction_master_waitrequest                            : std_logic;                     -- mm_interconnect_0:cpu_instruction_master_waitrequest -> cpu:i_waitrequest
 	signal cpu_instruction_master_address                                : std_logic_vector(17 downto 0); -- cpu:i_address -> mm_interconnect_0:cpu_instruction_master_address
 	signal cpu_instruction_master_read                                   : std_logic;                     -- cpu:i_read -> mm_interconnect_0:cpu_instruction_master_read
+	signal mm_interconnect_0_audio_0_avalon_audio_slave_chipselect       : std_logic;                     -- mm_interconnect_0:audio_0_avalon_audio_slave_chipselect -> audio_0:chipselect
+	signal mm_interconnect_0_audio_0_avalon_audio_slave_readdata         : std_logic_vector(31 downto 0); -- audio_0:readdata -> mm_interconnect_0:audio_0_avalon_audio_slave_readdata
+	signal mm_interconnect_0_audio_0_avalon_audio_slave_address          : std_logic_vector(1 downto 0);  -- mm_interconnect_0:audio_0_avalon_audio_slave_address -> audio_0:address
+	signal mm_interconnect_0_audio_0_avalon_audio_slave_read             : std_logic;                     -- mm_interconnect_0:audio_0_avalon_audio_slave_read -> audio_0:read
+	signal mm_interconnect_0_audio_0_avalon_audio_slave_write            : std_logic;                     -- mm_interconnect_0:audio_0_avalon_audio_slave_write -> audio_0:write
+	signal mm_interconnect_0_audio_0_avalon_audio_slave_writedata        : std_logic_vector(31 downto 0); -- mm_interconnect_0:audio_0_avalon_audio_slave_writedata -> audio_0:writedata
 	signal mm_interconnect_0_jtag_uart_avalon_jtag_slave_chipselect      : std_logic;                     -- mm_interconnect_0:jtag_uart_avalon_jtag_slave_chipselect -> jtag_uart:av_chipselect
 	signal mm_interconnect_0_jtag_uart_avalon_jtag_slave_readdata        : std_logic_vector(31 downto 0); -- jtag_uart:av_readdata -> mm_interconnect_0:jtag_uart_avalon_jtag_slave_readdata
 	signal mm_interconnect_0_jtag_uart_avalon_jtag_slave_waitrequest     : std_logic;                     -- jtag_uart:av_waitrequest -> mm_interconnect_0:jtag_uart_avalon_jtag_slave_waitrequest
@@ -265,9 +298,10 @@ architecture rtl of blinky is
 	signal mm_interconnect_0_leds_s1_address                             : std_logic_vector(1 downto 0);  -- mm_interconnect_0:leds_s1_address -> leds:address
 	signal mm_interconnect_0_leds_s1_write                               : std_logic;                     -- mm_interconnect_0:leds_s1_write -> mm_interconnect_0_leds_s1_write:in
 	signal mm_interconnect_0_leds_s1_writedata                           : std_logic_vector(31 downto 0); -- mm_interconnect_0:leds_s1_writedata -> leds:writedata
-	signal irq_mapper_receiver0_irq                                      : std_logic;                     -- jtag_uart:av_irq -> irq_mapper:receiver0_irq
+	signal irq_mapper_receiver0_irq                                      : std_logic;                     -- audio_0:irq -> irq_mapper:receiver0_irq
+	signal irq_mapper_receiver1_irq                                      : std_logic;                     -- jtag_uart:av_irq -> irq_mapper:receiver1_irq
 	signal cpu_irq_irq                                                   : std_logic_vector(31 downto 0); -- irq_mapper:sender_irq -> cpu:irq
-	signal rst_controller_reset_out_reset                                : std_logic;                     -- rst_controller:reset_out -> [irq_mapper:reset, mm_interconnect_0:cpu_reset_reset_bridge_in_reset_reset, onchip_ram:reset, rst_controller_reset_out_reset:in, rst_translator:in_reset]
+	signal rst_controller_reset_out_reset                                : std_logic;                     -- rst_controller:reset_out -> [audio_0:reset, irq_mapper:reset, mm_interconnect_0:cpu_reset_reset_bridge_in_reset_reset, onchip_ram:reset, rst_controller_reset_out_reset:in, rst_translator:in_reset]
 	signal rst_controller_reset_out_reset_req                            : std_logic;                     -- rst_controller:reset_req -> [cpu:reset_req, onchip_ram:reset_req, rst_translator:reset_req_in]
 	signal reset_reset_n_ports_inv                                       : std_logic;                     -- reset_reset_n:inv -> rst_controller:reset_in0
 	signal mm_interconnect_0_jtag_uart_avalon_jtag_slave_read_ports_inv  : std_logic;                     -- mm_interconnect_0_jtag_uart_avalon_jtag_slave_read:inv -> jtag_uart:av_read_n
@@ -276,6 +310,22 @@ architecture rtl of blinky is
 	signal rst_controller_reset_out_reset_ports_inv                      : std_logic;                     -- rst_controller_reset_out_reset:inv -> [cpu:reset_n, jtag_uart:rst_n, leds:reset_n, switches:reset_n]
 
 begin
+
+	audio_0 : component blinky_audio_0
+		port map (
+			clk         => clk_clk,                                                 --                clk.clk
+			reset       => rst_controller_reset_out_reset,                          --              reset.reset
+			address     => mm_interconnect_0_audio_0_avalon_audio_slave_address,    -- avalon_audio_slave.address
+			chipselect  => mm_interconnect_0_audio_0_avalon_audio_slave_chipselect, --                   .chipselect
+			read        => mm_interconnect_0_audio_0_avalon_audio_slave_read,       --                   .read
+			write       => mm_interconnect_0_audio_0_avalon_audio_slave_write,      --                   .write
+			writedata   => mm_interconnect_0_audio_0_avalon_audio_slave_writedata,  --                   .writedata
+			readdata    => mm_interconnect_0_audio_0_avalon_audio_slave_readdata,   --                   .readdata
+			irq         => irq_mapper_receiver0_irq,                                --          interrupt.irq
+			AUD_BCLK    => audio_0_external_interface_BCLK,                         -- external_interface.export
+			AUD_DACDAT  => audio_0_external_interface_DACDAT,                       --                   .export
+			AUD_DACLRCK => audio_0_external_interface_DACLRCK                       --                   .export
+		);
 
 	cpu : component blinky_cpu
 		port map (
@@ -318,7 +368,7 @@ begin
 			av_write_n     => mm_interconnect_0_jtag_uart_avalon_jtag_slave_write_ports_inv, --                  .write_n
 			av_writedata   => mm_interconnect_0_jtag_uart_avalon_jtag_slave_writedata,       --                  .writedata
 			av_waitrequest => mm_interconnect_0_jtag_uart_avalon_jtag_slave_waitrequest,     --                  .waitrequest
-			av_irq         => irq_mapper_receiver0_irq                                       --               irq.irq
+			av_irq         => irq_mapper_receiver1_irq                                       --               irq.irq
 		);
 
 	leds : component blinky_leds
@@ -373,6 +423,12 @@ begin
 			cpu_instruction_master_waitrequest      => cpu_instruction_master_waitrequest,                        --                                .waitrequest
 			cpu_instruction_master_read             => cpu_instruction_master_read,                               --                                .read
 			cpu_instruction_master_readdata         => cpu_instruction_master_readdata,                           --                                .readdata
+			audio_0_avalon_audio_slave_address      => mm_interconnect_0_audio_0_avalon_audio_slave_address,      --      audio_0_avalon_audio_slave.address
+			audio_0_avalon_audio_slave_write        => mm_interconnect_0_audio_0_avalon_audio_slave_write,        --                                .write
+			audio_0_avalon_audio_slave_read         => mm_interconnect_0_audio_0_avalon_audio_slave_read,         --                                .read
+			audio_0_avalon_audio_slave_readdata     => mm_interconnect_0_audio_0_avalon_audio_slave_readdata,     --                                .readdata
+			audio_0_avalon_audio_slave_writedata    => mm_interconnect_0_audio_0_avalon_audio_slave_writedata,    --                                .writedata
+			audio_0_avalon_audio_slave_chipselect   => mm_interconnect_0_audio_0_avalon_audio_slave_chipselect,   --                                .chipselect
 			cpu_debug_mem_slave_address             => mm_interconnect_0_cpu_debug_mem_slave_address,             --             cpu_debug_mem_slave.address
 			cpu_debug_mem_slave_write               => mm_interconnect_0_cpu_debug_mem_slave_write,               --                                .write
 			cpu_debug_mem_slave_read                => mm_interconnect_0_cpu_debug_mem_slave_read,                --                                .read
@@ -409,6 +465,7 @@ begin
 			clk           => clk_clk,                        --       clk.clk
 			reset         => rst_controller_reset_out_reset, -- clk_reset.reset
 			receiver0_irq => irq_mapper_receiver0_irq,       -- receiver0.irq
+			receiver1_irq => irq_mapper_receiver1_irq,       -- receiver1.irq
 			sender_irq    => cpu_irq_irq                     --    sender.irq
 		);
 
