@@ -9,12 +9,7 @@
 transcript
 .vcd
 .o
-settings
-obj/default
-.settings
-HAL
-drivers
-obj
+
 
 # Directories to ignore
 /db/
