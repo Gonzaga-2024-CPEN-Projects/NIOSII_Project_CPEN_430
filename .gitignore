@@ -1,18 +1,24 @@
 # Files to ignore
-**.bak
-**.ddb
-**.qws
-**.mti
-**.mpf
-**.wlf
-**.qdf
-**transcript
-**.vcd
-**.o
+.bak
+.ddb
+.qws
+.mti
+.mpf
+.wlf
+.qdf
+transcript
+.vcd
+.o
+settings
+obj/default
+.settings
+HAL
+drivers
+obj
 
 # Directories to ignore
-**/db/*
-**/incremental_db/*
-**/output_files/*
-**/work/*
-**/.metadata/*
+/db/
+/incremental_db/
+/output_files/
+/work/
+/.metadata/
