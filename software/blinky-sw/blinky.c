@@ -93,21 +93,23 @@ int main()
  Hardware Initialization
 *************************************************************/ 
 void init_GLED(void) {
-
+	return;
 } 
 void init_RLED(void) {
-	
+	return;
 }
 void init_SevenSeg(void) {
-	
+	return;
 } 
 void init_Switches(void) {
-	
+	return;
 }
 void init_Keys(void) {
-	
+	return;
 }
-void init_LCD(void)
+void init_LCD(void) {
+	return;
+}
 
 
 /************************************************************
@@ -117,6 +119,7 @@ void readSwitches(void) {
 	// play if SW0 = 1
 	// display instructions if SW1 = 1 
 	// display bankroll if SW2 = 1
+	return;
 }
 void play(void) {
 	gameInitialization(); 
@@ -131,10 +134,10 @@ void play(void) {
 	}
 } 
 void dispInstructions(void) {
-	
+	return;
 } 
 void dispBankroll(void) {
-	
+	return;
 } 
 
 
@@ -149,30 +152,38 @@ void gameInitialization(void) {
 }  
 void playerBet(void) {
 	// Read Switches once KEY0 is pressed
+	return;
 } 
 void dealInitialCards(void) {
 	// Generate Dealer First Card and Player Cards
 	// Update and Display Dealer Sum
 	// Update and Display Player Sum
+	return;
 } 
 void playerTurn(void) {
 	// Wait for Key Press (hit or stay)
 	// Calculate
 	// Bust?
 	// Wait for Key Press...
+	return;
 } 
 bool playerBust(int) {
 	// Check if Player sum <= 21
+	bool busted = false; 
+	return busted;
 } 
 void dealerTurn(void) {
 	// Automatic cycle
 	// Implement wait time for each card
+	return; 
 } 
 bool dealerBust(int) {
 	// Check if Dealer sum <= 21
+	bool busted = false; 
+	return busted;
 } 
 void updateBankroll(bool, int) {
-	
+	return; 
 } 
 
 
@@ -185,18 +196,23 @@ int GenerateRandomCard(void) {
 } 
 void updateDeck(void) {
 	// set 0 -> 1 in cardDeck array
+	return;
 } 
 void resetDeck(void) {
 	// set all indicies of cardDeck array back to 0
+	return;
 } 
 void displayPlayerSum(int) {
 	// display sum to HEX7 and HEX6 on seven seg display
+	return;
 } 
 void displayDealerSum(int) {
 	// display sum to HEX5 and HEX4 on seven seg display
+	return;
 } 
 void displayResult(bool) {
 	// display message on LCD
+	return;
 }
 
 
@@ -207,13 +223,16 @@ void hit(void) {
 	// Generate Random Card
 	// Update Deck
 	// Update playerSum
+	return;
 } 
 void stay(void) {
 	// Dealer Turn
+	return;
 }
 void submitBet(void) {
 	// ReadSwitches
 	// KEY0 Press for Enter
+	return;
 }
 
 
