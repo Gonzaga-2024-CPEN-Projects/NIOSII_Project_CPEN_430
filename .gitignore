@@ -8,10 +8,11 @@
 **.qdf
 **transcript
 **.vcd
+**.o
 
 # Directories to ignore
-**/db/
-**/incremental_db/
-**/output_files/
-**/work/
-**/.metadata/
+**/db/*
+**/incremental_db/*
+**/output_files/*
+**/work/*
+**/.metadata/*
