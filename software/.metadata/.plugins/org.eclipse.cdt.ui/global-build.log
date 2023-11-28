@@ -1,7 +1,10 @@
-12:32:44 **** Incremental Build of configuration Nios II for project blinky-sw_bsp ****
+12:38:41 **** Build of configuration Nios II for project blinky-sw ****
 make all 
+Info: Building ../blinky-sw_bsp/
+C:/intelFPGA/18.0/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../blinky-sw_bsp/
 [BSP build complete]
-12:32:51 **** Incremental Build of configuration Nios II for project blinky-sw ****
+[blinky-sw build complete]
+12:38:55 **** Incremental Build of configuration Nios II for project blinky-sw ****
 make all 
 Info: Building ../blinky-sw_bsp/
 C:/intelFPGA/18.0/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../blinky-sw_bsp/

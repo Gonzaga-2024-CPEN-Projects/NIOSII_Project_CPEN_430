@@ -4,11 +4,11 @@
 #include <stdio.h>
 
 
-char cardValues[52] = {'1', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K','A',
-					  '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A', 
-					  '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A', 
-					  '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'};
-int cardDeck[52] = {0}
+char cardValues[52] = {'2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K','A',
+					   '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A',
+					   '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A',
+					   '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'};
+int cardDeck[52] = {0};
 int bankRoll = 1000;
 int dealerSum = 0; 
 int playerSum = 0; 
@@ -35,10 +35,10 @@ void gameInitialization(void); // set deck and
 void playerBet(void); // Read Value from Switches, Wait for KEY0 to be pressed
 void dealInitialCards(void); 
 void playerTurn(void); 
-bool playerBust(int); 
+int playerBust(int);
 void dealerTurn(void); 
-bool dealerBust(int); 
-void updateBankroll(bool, int); 
+int dealerBust(int);
+void updateBankroll(int, int);
 
 
 // Game Functionality
@@ -47,7 +47,7 @@ void updateDeck(void); // Array of Flags - Set Flag when card is selected
 void resetDeck(void); 
 void displayPlayerSum(int); // seven segment HEX7 and HEX6
 void displayDealerSum(int); // seven segment HEX5 and HEX4
-void displayResult(bool);
+void displayResult(int);
 
 
 // Player Actions
@@ -167,9 +167,9 @@ void playerTurn(void) {
 	// Wait for Key Press...
 	return;
 } 
-bool playerBust(int) {
+int playerBust(int playerSum) {
 	// Check if Player sum <= 21
-	bool busted = false; 
+	int busted = 0;
 	return busted;
 } 
 void dealerTurn(void) {
@@ -177,12 +177,12 @@ void dealerTurn(void) {
 	// Implement wait time for each card
 	return; 
 } 
-bool dealerBust(int) {
+int dealerBust(int dealerSum) {
 	// Check if Dealer sum <= 21
-	bool busted = false; 
+	int busted = 0;
 	return busted;
 } 
-void updateBankroll(bool, int) {
+void updateBankroll(int busted, int playerBet) {
 	return; 
 } 
 
@@ -202,15 +202,15 @@ void resetDeck(void) {
 	// set all indicies of cardDeck array back to 0
 	return;
 } 
-void displayPlayerSum(int) {
+void displayPlayerSum(int playerSum) {
 	// display sum to HEX7 and HEX6 on seven seg display
 	return;
 } 
-void displayDealerSum(int) {
+void displayDealerSum(int dealerSum) {
 	// display sum to HEX5 and HEX4 on seven seg display
 	return;
 } 
-void displayResult(bool) {
+void displayResult(int result) {
 	// display message on LCD
 	return;
 }
