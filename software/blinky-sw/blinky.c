@@ -58,25 +58,26 @@ int main()
 	alt_putstr("Ciao from Nios II!\n");
 	printf("start program\n");
 	int KEY_PRESS;
-	// int delay;
 	// int led_pattern=0x0;
-	// int card_val;
-	
+	init_SevenSeg();
+
 	while(1) {
-		init_SevenSeg(); 
 		KEY_PRESS = IORD_ALTERA_AVALON_PIO_DATA(SWITCHES_BASE);
+
 		// Test HIT
-		if (KEY_PRESS == "1000") {
+		if (KEY_PRESS == 8) {
 			hit(); 
+			delay(20000); 
 		}
-
 		// Test STAY
-		if (KEY_PRESS == "0100") {
+		if (KEY_PRESS == 4) {
 			stay(); 
+			delay(20000); 
 		}
 
-		if (KEY_PRESS == "0010") {
+		if (KEY_PRESS == 2) {
 			init_SevenSeg(); 
+			delay(20000); 
 		}
 	}
 	return 0;
