@@ -27,7 +27,7 @@ void init_LCD(void);
 void readSwitches(void); 
 void play(void); // SW0
 void dispInstructions(void); // SW1
-void dispBankroll(void); //SW2
+void dispBankroll(int); //SW2
 
 
 // Game Flow
@@ -38,7 +38,7 @@ void playerTurn(void);
 int playerBust(int);
 void dealerTurn(void); 
 int dealerBust(int);
-void updateBankroll(int, int);
+int determineResult(int, int); 
 
 
 // Game Functionality
@@ -48,7 +48,8 @@ void resetDeck(void);
 int translateCardValue(int); 
 void displayPlayerSum(int); // seven segment HEX7 and HEX6
 void displayDealerSum(int); // seven segment HEX5 and HEX4
-void displayResult(int);
+char* sevenSegmentConversion(int); 
+void endRound(int, int);
 
 
 // Player Actions
@@ -58,30 +59,30 @@ void stay(void); // KEY2
 
 int main()
 {
-	int switch_data;
-	int delay;
-	int led_pattern=0x0;
+	// int switch_data;
+	// int delay;
+	// int led_pattern=0x0;
 	alt_putstr("Ciao from Nios II!\n");
 	int card_val;
 	printf("start program\n");
 	while(1) {
-//			switch_data = IORD_ALTERA_AVALON_PIO_DATA(SWITCHES_BASE);
-//
-//			IOWR_ALTERA_AVALON_PIO_DATA(LEDS_BASE, switch_data & led_pattern);
-//			delay = 0;
-//			while(delay < 200000) {
-//				delay++;
-//			}
-//			led_pattern ^= switch_data; // toggle LEDs on selected switches
-//
-//			IOWR_ALTERA_AVALON_PIO_DATA(SEV_SEG_0_BASE, random_num);
+		init_SevenSeg(); 
+		// switch_data = IORD_ALTERA_AVALON_PIO_DATA(SWITCHES_BASE);
 
+		// IOWR_ALTERA_AVALON_PIO_DATA(LEDS_BASE, switch_data & led_pattern);
+		// delay = 0;
+		// while(delay < 200000) {
+		// 	delay++;
+		// }
+		// led_pattern ^= switch_data; // toggle LEDs on selected switches
 
-			char msg[10];
-			card_val = generateRandomCard();
-			itoa(card_val, msg, 10);
-			alt_putstr(msg);
-			alt_putstr("\n");
+		// IOWR_ALTERA_AVALON_PIO_DATA(SEV_SEG_0_BASE, random_num);
+
+		char msg[10];
+		card_val = generateRandomCard();
+		itoa(card_val, msg, 10);
+		alt_putstr(msg);
+		alt_putstr("\n");
 
 	}
 	return 0;
@@ -91,21 +92,35 @@ int main()
  Hardware Initialization
 *************************************************************/ 
 void init_GLED(void) {
+	// Initialize to Match KEYS (specifically the green led that is in the middle of each key)
 	return;
 } 
 void init_RLED(void) {
+	// Initialize to Match SWITCHES
 	return;
 }
 void init_SevenSeg(void) {
+	IOWR_ALTERA_AVALON_PIO_DATA(SEV_SEG_0_BASE, 0xDF);
+	IOWR_ALTERA_AVALON_PIO_DATA(SEV_SEG_1_BASE, 0xDF);
+	IOWR_ALTERA_AVALON_PIO_DATA(SEV_SEG_2_BASE, 0xDF);
+	IOWR_ALTERA_AVALON_PIO_DATA(SEV_SEG_3_BASE, 0xDF);
+
+	IOWR_ALTERA_AVALON_PIO_DATA(SEV_SEG_4_BASE, 0xC7);
+	IOWR_ALTERA_AVALON_PIO_DATA(SEV_SEG_5_BASE, 0xA1);
+	IOWR_ALTERA_AVALON_PIO_DATA(SEV_SEG_6_BASE, 0xC7);
+	IOWR_ALTERA_AVALON_PIO_DATA(SEV_SEG_7_BASE, 0x9C);
 	return;
 } 
 void init_Switches(void) {
+	// NOTSURE IF WE NEED THIS
 	return;
 }
 void init_Keys(void) {
+	// NOTSURE IF WE NEED THIS
 	return;
 }
 void init_LCD(void) {
+	// TBD
 	return;
 }
 
@@ -132,9 +147,11 @@ void play(void) {
 	}
 } 
 void dispInstructions(void) {
+	// DISPLAY TO LCD
 	return;
 } 
-void dispBankroll(void) {
+void dispBankroll(int bankRoll) {
+	// DISPLAY TO LCD
 	return;
 } 
 
@@ -146,7 +163,7 @@ void gameInitialization(void) {
 	bankRoll = 1000;
 	dealerSum = 0; 
 	playerSum = 0; 
-	gamesPlayed = 0;  
+	gamesPlayed = 0; 
 }  
 void playerBet(void) {
 	// Wait for KEY0 to be pressed
@@ -156,6 +173,7 @@ void playerBet(void) {
 } 
 void dealInitialCards(void) {
 	// Dealer First Card Shown
+	resetDeck(); 
 	int tempCard = generateRandomCard(); 
 	while(cardDeck[tempCard] == 1) {
 		tempCard = generateRandomCard(); 
@@ -203,19 +221,24 @@ int dealerBust(int dealerSum) {
 		busted = 1; 
 	}
 	return busted;
-} 
-void updateBankroll(int busted, int playerBet) {
-	if (busted == 1) {
-		if (playerBet >= bankRoll) {
-			// TODO: GAME OVERRRRRRRRRRRRR
-		}
-		bankRoll = bankRoll - playerBet; 
+}
+int determineResult(int playerSum, int dealerSum) {
+	if (playerBust(playerSum) == 1) {
+		return 0; 
+	}
+	else if (dealerBust(dealerSum) == 1) {
+		return 1;
+	}
+	else if (playerSum == dealerSum) {
+		return 2; 
+	}
+	else if (playerSum > dealerSum) {
+		return 1; 
 	}
 	else {
-		bankRoll = bankRoll + playerBet; 
+		return 0; 
 	}
-	return; 
-} 
+}
 
 
 /************************************************************
@@ -245,19 +268,80 @@ int translateCardValue(int cardIdx) {
 	return cardValue; 
 }
 void displayPlayerSum(int playerSum) {
-	// display sum to HEX7 and HEX6 on seven seg display
+	// display to HEX7 and HEX6
+	int ones = playerSum % 10; 
+	int tens = playerSum / 10; 
+	char hexVal[4] = sevenSegmentConversion(ones); 
+	IOWR_ALTERA_AVALON_PIO_DATA(SEV_SEG_6_BASE, hexVal);
+	hexVal[4] = sevenSegmentConversion(tens); 
+	IOWR_ALTERA_AVALON_PIO_DATA(SEV_SEG_7_BASE, hexVal);
+
 	return;
 } 
 void displayDealerSum(int dealerSum) {
-	// display sum to HEX5 and HEX4 on seven seg display
+	// display to HEX5 and HEX4
+	int ones = dealerSum % 10; 
+	int tens = dealerSum / 10; 
+	char hexVal[4] = sevenSegmentConversion(ones); 
+	IOWR_ALTERA_AVALON_PIO_DATA(SEV_SEG_4_BASE, hexVal);
+	hexVal[4] = sevenSegmentConversion(tens); 
+	IOWR_ALTERA_AVALON_PIO_DATA(SEV_SEG_5_BASE, hexVal);
 	return;
 } 
-void displayResult(int result) {
+char* sevenSegmentConversion(int digit) {
+	char hexVal[4]; 
+	switch(digit) {
+		case 9: //00010010
+			hexVal = '0x90';
+			break; 
+		case 8: 
+			hexVal = '0x80';
+			break; 
+		case 7:
+			hexVal = '0xF8';
+			break; 
+		case 6: 
+			hexVal = '0x82';
+			break; 
+		case 5: 
+			hexVal = '0x92';
+			break; 
+		case 4: 
+			hexVal = '0x99';
+			break; 
+		case 3: 
+			hexVal = '0xB0';
+			break; 
+		case 2: 
+			hexVal = '0xA4';
+			break; 
+		case 1: 
+			hexVal = '0xF9';
+			break; 
+		case 0:
+			hexVal = '0xC0';
+			break; 
+		default: 
+			break; 
+	}
+	char* ptr = hexVal; 
+	return ptr;
+}
+void endRound(int result, int playerBet) {
 	// display message on LCD
-	if (result == 1) { // WIN
+	if (result == 2) { // PUSH
+		// Display "PUSH"
+		// Bankroll Doesn't Change
+		return;
+	}
+	else if (result == 1) { // WIN
+		// Display "PLAYER WINS!"
+		bankRoll = bankRoll - playerBet; 
 		return; 
 	}
 	else { // LOSE
+		// Display "DEALER WINS!"
+		bankRoll = bankRoll + playerBet;
 		return; 
 	}
 	return;
@@ -268,6 +352,10 @@ void displayResult(int result) {
  Player Actions
 *************************************************************/ 
 void hit(void) {
+	IOWR_ALTERA_AVALON_PIO_DATA(SEV_SEG_0_BASE, 0xFF);
+	IOWR_ALTERA_AVALON_PIO_DATA(SEV_SEG_1_BASE, 0xC1);
+	IOWR_ALTERA_AVALON_PIO_DATA(SEV_SEG_2_BASE, 0xF9);
+	IOWR_ALTERA_AVALON_PIO_DATA(SEV_SEG_3_BASE, 0x89);
 	// Generate Random Card
 	int card = generateRandomCard(); 
 
@@ -285,5 +373,9 @@ void hit(void) {
 	return;
 } 
 void stay(void) { // Nothing Happens
+	IOWR_ALTERA_AVALON_PIO_DATA(SEV_SEG_0_BASE, 0x91);
+	IOWR_ALTERA_AVALON_PIO_DATA(SEV_SEG_1_BASE, 0x88);
+	IOWR_ALTERA_AVALON_PIO_DATA(SEV_SEG_2_BASE, 0xC1);
+	IOWR_ALTERA_AVALON_PIO_DATA(SEV_SEG_3_BASE, 0x92);
 	return;
 }
