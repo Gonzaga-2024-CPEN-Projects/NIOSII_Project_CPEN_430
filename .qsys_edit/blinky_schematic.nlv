@@ -12,15 +12,15 @@ preplace inst blinky.jtag_uart -pg 1 -lvl 3 -y 510
 preplace inst blinky.cpu.cpu -pg 1
 preplace inst blinky -pg 1 -lvl 1 -y 40 -regy -20
 preplace inst blinky.cpu.reset_bridge -pg 1
-preplace netloc FAN_OUT<net_container>blinky</net_container>(SLAVE)cpu.reset,(SLAVE)sev_seg_0.reset,(SLAVE)randoms.reset,(SLAVE)onchip_ram.reset1,(MASTER)clk_main.clk_reset,(SLAVE)jtag_uart.reset,(SLAVE)leds.reset,(SLAVE)switches.reset) 1 1 2 400 340 860
-preplace netloc EXPORT<net_container>blinky</net_container>(SLAVE)blinky.randoms_external_connection,(SLAVE)randoms.external_connection) 1 0 3 NJ 160 NJ 160 NJ
+preplace netloc INTERCONNECT<net_container>blinky</net_container>(MASTER)cpu.data_master,(SLAVE)cpu.debug_mem_slave,(MASTER)cpu.instruction_master,(SLAVE)jtag_uart.avalon_jtag_slave,(SLAVE)onchip_ram.s1,(SLAVE)leds.s1,(SLAVE)randoms.s1,(SLAVE)switches.s1,(SLAVE)sev_seg_0.s1) 1 1 2 440 520 840
 preplace netloc EXPORT<net_container>blinky</net_container>(SLAVE)blinky.leds_external_connection,(SLAVE)leds.external_connection) 1 0 3 NJ 60 NJ 60 NJ
-preplace netloc FAN_OUT<net_container>blinky</net_container>(SLAVE)switches.clk,(SLAVE)leds.clk,(SLAVE)cpu.clk,(MASTER)clk_main.clk,(SLAVE)randoms.clk,(SLAVE)onchip_ram.clk1,(SLAVE)sev_seg_0.clk,(SLAVE)jtag_uart.clk) 1 1 2 420 320 880
-preplace netloc EXPORT<net_container>blinky</net_container>(SLAVE)blinky.reset,(SLAVE)clk_main.clk_in_reset) 1 0 1 NJ
+preplace netloc EXPORT<net_container>blinky</net_container>(SLAVE)clk_main.clk_in_reset,(SLAVE)blinky.reset) 1 0 1 NJ
+preplace netloc FAN_OUT<net_container>blinky</net_container>(SLAVE)randoms.reset,(SLAVE)sev_seg_0.reset,(SLAVE)onchip_ram.reset1,(SLAVE)cpu.reset,(SLAVE)leds.reset,(SLAVE)jtag_uart.reset,(SLAVE)switches.reset,(MASTER)clk_main.clk_reset) 1 1 2 400 340 860
 preplace netloc EXPORT<net_container>blinky</net_container>(SLAVE)sev_seg_0.external_connection,(SLAVE)blinky.sev_seg_0_external_connection) 1 0 3 NJ 260 NJ 260 NJ
-preplace netloc EXPORT<net_container>blinky</net_container>(SLAVE)blinky.switches_external_connection,(SLAVE)switches.external_connection) 1 0 3 NJ 280 NJ 300 NJ
+preplace netloc EXPORT<net_container>blinky</net_container>(SLAVE)switches.external_connection,(SLAVE)blinky.switches_external_connection) 1 0 3 NJ 280 NJ 300 NJ
+preplace netloc EXPORT<net_container>blinky</net_container>(SLAVE)randoms.external_connection,(SLAVE)blinky.randoms_external_connection) 1 0 3 NJ 160 NJ 160 NJ
 preplace netloc EXPORT<net_container>blinky</net_container>(SLAVE)blinky.clk,(SLAVE)clk_main.clk_in) 1 0 1 NJ
 preplace netloc POINT_TO_POINT<net_container>blinky</net_container>(SLAVE)jtag_uart.irq,(MASTER)cpu.irq) 1 2 1 820
-preplace netloc INTERCONNECT<net_container>blinky</net_container>(SLAVE)onchip_ram.s1,(SLAVE)switches.s1,(SLAVE)sev_seg_0.s1,(MASTER)cpu.data_master,(SLAVE)randoms.s1,(MASTER)cpu.instruction_master,(SLAVE)cpu.debug_mem_slave,(SLAVE)jtag_uart.avalon_jtag_slave,(SLAVE)leds.s1) 1 1 2 440 520 840
+preplace netloc FAN_OUT<net_container>blinky</net_container>(SLAVE)switches.clk,(SLAVE)randoms.clk,(SLAVE)onchip_ram.clk1,(SLAVE)cpu.clk,(SLAVE)jtag_uart.clk,(SLAVE)sev_seg_0.clk,(MASTER)clk_main.clk,(SLAVE)leds.clk) 1 1 2 420 320 880
 levelinfo -pg 1 0 190 1070
 levelinfo -hier blinky 200 230 580 910 1060
