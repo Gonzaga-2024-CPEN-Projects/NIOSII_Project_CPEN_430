@@ -65,20 +65,15 @@ int main()
 
 	while(1) {
 		KEY_PRESS = IORD_ALTERA_AVALON_PIO_DATA(KEYS_BASE);
+//		itoa(KEY_PRESS, msg, 10);
+//		alt_putstr(msg);
+//		alt_putstr("\n");
+//		delay(50000);
 		if (KEY_PRESS == 3) {
-			while(KEY_PRESS == 3){
-				KEY_PRESS = IORD_ALTERA_AVALON_PIO_DATA(KEYS_BASE);
-			}
+			delay(100000);
 			hit();
-		}
 
-		if (KEY_PRESS == 5) {
-			while(KEY_PRESS == 5){
-				KEY_PRESS = IORD_ALTERA_AVALON_PIO_DATA(KEYS_BASE);
-			}
-			stay();
 		}
-
 	}
 	return 0;
 }

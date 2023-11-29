@@ -71,14 +71,6 @@ int main()
 			}
 			hit();
 		}
-
-		if (KEY_PRESS == 5) {
-			while(KEY_PRESS == 5){
-				KEY_PRESS = IORD_ALTERA_AVALON_PIO_DATA(KEYS_BASE);
-			}
-			stay();
-		}
-
 	}
 	return 0;
 }
