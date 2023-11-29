@@ -71,7 +71,7 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
  26 .jdi          00004428  00000000  00000000  0003ab55  2**0
                   CONTENTS, READONLY
- 27 .sopcinfo     0006d282  00000000  00000000  0003ef7d  2**0
+ 27 .sopcinfo     00078f1c  00000000  00000000  0003ef7d  2**0
                   CONTENTS, READONLY
 SYMBOL TABLE:
 00010000 l    d  .entry	00000000 .entry
@@ -1349,7 +1349,7 @@ int generateRandomCard(void) {
    106b8:	df000104 	addi	fp,sp,4
 	int random_num = IORD_ALTERA_AVALON_PIO_DATA(RANDOMS_BASE);
    106bc:	008000b4 	movhi	r2,2
-   106c0:	10841c04 	addi	r2,r2,4208
+   106c0:	10842804 	addi	r2,r2,4256
    106c4:	10800037 	ldwio	r2,0(r2)
    106c8:	e0bfff15 	stw	r2,-4(fp)
 	return abs(random_num %52);

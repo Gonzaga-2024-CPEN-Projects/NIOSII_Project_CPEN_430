@@ -4,22 +4,19 @@ set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to clk
 set_location_assignment PIN_M23 -to reset_n
 set_instance_assignment -name IO_STANDARD "2.5 V" -to reset_n
 
+#============================================================
+# KEYS
+#============================================================
+set_location_assignment PIN_M21 -to KEYS[0]
+set_location_assignment PIN_N21 -to KEYS[1]
+set_location_assignment PIN_R24 -to KEYS[2]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to KEYS[0]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to KEYS[1]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to KEYS[2]
 
-set_location_assignment PIN_Y23 -to sw_n
-set_instance_assignment -name IO_STANDARD "2.5 V" -to sw
-
-set_location_assignment PIN_E21 -to leds[0]
-set_location_assignment PIN_E22 -to leds[1]
-set_instance_assignment -name IO_STANDARD "2.5 V" -to leds[0] 
-set_instance_assignment -name IO_STANDARD "2.5 V" -to leds[1] 
-
-set_location_assignment PIN_AB28 -to switches[0]
-set_location_assignment PIN_AC28 -to switches[1] 
-set_instance_assignment -name IO_STANDARD "2.5 V" -to switches[0] 
-set_instance_assignment -name IO_STANDARD "2.5 V" -to switches[1] 
-set_location_assignment PIN_G19 -to rled 
-set_instance_assignment -name IO_STANDARD "2.5 V" -to rled
-
+#============================================================
+# SEVEN SEGMENT DISPLAYS
+#============================================================
 set_location_assignment PIN_G18 -to sev_seg_0[0]
 set_location_assignment PIN_F22 -to sev_seg_0[1]
 set_location_assignment PIN_E17 -to sev_seg_0[2]
@@ -83,3 +80,102 @@ set_location_assignment PIN_AH17 -to sev_seg_7[3]
 set_location_assignment PIN_AF17 -to sev_seg_7[4]
 set_location_assignment PIN_AG18 -to sev_seg_7[5]
 set_location_assignment PIN_AA14 -to sev_seg_7[6] 
+
+#============================================================
+# GREEN LEDS
+#============================================================
+set_location_assignment PIN_E21 -to LEDG[0]
+set_location_assignment PIN_E22 -to LEDG[1]
+set_location_assignment PIN_E25 -to LEDG[2]
+set_location_assignment PIN_E24 -to LEDG[3]
+set_location_assignment PIN_H21 -to LEDG[4]
+set_location_assignment PIN_G20 -to LEDG[5]
+set_location_assignment PIN_G22 -to LEDG[6]
+set_location_assignment PIN_G21 -to LEDG[7]
+set_location_assignment PIN_F17 -to LEDG[8]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to LEDG[0]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to LEDG[1]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to LEDG[2]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to LEDG[3]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to LEDG[4]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to LEDG[5]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to LEDG[6]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to LEDG[7]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to LEDG[8]
+
+#============================================================
+# RED LEDS
+#============================================================
+set_location_assignment PIN_G19 -to LEDR[0]
+set_location_assignment PIN_E19 -to LEDR[2]
+set_location_assignment PIN_F19 -to LEDR[1]
+set_location_assignment PIN_F21 -to LEDR[3]
+set_location_assignment PIN_F18 -to LEDR[4]
+set_location_assignment PIN_E18 -to LEDR[5]
+set_location_assignment PIN_J19 -to LEDR[6]
+set_location_assignment PIN_H19 -to LEDR[7]
+set_location_assignment PIN_J17 -to LEDR[8]
+set_location_assignment PIN_G17 -to LEDR[9]
+set_location_assignment PIN_J15 -to LEDR[10]
+set_location_assignment PIN_H16 -to LEDR[11]
+set_location_assignment PIN_J16 -to LEDR[12]
+set_location_assignment PIN_H17 -to LEDR[13]
+set_location_assignment PIN_F15 -to LEDR[14]
+set_location_assignment PIN_G15 -to LEDR[15]
+set_location_assignment PIN_G16 -to LEDR[16]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to LEDR[0]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to LEDR[1]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to LEDR[3]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to LEDR[4]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to LEDR[5]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to LEDR[6]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to LEDR[7]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to LEDR[8]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to LEDR[9]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to LEDR[10]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to LEDR[11]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to LEDR[12]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to LEDR[13]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to LEDR[14]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to LEDR[15]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to LEDR[16]
+
+#============================================================
+# SWITCHES
+#============================================================
+set_location_assignment PIN_AB28 -to switches[0]
+set_location_assignment PIN_AC28 -to switches[1] 
+set_location_assignment PIN_AC27 -to switches[2]
+set_location_assignment PIN_AD27 -to switches[3]
+set_location_assignment PIN_AB27 -to switches[4]
+set_location_assignment PIN_AC26 -to switches[5]
+set_location_assignment PIN_AD26 -to switches[6]
+set_location_assignment PIN_AB26 -to switches[7]
+set_location_assignment PIN_AC25 -to switches[8]
+set_location_assignment PIN_AB25 -to switches[9]
+set_location_assignment PIN_AC24 -to switches[10]
+set_location_assignment PIN_AB24 -to switches[11]
+set_location_assignment PIN_AB23 -to switches[12]
+set_location_assignment PIN_AA24 -to switches[13]
+set_location_assignment PIN_AA23 -to switches[14]
+set_location_assignment PIN_AA22 -to switches[15]
+set_location_assignment PIN_Y24 -to switches[16]
+set_location_assignment PIN_Y23 -to switches[17]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to switches[0] 
+set_instance_assignment -name IO_STANDARD "2.5 V" -to switches[1]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to switches[2]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to switches[3]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to switches[4]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to switches[5]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to switches[6]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to switches[7]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to switches[8]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to switches[9]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to switches[10]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to switches[11]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to switches[12]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to switches[13]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to switches[14]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to switches[15]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to switches[16]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to switches[17]

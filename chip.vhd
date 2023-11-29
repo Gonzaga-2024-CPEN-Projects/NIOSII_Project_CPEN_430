@@ -9,10 +9,10 @@ entity chip is
     port (
         clk           : in std_logic;
         reset_n       : in std_logic;
-        sw            : in std_logic;
-        switches      : in std_logic_vector(1 downto 0);
-        leds          : out std_logic_vector(1 downto 0);
-        rled          : out std_logic;
+        switches      : in std_logic_vector(17 downto 0);
+		  KEYS			 : in std_logic_vector(2 downto 0); 
+		  LEDG          : out std_logic_vector(7 downto 0);
+		  LEDR          : out std_logic_vector(16 downto 0);
         sev_seg_0     : out std_logic_vector(6 downto 0);
 		  sev_seg_1     : out std_logic_vector(6 downto 0);
 		  sev_seg_2     : out std_logic_vector(6 downto 0);
@@ -42,8 +42,10 @@ architecture rtl_and_struct of chip is
         port (
             clk_clk                             : in std_logic := 'X'; -- clk
             reset_reset_n                       : in std_logic := 'X'; -- reset_n
-            leds_external_connection_export     : out std_logic_vector(1 downto 0); -- export
-            switches_external_connection_export : in std_logic_vector(1 downto 0) := (others => 'X'); -- export
+            switches_external_connection_export : in std_logic_vector(17 downto 0) := (others => 'X'); -- export
+				keys_external_connection_export: in std_logic_vector(2 downto 0);
+				grn_leds_external_connection_export: out std_logic_vector(7 downto 0);
+				red_leds_external_connection_export: out std_logic_vector(16 downto 0);
             sev_seg_0_external_connection_export: out std_logic_vector(6 downto 0);
 				sev_seg_1_external_connection_export: out std_logic_vector(6 downto 0);
 				sev_seg_2_external_connection_export: out std_logic_vector(6 downto 0);
@@ -61,8 +63,10 @@ begin
         port map (
             clk_clk                             => clk,
             reset_reset_n                       => reset_n,
-            leds_external_connection_export     => leds,
             switches_external_connection_export => switches,
+				keys_external_connection_export => KEYS,
+				grn_leds_external_connection_export => LEDG,
+				red_leds_external_connection_export => LEDR,
             sev_seg_0_external_connection_export=> sev_seg_0,
 				sev_seg_1_external_connection_export=> sev_seg_1,
 				sev_seg_2_external_connection_export=> sev_seg_2,
@@ -74,22 +78,22 @@ begin
 				randoms_external_connection_export => randoms
         );
 
-    -- begin custom hardware
-    -- turning on red LED when the most left switch is up
-    process (reset_n, clk)
-    begin
-        if reset_n = '0' then
-            rled_tmp <= '0';
-        elsif rising_edge(clk) then
-            if sw = '1' then
-                rled_tmp <= '1';
-            else
-                rled_tmp <= '0';
-            end if;
-        end if;
-    end process;
-    rled <= rled_tmp;
-	 
+--    -- begin custom hardware
+--    -- turning on red LED when the most left switch is up
+--    process (reset_n, clk)
+--    begin
+--        if reset_n = '0' then
+--            rled_tmp <= '0';
+--        elsif rising_edge(clk) then
+--            if sw = '1' then
+--                rled_tmp <= '1';
+--            else
+--                rled_tmp <= '0';
+--            end if;
+--        end if;
+--    end process;
+--    rled <= rled_tmp;
+--	 
 	 --random number generation
 	 process (reset_n, clk)
 	 begin
@@ -104,10 +108,10 @@ begin
     
 
     randoms <= lfsr_reg;
-
-	 
-	
-    -- end custom hardware
+--
+--	 
+--	
+--    -- end custom hardware
 	 
 	 
 
