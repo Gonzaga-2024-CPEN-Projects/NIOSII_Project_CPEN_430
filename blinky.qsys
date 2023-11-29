@@ -33,6 +33,14 @@
          type = "String";
       }
    }
+   element grn_leds
+   {
+      datum _sortIndex
+      {
+         value = "8";
+         type = "int";
+      }
+   }
    element jtag_uart
    {
       datum _sortIndex
@@ -46,22 +54,6 @@
       datum baseAddress
       {
          value = "135232";
-         type = "String";
-      }
-   }
-   element leds
-   {
-      datum _sortIndex
-      {
-         value = "5";
-         type = "int";
-      }
-   }
-   element leds.s1
-   {
-      datum baseAddress
-      {
-         value = "135200";
          type = "String";
       }
    }
@@ -94,6 +86,22 @@
       datum baseAddress
       {
          value = "135168";
+         type = "String";
+      }
+   }
+   element red_leds
+   {
+      datum _sortIndex
+      {
+         value = "5";
+         type = "int";
+      }
+   }
+   element red_leds.s1
+   {
+      datum baseAddress
+      {
+         value = "135200";
          type = "String";
       }
    }
@@ -152,13 +160,18 @@
  <instanceScript></instanceScript>
  <interface name="clk" internal="clk_main.clk_in" type="clock" dir="end" />
  <interface
-   name="leds_external_connection"
-   internal="leds.external_connection"
+   name="grn_leds_external_connection"
+   internal="grn_leds.external_connection"
    type="conduit"
    dir="end" />
  <interface
    name="randoms_external_connection"
    internal="randoms.external_connection"
+   type="conduit"
+   dir="end" />
+ <interface
+   name="red_leds_external_connection"
+   internal="red_leds.external_connection"
    type="conduit"
    dir="end" />
  <interface name="reset" internal="clk_main.clk_in_reset" type="reset" dir="end" />
@@ -198,7 +211,7 @@
   <parameter name="dataAddrWidth" value="18" />
   <parameter name="dataMasterHighPerformanceAddrWidth" value="1" />
   <parameter name="dataMasterHighPerformanceMapParam" value="" />
-  <parameter name="dataSlaveMapParam"><![CDATA[<address-map><slave name='onchip_ram.s1' start='0x10000' end='0x20000' type='altera_avalon_onchip_memory2.s1' /><slave name='cpu.debug_mem_slave' start='0x20800' end='0x21000' type='altera_nios2_gen2.debug_mem_slave' /><slave name='randoms.s1' start='0x21000' end='0x21010' type='altera_avalon_pio.s1' /><slave name='sev_seg_0.s1' start='0x21010' end='0x21020' type='altera_avalon_pio.s1' /><slave name='leds.s1' start='0x21020' end='0x21030' type='altera_avalon_pio.s1' /><slave name='switches.s1' start='0x21030' end='0x21040' type='altera_avalon_pio.s1' /><slave name='jtag_uart.avalon_jtag_slave' start='0x21040' end='0x21048' type='altera_avalon_jtag_uart.avalon_jtag_slave' /></address-map>]]></parameter>
+  <parameter name="dataSlaveMapParam"><![CDATA[<address-map><slave name='grn_leds.s1' start='0x0' end='0x10' type='altera_avalon_pio.s1' /><slave name='onchip_ram.s1' start='0x10000' end='0x20000' type='altera_avalon_onchip_memory2.s1' /><slave name='cpu.debug_mem_slave' start='0x20800' end='0x21000' type='altera_nios2_gen2.debug_mem_slave' /><slave name='randoms.s1' start='0x21000' end='0x21010' type='altera_avalon_pio.s1' /><slave name='sev_seg_0.s1' start='0x21010' end='0x21020' type='altera_avalon_pio.s1' /><slave name='red_leds.s1' start='0x21020' end='0x21030' type='altera_avalon_pio.s1' /><slave name='switches.s1' start='0x21030' end='0x21040' type='altera_avalon_pio.s1' /><slave name='jtag_uart.avalon_jtag_slave' start='0x21040' end='0x21048' type='altera_avalon_jtag_uart.avalon_jtag_slave' /></address-map>]]></parameter>
   <parameter name="data_master_high_performance_paddr_base" value="0" />
   <parameter name="data_master_high_performance_paddr_size" value="0" />
   <parameter name="data_master_paddr_base" value="0" />
@@ -356,6 +369,20 @@
   <parameter name="tracefilename" value="" />
   <parameter name="userDefinedSettings" value="" />
  </module>
+ <module name="grn_leds" kind="altera_avalon_pio" version="18.0" enabled="1">
+  <parameter name="bitClearingEdgeCapReg" value="false" />
+  <parameter name="bitModifyingOutReg" value="false" />
+  <parameter name="captureEdge" value="false" />
+  <parameter name="clockRate" value="50000000" />
+  <parameter name="direction" value="Output" />
+  <parameter name="edgeType" value="RISING" />
+  <parameter name="generateIRQ" value="false" />
+  <parameter name="irqType" value="LEVEL" />
+  <parameter name="resetValue" value="0" />
+  <parameter name="simDoTestBenchWiring" value="false" />
+  <parameter name="simDrivenValue" value="0" />
+  <parameter name="width" value="8" />
+ </module>
  <module
    name="jtag_uart"
    kind="altera_avalon_jtag_uart"
@@ -374,20 +401,6 @@
   <parameter name="useRelativePathForSimFile" value="false" />
   <parameter name="writeBufferDepth" value="64" />
   <parameter name="writeIRQThreshold" value="8" />
- </module>
- <module name="leds" kind="altera_avalon_pio" version="18.0" enabled="1">
-  <parameter name="bitClearingEdgeCapReg" value="false" />
-  <parameter name="bitModifyingOutReg" value="false" />
-  <parameter name="captureEdge" value="false" />
-  <parameter name="clockRate" value="50000000" />
-  <parameter name="direction" value="Output" />
-  <parameter name="edgeType" value="RISING" />
-  <parameter name="generateIRQ" value="false" />
-  <parameter name="irqType" value="LEVEL" />
-  <parameter name="resetValue" value="0" />
-  <parameter name="simDoTestBenchWiring" value="false" />
-  <parameter name="simDrivenValue" value="0" />
-  <parameter name="width" value="2" />
  </module>
  <module
    name="onchip_ram"
@@ -435,6 +448,20 @@
   <parameter name="simDrivenValue" value="0" />
   <parameter name="width" value="32" />
  </module>
+ <module name="red_leds" kind="altera_avalon_pio" version="18.0" enabled="1">
+  <parameter name="bitClearingEdgeCapReg" value="false" />
+  <parameter name="bitModifyingOutReg" value="false" />
+  <parameter name="captureEdge" value="false" />
+  <parameter name="clockRate" value="50000000" />
+  <parameter name="direction" value="Output" />
+  <parameter name="edgeType" value="RISING" />
+  <parameter name="generateIRQ" value="false" />
+  <parameter name="irqType" value="LEVEL" />
+  <parameter name="resetValue" value="0" />
+  <parameter name="simDoTestBenchWiring" value="false" />
+  <parameter name="simDrivenValue" value="0" />
+  <parameter name="width" value="17" />
+ </module>
  <module name="sev_seg_0" kind="altera_avalon_pio" version="18.0" enabled="1">
   <parameter name="bitClearingEdgeCapReg" value="false" />
   <parameter name="bitModifyingOutReg" value="false" />
@@ -461,7 +488,7 @@
   <parameter name="resetValue" value="0" />
   <parameter name="simDoTestBenchWiring" value="false" />
   <parameter name="simDrivenValue" value="0" />
-  <parameter name="width" value="2" />
+  <parameter name="width" value="18" />
  </module>
  <connection
    kind="avalon"
@@ -499,7 +526,11 @@
   <parameter name="baseAddress" value="0x00021030" />
   <parameter name="defaultConnection" value="false" />
  </connection>
- <connection kind="avalon" version="18.0" start="cpu.data_master" end="leds.s1">
+ <connection
+   kind="avalon"
+   version="18.0"
+   start="cpu.data_master"
+   end="red_leds.s1">
   <parameter name="arbitrationPriority" value="1" />
   <parameter name="baseAddress" value="0x00021020" />
   <parameter name="defaultConnection" value="false" />
@@ -516,6 +547,15 @@
  <connection kind="avalon" version="18.0" start="cpu.data_master" end="randoms.s1">
   <parameter name="arbitrationPriority" value="1" />
   <parameter name="baseAddress" value="0x00021000" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="18.0"
+   start="cpu.data_master"
+   end="grn_leds.s1">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x0000" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -539,9 +579,10 @@
  <connection kind="clock" version="18.0" start="clk_main.clk" end="cpu.clk" />
  <connection kind="clock" version="18.0" start="clk_main.clk" end="jtag_uart.clk" />
  <connection kind="clock" version="18.0" start="clk_main.clk" end="switches.clk" />
- <connection kind="clock" version="18.0" start="clk_main.clk" end="leds.clk" />
+ <connection kind="clock" version="18.0" start="clk_main.clk" end="red_leds.clk" />
  <connection kind="clock" version="18.0" start="clk_main.clk" end="sev_seg_0.clk" />
  <connection kind="clock" version="18.0" start="clk_main.clk" end="randoms.clk" />
+ <connection kind="clock" version="18.0" start="clk_main.clk" end="grn_leds.clk" />
  <connection
    kind="clock"
    version="18.0"
@@ -569,7 +610,7 @@
    kind="reset"
    version="18.0"
    start="clk_main.clk_reset"
-   end="leds.reset" />
+   end="red_leds.reset" />
  <connection
    kind="reset"
    version="18.0"
@@ -580,6 +621,11 @@
    version="18.0"
    start="clk_main.clk_reset"
    end="randoms.reset" />
+ <connection
+   kind="reset"
+   version="18.0"
+   start="clk_main.clk_reset"
+   end="grn_leds.reset" />
  <connection
    kind="reset"
    version="18.0"

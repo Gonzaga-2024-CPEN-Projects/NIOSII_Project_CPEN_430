@@ -9,11 +9,12 @@ use IEEE.numeric_std.all;
 entity blinky is
 	port (
 		clk_clk                              : in  std_logic                     := '0';             --                           clk.clk
-		leds_external_connection_export      : out std_logic_vector(1 downto 0);                     --      leds_external_connection.export
+		grn_leds_external_connection_export  : out std_logic_vector(7 downto 0);                     --  grn_leds_external_connection.export
 		randoms_external_connection_export   : in  std_logic_vector(31 downto 0) := (others => '0'); --   randoms_external_connection.export
+		red_leds_external_connection_export  : out std_logic_vector(16 downto 0);                    --  red_leds_external_connection.export
 		reset_reset_n                        : in  std_logic                     := '0';             --                         reset.reset_n
 		sev_seg_0_external_connection_export : out std_logic_vector(6 downto 0);                     -- sev_seg_0_external_connection.export
-		switches_external_connection_export  : in  std_logic_vector(1 downto 0)  := (others => '0')  --  switches_external_connection.export
+		switches_external_connection_export  : in  std_logic_vector(17 downto 0) := (others => '0')  --  switches_external_connection.export
 	);
 end entity blinky;
 
@@ -49,6 +50,19 @@ architecture rtl of blinky is
 		);
 	end component blinky_cpu;
 
+	component blinky_grn_leds is
+		port (
+			clk        : in  std_logic                     := 'X';             -- clk
+			reset_n    : in  std_logic                     := 'X';             -- reset_n
+			address    : in  std_logic_vector(1 downto 0)  := (others => 'X'); -- address
+			write_n    : in  std_logic                     := 'X';             -- write_n
+			writedata  : in  std_logic_vector(31 downto 0) := (others => 'X'); -- writedata
+			chipselect : in  std_logic                     := 'X';             -- chipselect
+			readdata   : out std_logic_vector(31 downto 0);                    -- readdata
+			out_port   : out std_logic_vector(7 downto 0)                      -- export
+		);
+	end component blinky_grn_leds;
+
 	component blinky_jtag_uart is
 		port (
 			clk            : in  std_logic                     := 'X';             -- clk
@@ -63,19 +77,6 @@ architecture rtl of blinky is
 			av_irq         : out std_logic                                         -- irq
 		);
 	end component blinky_jtag_uart;
-
-	component blinky_leds is
-		port (
-			clk        : in  std_logic                     := 'X';             -- clk
-			reset_n    : in  std_logic                     := 'X';             -- reset_n
-			address    : in  std_logic_vector(1 downto 0)  := (others => 'X'); -- address
-			write_n    : in  std_logic                     := 'X';             -- write_n
-			writedata  : in  std_logic_vector(31 downto 0) := (others => 'X'); -- writedata
-			chipselect : in  std_logic                     := 'X';             -- chipselect
-			readdata   : out std_logic_vector(31 downto 0);                    -- readdata
-			out_port   : out std_logic_vector(1 downto 0)                      -- export
-		);
-	end component blinky_leds;
 
 	component blinky_onchip_ram is
 		port (
@@ -103,6 +104,19 @@ architecture rtl of blinky is
 		);
 	end component blinky_randoms;
 
+	component blinky_red_leds is
+		port (
+			clk        : in  std_logic                     := 'X';             -- clk
+			reset_n    : in  std_logic                     := 'X';             -- reset_n
+			address    : in  std_logic_vector(1 downto 0)  := (others => 'X'); -- address
+			write_n    : in  std_logic                     := 'X';             -- write_n
+			writedata  : in  std_logic_vector(31 downto 0) := (others => 'X'); -- writedata
+			chipselect : in  std_logic                     := 'X';             -- chipselect
+			readdata   : out std_logic_vector(31 downto 0);                    -- readdata
+			out_port   : out std_logic_vector(16 downto 0)                     -- export
+		);
+	end component blinky_red_leds;
+
 	component blinky_sev_seg_0 is
 		port (
 			clk        : in  std_logic                     := 'X';             -- clk
@@ -122,7 +136,7 @@ architecture rtl of blinky is
 			reset_n  : in  std_logic                     := 'X';             -- reset_n
 			address  : in  std_logic_vector(1 downto 0)  := (others => 'X'); -- address
 			readdata : out std_logic_vector(31 downto 0);                    -- readdata
-			in_port  : in  std_logic_vector(1 downto 0)  := (others => 'X')  -- export
+			in_port  : in  std_logic_vector(17 downto 0) := (others => 'X')  -- export
 		);
 	end component blinky_switches;
 
@@ -150,6 +164,11 @@ architecture rtl of blinky is
 			cpu_debug_mem_slave_byteenable          : out std_logic_vector(3 downto 0);                     -- byteenable
 			cpu_debug_mem_slave_waitrequest         : in  std_logic                     := 'X';             -- waitrequest
 			cpu_debug_mem_slave_debugaccess         : out std_logic;                                        -- debugaccess
+			grn_leds_s1_address                     : out std_logic_vector(1 downto 0);                     -- address
+			grn_leds_s1_write                       : out std_logic;                                        -- write
+			grn_leds_s1_readdata                    : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
+			grn_leds_s1_writedata                   : out std_logic_vector(31 downto 0);                    -- writedata
+			grn_leds_s1_chipselect                  : out std_logic;                                        -- chipselect
 			jtag_uart_avalon_jtag_slave_address     : out std_logic_vector(0 downto 0);                     -- address
 			jtag_uart_avalon_jtag_slave_write       : out std_logic;                                        -- write
 			jtag_uart_avalon_jtag_slave_read        : out std_logic;                                        -- read
@@ -157,11 +176,6 @@ architecture rtl of blinky is
 			jtag_uart_avalon_jtag_slave_writedata   : out std_logic_vector(31 downto 0);                    -- writedata
 			jtag_uart_avalon_jtag_slave_waitrequest : in  std_logic                     := 'X';             -- waitrequest
 			jtag_uart_avalon_jtag_slave_chipselect  : out std_logic;                                        -- chipselect
-			leds_s1_address                         : out std_logic_vector(1 downto 0);                     -- address
-			leds_s1_write                           : out std_logic;                                        -- write
-			leds_s1_readdata                        : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
-			leds_s1_writedata                       : out std_logic_vector(31 downto 0);                    -- writedata
-			leds_s1_chipselect                      : out std_logic;                                        -- chipselect
 			onchip_ram_s1_address                   : out std_logic_vector(13 downto 0);                    -- address
 			onchip_ram_s1_write                     : out std_logic;                                        -- write
 			onchip_ram_s1_readdata                  : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
@@ -171,6 +185,11 @@ architecture rtl of blinky is
 			onchip_ram_s1_clken                     : out std_logic;                                        -- clken
 			randoms_s1_address                      : out std_logic_vector(1 downto 0);                     -- address
 			randoms_s1_readdata                     : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
+			red_leds_s1_address                     : out std_logic_vector(1 downto 0);                     -- address
+			red_leds_s1_write                       : out std_logic;                                        -- write
+			red_leds_s1_readdata                    : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
+			red_leds_s1_writedata                   : out std_logic_vector(31 downto 0);                    -- writedata
+			red_leds_s1_chipselect                  : out std_logic;                                        -- chipselect
 			sev_seg_0_s1_address                    : out std_logic_vector(1 downto 0);                     -- address
 			sev_seg_0_s1_write                      : out std_logic;                                        -- write
 			sev_seg_0_s1_readdata                   : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
@@ -292,11 +311,11 @@ architecture rtl of blinky is
 	signal mm_interconnect_0_onchip_ram_s1_clken                         : std_logic;                     -- mm_interconnect_0:onchip_ram_s1_clken -> onchip_ram:clken
 	signal mm_interconnect_0_switches_s1_readdata                        : std_logic_vector(31 downto 0); -- switches:readdata -> mm_interconnect_0:switches_s1_readdata
 	signal mm_interconnect_0_switches_s1_address                         : std_logic_vector(1 downto 0);  -- mm_interconnect_0:switches_s1_address -> switches:address
-	signal mm_interconnect_0_leds_s1_chipselect                          : std_logic;                     -- mm_interconnect_0:leds_s1_chipselect -> leds:chipselect
-	signal mm_interconnect_0_leds_s1_readdata                            : std_logic_vector(31 downto 0); -- leds:readdata -> mm_interconnect_0:leds_s1_readdata
-	signal mm_interconnect_0_leds_s1_address                             : std_logic_vector(1 downto 0);  -- mm_interconnect_0:leds_s1_address -> leds:address
-	signal mm_interconnect_0_leds_s1_write                               : std_logic;                     -- mm_interconnect_0:leds_s1_write -> mm_interconnect_0_leds_s1_write:in
-	signal mm_interconnect_0_leds_s1_writedata                           : std_logic_vector(31 downto 0); -- mm_interconnect_0:leds_s1_writedata -> leds:writedata
+	signal mm_interconnect_0_red_leds_s1_chipselect                      : std_logic;                     -- mm_interconnect_0:red_leds_s1_chipselect -> red_leds:chipselect
+	signal mm_interconnect_0_red_leds_s1_readdata                        : std_logic_vector(31 downto 0); -- red_leds:readdata -> mm_interconnect_0:red_leds_s1_readdata
+	signal mm_interconnect_0_red_leds_s1_address                         : std_logic_vector(1 downto 0);  -- mm_interconnect_0:red_leds_s1_address -> red_leds:address
+	signal mm_interconnect_0_red_leds_s1_write                           : std_logic;                     -- mm_interconnect_0:red_leds_s1_write -> mm_interconnect_0_red_leds_s1_write:in
+	signal mm_interconnect_0_red_leds_s1_writedata                       : std_logic_vector(31 downto 0); -- mm_interconnect_0:red_leds_s1_writedata -> red_leds:writedata
 	signal mm_interconnect_0_sev_seg_0_s1_chipselect                     : std_logic;                     -- mm_interconnect_0:sev_seg_0_s1_chipselect -> sev_seg_0:chipselect
 	signal mm_interconnect_0_sev_seg_0_s1_readdata                       : std_logic_vector(31 downto 0); -- sev_seg_0:readdata -> mm_interconnect_0:sev_seg_0_s1_readdata
 	signal mm_interconnect_0_sev_seg_0_s1_address                        : std_logic_vector(1 downto 0);  -- mm_interconnect_0:sev_seg_0_s1_address -> sev_seg_0:address
@@ -304,6 +323,11 @@ architecture rtl of blinky is
 	signal mm_interconnect_0_sev_seg_0_s1_writedata                      : std_logic_vector(31 downto 0); -- mm_interconnect_0:sev_seg_0_s1_writedata -> sev_seg_0:writedata
 	signal mm_interconnect_0_randoms_s1_readdata                         : std_logic_vector(31 downto 0); -- randoms:readdata -> mm_interconnect_0:randoms_s1_readdata
 	signal mm_interconnect_0_randoms_s1_address                          : std_logic_vector(1 downto 0);  -- mm_interconnect_0:randoms_s1_address -> randoms:address
+	signal mm_interconnect_0_grn_leds_s1_chipselect                      : std_logic;                     -- mm_interconnect_0:grn_leds_s1_chipselect -> grn_leds:chipselect
+	signal mm_interconnect_0_grn_leds_s1_readdata                        : std_logic_vector(31 downto 0); -- grn_leds:readdata -> mm_interconnect_0:grn_leds_s1_readdata
+	signal mm_interconnect_0_grn_leds_s1_address                         : std_logic_vector(1 downto 0);  -- mm_interconnect_0:grn_leds_s1_address -> grn_leds:address
+	signal mm_interconnect_0_grn_leds_s1_write                           : std_logic;                     -- mm_interconnect_0:grn_leds_s1_write -> mm_interconnect_0_grn_leds_s1_write:in
+	signal mm_interconnect_0_grn_leds_s1_writedata                       : std_logic_vector(31 downto 0); -- mm_interconnect_0:grn_leds_s1_writedata -> grn_leds:writedata
 	signal irq_mapper_receiver0_irq                                      : std_logic;                     -- jtag_uart:av_irq -> irq_mapper:receiver0_irq
 	signal cpu_irq_irq                                                   : std_logic_vector(31 downto 0); -- irq_mapper:sender_irq -> cpu:irq
 	signal rst_controller_reset_out_reset                                : std_logic;                     -- rst_controller:reset_out -> [irq_mapper:reset, mm_interconnect_0:cpu_reset_reset_bridge_in_reset_reset, onchip_ram:reset, rst_controller_reset_out_reset:in, rst_translator:in_reset]
@@ -311,9 +335,10 @@ architecture rtl of blinky is
 	signal reset_reset_n_ports_inv                                       : std_logic;                     -- reset_reset_n:inv -> rst_controller:reset_in0
 	signal mm_interconnect_0_jtag_uart_avalon_jtag_slave_read_ports_inv  : std_logic;                     -- mm_interconnect_0_jtag_uart_avalon_jtag_slave_read:inv -> jtag_uart:av_read_n
 	signal mm_interconnect_0_jtag_uart_avalon_jtag_slave_write_ports_inv : std_logic;                     -- mm_interconnect_0_jtag_uart_avalon_jtag_slave_write:inv -> jtag_uart:av_write_n
-	signal mm_interconnect_0_leds_s1_write_ports_inv                     : std_logic;                     -- mm_interconnect_0_leds_s1_write:inv -> leds:write_n
+	signal mm_interconnect_0_red_leds_s1_write_ports_inv                 : std_logic;                     -- mm_interconnect_0_red_leds_s1_write:inv -> red_leds:write_n
 	signal mm_interconnect_0_sev_seg_0_s1_write_ports_inv                : std_logic;                     -- mm_interconnect_0_sev_seg_0_s1_write:inv -> sev_seg_0:write_n
-	signal rst_controller_reset_out_reset_ports_inv                      : std_logic;                     -- rst_controller_reset_out_reset:inv -> [cpu:reset_n, jtag_uart:rst_n, leds:reset_n, randoms:reset_n, sev_seg_0:reset_n, switches:reset_n]
+	signal mm_interconnect_0_grn_leds_s1_write_ports_inv                 : std_logic;                     -- mm_interconnect_0_grn_leds_s1_write:inv -> grn_leds:write_n
+	signal rst_controller_reset_out_reset_ports_inv                      : std_logic;                     -- rst_controller_reset_out_reset:inv -> [cpu:reset_n, grn_leds:reset_n, jtag_uart:rst_n, randoms:reset_n, red_leds:reset_n, sev_seg_0:reset_n, switches:reset_n]
 
 begin
 
@@ -347,6 +372,18 @@ begin
 			dummy_ci_port                       => open                                               -- custom_instruction_master.readra
 		);
 
+	grn_leds : component blinky_grn_leds
+		port map (
+			clk        => clk_clk,                                       --                 clk.clk
+			reset_n    => rst_controller_reset_out_reset_ports_inv,      --               reset.reset_n
+			address    => mm_interconnect_0_grn_leds_s1_address,         --                  s1.address
+			write_n    => mm_interconnect_0_grn_leds_s1_write_ports_inv, --                    .write_n
+			writedata  => mm_interconnect_0_grn_leds_s1_writedata,       --                    .writedata
+			chipselect => mm_interconnect_0_grn_leds_s1_chipselect,      --                    .chipselect
+			readdata   => mm_interconnect_0_grn_leds_s1_readdata,        --                    .readdata
+			out_port   => grn_leds_external_connection_export            -- external_connection.export
+		);
+
 	jtag_uart : component blinky_jtag_uart
 		port map (
 			clk            => clk_clk,                                                       --               clk.clk
@@ -359,18 +396,6 @@ begin
 			av_writedata   => mm_interconnect_0_jtag_uart_avalon_jtag_slave_writedata,       --                  .writedata
 			av_waitrequest => mm_interconnect_0_jtag_uart_avalon_jtag_slave_waitrequest,     --                  .waitrequest
 			av_irq         => irq_mapper_receiver0_irq                                       --               irq.irq
-		);
-
-	leds : component blinky_leds
-		port map (
-			clk        => clk_clk,                                   --                 clk.clk
-			reset_n    => rst_controller_reset_out_reset_ports_inv,  --               reset.reset_n
-			address    => mm_interconnect_0_leds_s1_address,         --                  s1.address
-			write_n    => mm_interconnect_0_leds_s1_write_ports_inv, --                    .write_n
-			writedata  => mm_interconnect_0_leds_s1_writedata,       --                    .writedata
-			chipselect => mm_interconnect_0_leds_s1_chipselect,      --                    .chipselect
-			readdata   => mm_interconnect_0_leds_s1_readdata,        --                    .readdata
-			out_port   => leds_external_connection_export            -- external_connection.export
 		);
 
 	onchip_ram : component blinky_onchip_ram
@@ -395,6 +420,18 @@ begin
 			address  => mm_interconnect_0_randoms_s1_address,     --                  s1.address
 			readdata => mm_interconnect_0_randoms_s1_readdata,    --                    .readdata
 			in_port  => randoms_external_connection_export        -- external_connection.export
+		);
+
+	red_leds : component blinky_red_leds
+		port map (
+			clk        => clk_clk,                                       --                 clk.clk
+			reset_n    => rst_controller_reset_out_reset_ports_inv,      --               reset.reset_n
+			address    => mm_interconnect_0_red_leds_s1_address,         --                  s1.address
+			write_n    => mm_interconnect_0_red_leds_s1_write_ports_inv, --                    .write_n
+			writedata  => mm_interconnect_0_red_leds_s1_writedata,       --                    .writedata
+			chipselect => mm_interconnect_0_red_leds_s1_chipselect,      --                    .chipselect
+			readdata   => mm_interconnect_0_red_leds_s1_readdata,        --                    .readdata
+			out_port   => red_leds_external_connection_export            -- external_connection.export
 		);
 
 	sev_seg_0 : component blinky_sev_seg_0
@@ -442,6 +479,11 @@ begin
 			cpu_debug_mem_slave_byteenable          => mm_interconnect_0_cpu_debug_mem_slave_byteenable,          --                                .byteenable
 			cpu_debug_mem_slave_waitrequest         => mm_interconnect_0_cpu_debug_mem_slave_waitrequest,         --                                .waitrequest
 			cpu_debug_mem_slave_debugaccess         => mm_interconnect_0_cpu_debug_mem_slave_debugaccess,         --                                .debugaccess
+			grn_leds_s1_address                     => mm_interconnect_0_grn_leds_s1_address,                     --                     grn_leds_s1.address
+			grn_leds_s1_write                       => mm_interconnect_0_grn_leds_s1_write,                       --                                .write
+			grn_leds_s1_readdata                    => mm_interconnect_0_grn_leds_s1_readdata,                    --                                .readdata
+			grn_leds_s1_writedata                   => mm_interconnect_0_grn_leds_s1_writedata,                   --                                .writedata
+			grn_leds_s1_chipselect                  => mm_interconnect_0_grn_leds_s1_chipselect,                  --                                .chipselect
 			jtag_uart_avalon_jtag_slave_address     => mm_interconnect_0_jtag_uart_avalon_jtag_slave_address,     --     jtag_uart_avalon_jtag_slave.address
 			jtag_uart_avalon_jtag_slave_write       => mm_interconnect_0_jtag_uart_avalon_jtag_slave_write,       --                                .write
 			jtag_uart_avalon_jtag_slave_read        => mm_interconnect_0_jtag_uart_avalon_jtag_slave_read,        --                                .read
@@ -449,11 +491,6 @@ begin
 			jtag_uart_avalon_jtag_slave_writedata   => mm_interconnect_0_jtag_uart_avalon_jtag_slave_writedata,   --                                .writedata
 			jtag_uart_avalon_jtag_slave_waitrequest => mm_interconnect_0_jtag_uart_avalon_jtag_slave_waitrequest, --                                .waitrequest
 			jtag_uart_avalon_jtag_slave_chipselect  => mm_interconnect_0_jtag_uart_avalon_jtag_slave_chipselect,  --                                .chipselect
-			leds_s1_address                         => mm_interconnect_0_leds_s1_address,                         --                         leds_s1.address
-			leds_s1_write                           => mm_interconnect_0_leds_s1_write,                           --                                .write
-			leds_s1_readdata                        => mm_interconnect_0_leds_s1_readdata,                        --                                .readdata
-			leds_s1_writedata                       => mm_interconnect_0_leds_s1_writedata,                       --                                .writedata
-			leds_s1_chipselect                      => mm_interconnect_0_leds_s1_chipselect,                      --                                .chipselect
 			onchip_ram_s1_address                   => mm_interconnect_0_onchip_ram_s1_address,                   --                   onchip_ram_s1.address
 			onchip_ram_s1_write                     => mm_interconnect_0_onchip_ram_s1_write,                     --                                .write
 			onchip_ram_s1_readdata                  => mm_interconnect_0_onchip_ram_s1_readdata,                  --                                .readdata
@@ -463,6 +500,11 @@ begin
 			onchip_ram_s1_clken                     => mm_interconnect_0_onchip_ram_s1_clken,                     --                                .clken
 			randoms_s1_address                      => mm_interconnect_0_randoms_s1_address,                      --                      randoms_s1.address
 			randoms_s1_readdata                     => mm_interconnect_0_randoms_s1_readdata,                     --                                .readdata
+			red_leds_s1_address                     => mm_interconnect_0_red_leds_s1_address,                     --                     red_leds_s1.address
+			red_leds_s1_write                       => mm_interconnect_0_red_leds_s1_write,                       --                                .write
+			red_leds_s1_readdata                    => mm_interconnect_0_red_leds_s1_readdata,                    --                                .readdata
+			red_leds_s1_writedata                   => mm_interconnect_0_red_leds_s1_writedata,                   --                                .writedata
+			red_leds_s1_chipselect                  => mm_interconnect_0_red_leds_s1_chipselect,                  --                                .chipselect
 			sev_seg_0_s1_address                    => mm_interconnect_0_sev_seg_0_s1_address,                    --                    sev_seg_0_s1.address
 			sev_seg_0_s1_write                      => mm_interconnect_0_sev_seg_0_s1_write,                      --                                .write
 			sev_seg_0_s1_readdata                   => mm_interconnect_0_sev_seg_0_s1_readdata,                   --                                .readdata
@@ -551,9 +593,11 @@ begin
 
 	mm_interconnect_0_jtag_uart_avalon_jtag_slave_write_ports_inv <= not mm_interconnect_0_jtag_uart_avalon_jtag_slave_write;
 
-	mm_interconnect_0_leds_s1_write_ports_inv <= not mm_interconnect_0_leds_s1_write;
+	mm_interconnect_0_red_leds_s1_write_ports_inv <= not mm_interconnect_0_red_leds_s1_write;
 
 	mm_interconnect_0_sev_seg_0_s1_write_ports_inv <= not mm_interconnect_0_sev_seg_0_s1_write;
+
+	mm_interconnect_0_grn_leds_s1_write_ports_inv <= not mm_interconnect_0_grn_leds_s1_write;
 
 	rst_controller_reset_out_reset_ports_inv <= not rst_controller_reset_out_reset;
 
