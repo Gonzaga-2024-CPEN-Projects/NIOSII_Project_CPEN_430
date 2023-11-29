@@ -13,7 +13,14 @@ entity chip is
         switches      : in std_logic_vector(1 downto 0);
         leds          : out std_logic_vector(1 downto 0);
         rled          : out std_logic;
-        sev_seg_0     : out std_logic_vector(6 downto 0)
+        sev_seg_0     : out std_logic_vector(6 downto 0);
+		  sev_seg_1     : out std_logic_vector(6 downto 0);
+		  sev_seg_2     : out std_logic_vector(6 downto 0);
+		  sev_seg_3     : out std_logic_vector(6 downto 0);
+		  sev_seg_4     : out std_logic_vector(6 downto 0);
+		  sev_seg_5  	 : out std_logic_vector(6 downto 0);
+		  sev_seg_6   	 : out std_logic_vector(6 downto 0);
+		  sev_seg_7     : out std_logic_vector(6 downto 0)
     );
 end entity chip;
 
@@ -38,6 +45,13 @@ architecture rtl_and_struct of chip is
             leds_external_connection_export     : out std_logic_vector(1 downto 0); -- export
             switches_external_connection_export : in std_logic_vector(1 downto 0) := (others => 'X'); -- export
             sev_seg_0_external_connection_export: out std_logic_vector(6 downto 0);
+				sev_seg_1_external_connection_export: out std_logic_vector(6 downto 0);
+				sev_seg_2_external_connection_export: out std_logic_vector(6 downto 0);
+				sev_seg_3_external_connection_export: out std_logic_vector(6 downto 0);
+				sev_seg_4_external_connection_export: out std_logic_vector(6 downto 0);
+				sev_seg_5_external_connection_export: out std_logic_vector(6 downto 0);
+				sev_seg_6_external_connection_export: out std_logic_vector(6 downto 0);
+				sev_seg_7_external_connection_export: out std_logic_vector(6 downto 0);
 				randoms_external_connection_export : in std_logic_vector(31 downto 0)
         );
     end component blinky;
@@ -50,6 +64,13 @@ begin
             leds_external_connection_export     => leds,
             switches_external_connection_export => switches,
             sev_seg_0_external_connection_export=> sev_seg_0,
+				sev_seg_1_external_connection_export=> sev_seg_1,
+				sev_seg_2_external_connection_export=> sev_seg_2,
+				sev_seg_3_external_connection_export=> sev_seg_3,
+				sev_seg_4_external_connection_export=> sev_seg_4,
+				sev_seg_5_external_connection_export=> sev_seg_5,
+				sev_seg_6_external_connection_export=> sev_seg_6,
+				sev_seg_7_external_connection_export=> sev_seg_7,
 				randoms_external_connection_export => randoms
         );
 

@@ -4,7 +4,7 @@
  * Machine generated for CPU 'cpu' in SOPC Builder design 'blinky'
  * SOPC Builder design path: ../../blinky.sopcinfo
  *
- * Generated: Tue Nov 28 12:24:23 PST 2023
+ * Generated: Tue Nov 28 18:31:06 PST 2023
  */
 
 /*
@@ -155,19 +155,19 @@
 #define ALT_NUM_INTERNAL_INTERRUPT_CONTROLLERS 1
 #define ALT_NUM_INTERRUPT_CONTROLLERS 1
 #define ALT_STDERR "/dev/jtag_uart"
-#define ALT_STDERR_BASE 0x21040
+#define ALT_STDERR_BASE 0x210b0
 #define ALT_STDERR_DEV jtag_uart
 #define ALT_STDERR_IS_JTAG_UART
 #define ALT_STDERR_PRESENT
 #define ALT_STDERR_TYPE "altera_avalon_jtag_uart"
 #define ALT_STDIN "/dev/jtag_uart"
-#define ALT_STDIN_BASE 0x21040
+#define ALT_STDIN_BASE 0x210b0
 #define ALT_STDIN_DEV jtag_uart
 #define ALT_STDIN_IS_JTAG_UART
 #define ALT_STDIN_PRESENT
 #define ALT_STDIN_TYPE "altera_avalon_jtag_uart"
 #define ALT_STDOUT "/dev/jtag_uart"
-#define ALT_STDOUT_BASE 0x21040
+#define ALT_STDOUT_BASE 0x210b0
 #define ALT_STDOUT_DEV jtag_uart
 #define ALT_STDOUT_IS_JTAG_UART
 #define ALT_STDOUT_PRESENT
@@ -192,7 +192,7 @@
  */
 
 #define ALT_MODULE_CLASS_jtag_uart altera_avalon_jtag_uart
-#define JTAG_UART_BASE 0x21040
+#define JTAG_UART_BASE 0x210b0
 #define JTAG_UART_IRQ 0
 #define JTAG_UART_IRQ_INTERRUPT_CONTROLLER_ID 0
 #define JTAG_UART_NAME "/dev/jtag_uart"
@@ -210,7 +210,7 @@
  */
 
 #define ALT_MODULE_CLASS_leds altera_avalon_pio
-#define LEDS_BASE 0x21020
+#define LEDS_BASE 0x21090
 #define LEDS_BIT_CLEARING_EDGE_REGISTER 0
 #define LEDS_BIT_MODIFYING_OUTPUT_REGISTER 0
 #define LEDS_CAPTURE 0
@@ -266,7 +266,7 @@
  */
 
 #define ALT_MODULE_CLASS_randoms altera_avalon_pio
-#define RANDOMS_BASE 0x21000
+#define RANDOMS_BASE 0x21070
 #define RANDOMS_BIT_CLEARING_EDGE_REGISTER 0
 #define RANDOMS_BIT_MODIFYING_OUTPUT_REGISTER 0
 #define RANDOMS_CAPTURE 0
@@ -293,7 +293,7 @@
  */
 
 #define ALT_MODULE_CLASS_sev_seg_0 altera_avalon_pio
-#define SEV_SEG_0_BASE 0x21010
+#define SEV_SEG_0_BASE 0x21080
 #define SEV_SEG_0_BIT_CLEARING_EDGE_REGISTER 0
 #define SEV_SEG_0_BIT_MODIFYING_OUTPUT_REGISTER 0
 #define SEV_SEG_0_CAPTURE 0
@@ -315,12 +315,201 @@
 
 
 /*
+ * sev_seg_1 configuration
+ *
+ */
+
+#define ALT_MODULE_CLASS_sev_seg_1 altera_avalon_pio
+#define SEV_SEG_1_BASE 0x21060
+#define SEV_SEG_1_BIT_CLEARING_EDGE_REGISTER 0
+#define SEV_SEG_1_BIT_MODIFYING_OUTPUT_REGISTER 0
+#define SEV_SEG_1_CAPTURE 0
+#define SEV_SEG_1_DATA_WIDTH 7
+#define SEV_SEG_1_DO_TEST_BENCH_WIRING 0
+#define SEV_SEG_1_DRIVEN_SIM_VALUE 0
+#define SEV_SEG_1_EDGE_TYPE "NONE"
+#define SEV_SEG_1_FREQ 50000000
+#define SEV_SEG_1_HAS_IN 0
+#define SEV_SEG_1_HAS_OUT 1
+#define SEV_SEG_1_HAS_TRI 0
+#define SEV_SEG_1_IRQ -1
+#define SEV_SEG_1_IRQ_INTERRUPT_CONTROLLER_ID -1
+#define SEV_SEG_1_IRQ_TYPE "NONE"
+#define SEV_SEG_1_NAME "/dev/sev_seg_1"
+#define SEV_SEG_1_RESET_VALUE 0
+#define SEV_SEG_1_SPAN 16
+#define SEV_SEG_1_TYPE "altera_avalon_pio"
+
+
+/*
+ * sev_seg_2 configuration
+ *
+ */
+
+#define ALT_MODULE_CLASS_sev_seg_2 altera_avalon_pio
+#define SEV_SEG_2_BASE 0x21050
+#define SEV_SEG_2_BIT_CLEARING_EDGE_REGISTER 0
+#define SEV_SEG_2_BIT_MODIFYING_OUTPUT_REGISTER 0
+#define SEV_SEG_2_CAPTURE 0
+#define SEV_SEG_2_DATA_WIDTH 7
+#define SEV_SEG_2_DO_TEST_BENCH_WIRING 0
+#define SEV_SEG_2_DRIVEN_SIM_VALUE 0
+#define SEV_SEG_2_EDGE_TYPE "NONE"
+#define SEV_SEG_2_FREQ 50000000
+#define SEV_SEG_2_HAS_IN 0
+#define SEV_SEG_2_HAS_OUT 1
+#define SEV_SEG_2_HAS_TRI 0
+#define SEV_SEG_2_IRQ -1
+#define SEV_SEG_2_IRQ_INTERRUPT_CONTROLLER_ID -1
+#define SEV_SEG_2_IRQ_TYPE "NONE"
+#define SEV_SEG_2_NAME "/dev/sev_seg_2"
+#define SEV_SEG_2_RESET_VALUE 0
+#define SEV_SEG_2_SPAN 16
+#define SEV_SEG_2_TYPE "altera_avalon_pio"
+
+
+/*
+ * sev_seg_3 configuration
+ *
+ */
+
+#define ALT_MODULE_CLASS_sev_seg_3 altera_avalon_pio
+#define SEV_SEG_3_BASE 0x21040
+#define SEV_SEG_3_BIT_CLEARING_EDGE_REGISTER 0
+#define SEV_SEG_3_BIT_MODIFYING_OUTPUT_REGISTER 0
+#define SEV_SEG_3_CAPTURE 0
+#define SEV_SEG_3_DATA_WIDTH 7
+#define SEV_SEG_3_DO_TEST_BENCH_WIRING 0
+#define SEV_SEG_3_DRIVEN_SIM_VALUE 0
+#define SEV_SEG_3_EDGE_TYPE "NONE"
+#define SEV_SEG_3_FREQ 50000000
+#define SEV_SEG_3_HAS_IN 0
+#define SEV_SEG_3_HAS_OUT 1
+#define SEV_SEG_3_HAS_TRI 0
+#define SEV_SEG_3_IRQ -1
+#define SEV_SEG_3_IRQ_INTERRUPT_CONTROLLER_ID -1
+#define SEV_SEG_3_IRQ_TYPE "NONE"
+#define SEV_SEG_3_NAME "/dev/sev_seg_3"
+#define SEV_SEG_3_RESET_VALUE 0
+#define SEV_SEG_3_SPAN 16
+#define SEV_SEG_3_TYPE "altera_avalon_pio"
+
+
+/*
+ * sev_seg_4 configuration
+ *
+ */
+
+#define ALT_MODULE_CLASS_sev_seg_4 altera_avalon_pio
+#define SEV_SEG_4_BASE 0x21030
+#define SEV_SEG_4_BIT_CLEARING_EDGE_REGISTER 0
+#define SEV_SEG_4_BIT_MODIFYING_OUTPUT_REGISTER 0
+#define SEV_SEG_4_CAPTURE 0
+#define SEV_SEG_4_DATA_WIDTH 7
+#define SEV_SEG_4_DO_TEST_BENCH_WIRING 0
+#define SEV_SEG_4_DRIVEN_SIM_VALUE 0
+#define SEV_SEG_4_EDGE_TYPE "NONE"
+#define SEV_SEG_4_FREQ 50000000
+#define SEV_SEG_4_HAS_IN 0
+#define SEV_SEG_4_HAS_OUT 1
+#define SEV_SEG_4_HAS_TRI 0
+#define SEV_SEG_4_IRQ -1
+#define SEV_SEG_4_IRQ_INTERRUPT_CONTROLLER_ID -1
+#define SEV_SEG_4_IRQ_TYPE "NONE"
+#define SEV_SEG_4_NAME "/dev/sev_seg_4"
+#define SEV_SEG_4_RESET_VALUE 0
+#define SEV_SEG_4_SPAN 16
+#define SEV_SEG_4_TYPE "altera_avalon_pio"
+
+
+/*
+ * sev_seg_5 configuration
+ *
+ */
+
+#define ALT_MODULE_CLASS_sev_seg_5 altera_avalon_pio
+#define SEV_SEG_5_BASE 0x21020
+#define SEV_SEG_5_BIT_CLEARING_EDGE_REGISTER 0
+#define SEV_SEG_5_BIT_MODIFYING_OUTPUT_REGISTER 0
+#define SEV_SEG_5_CAPTURE 0
+#define SEV_SEG_5_DATA_WIDTH 7
+#define SEV_SEG_5_DO_TEST_BENCH_WIRING 0
+#define SEV_SEG_5_DRIVEN_SIM_VALUE 0
+#define SEV_SEG_5_EDGE_TYPE "NONE"
+#define SEV_SEG_5_FREQ 50000000
+#define SEV_SEG_5_HAS_IN 0
+#define SEV_SEG_5_HAS_OUT 1
+#define SEV_SEG_5_HAS_TRI 0
+#define SEV_SEG_5_IRQ -1
+#define SEV_SEG_5_IRQ_INTERRUPT_CONTROLLER_ID -1
+#define SEV_SEG_5_IRQ_TYPE "NONE"
+#define SEV_SEG_5_NAME "/dev/sev_seg_5"
+#define SEV_SEG_5_RESET_VALUE 0
+#define SEV_SEG_5_SPAN 16
+#define SEV_SEG_5_TYPE "altera_avalon_pio"
+
+
+/*
+ * sev_seg_6 configuration
+ *
+ */
+
+#define ALT_MODULE_CLASS_sev_seg_6 altera_avalon_pio
+#define SEV_SEG_6_BASE 0x21010
+#define SEV_SEG_6_BIT_CLEARING_EDGE_REGISTER 0
+#define SEV_SEG_6_BIT_MODIFYING_OUTPUT_REGISTER 0
+#define SEV_SEG_6_CAPTURE 0
+#define SEV_SEG_6_DATA_WIDTH 7
+#define SEV_SEG_6_DO_TEST_BENCH_WIRING 0
+#define SEV_SEG_6_DRIVEN_SIM_VALUE 0
+#define SEV_SEG_6_EDGE_TYPE "NONE"
+#define SEV_SEG_6_FREQ 50000000
+#define SEV_SEG_6_HAS_IN 0
+#define SEV_SEG_6_HAS_OUT 1
+#define SEV_SEG_6_HAS_TRI 0
+#define SEV_SEG_6_IRQ -1
+#define SEV_SEG_6_IRQ_INTERRUPT_CONTROLLER_ID -1
+#define SEV_SEG_6_IRQ_TYPE "NONE"
+#define SEV_SEG_6_NAME "/dev/sev_seg_6"
+#define SEV_SEG_6_RESET_VALUE 0
+#define SEV_SEG_6_SPAN 16
+#define SEV_SEG_6_TYPE "altera_avalon_pio"
+
+
+/*
+ * sev_seg_7 configuration
+ *
+ */
+
+#define ALT_MODULE_CLASS_sev_seg_7 altera_avalon_pio
+#define SEV_SEG_7_BASE 0x21000
+#define SEV_SEG_7_BIT_CLEARING_EDGE_REGISTER 0
+#define SEV_SEG_7_BIT_MODIFYING_OUTPUT_REGISTER 0
+#define SEV_SEG_7_CAPTURE 0
+#define SEV_SEG_7_DATA_WIDTH 7
+#define SEV_SEG_7_DO_TEST_BENCH_WIRING 0
+#define SEV_SEG_7_DRIVEN_SIM_VALUE 0
+#define SEV_SEG_7_EDGE_TYPE "NONE"
+#define SEV_SEG_7_FREQ 50000000
+#define SEV_SEG_7_HAS_IN 0
+#define SEV_SEG_7_HAS_OUT 1
+#define SEV_SEG_7_HAS_TRI 0
+#define SEV_SEG_7_IRQ -1
+#define SEV_SEG_7_IRQ_INTERRUPT_CONTROLLER_ID -1
+#define SEV_SEG_7_IRQ_TYPE "NONE"
+#define SEV_SEG_7_NAME "/dev/sev_seg_7"
+#define SEV_SEG_7_RESET_VALUE 0
+#define SEV_SEG_7_SPAN 16
+#define SEV_SEG_7_TYPE "altera_avalon_pio"
+
+
+/*
  * switches configuration
  *
  */
 
 #define ALT_MODULE_CLASS_switches altera_avalon_pio
-#define SWITCHES_BASE 0x21030
+#define SWITCHES_BASE 0x210a0
 #define SWITCHES_BIT_CLEARING_EDGE_REGISTER 0
 #define SWITCHES_BIT_MODIFYING_OUTPUT_REGISTER 0
 #define SWITCHES_CAPTURE 0

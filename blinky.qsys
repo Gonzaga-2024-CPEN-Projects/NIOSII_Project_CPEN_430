@@ -45,7 +45,7 @@
    {
       datum baseAddress
       {
-         value = "135232";
+         value = "135344";
          type = "String";
       }
    }
@@ -61,7 +61,7 @@
    {
       datum baseAddress
       {
-         value = "135200";
+         value = "135312";
          type = "String";
       }
    }
@@ -93,7 +93,7 @@
    {
       datum baseAddress
       {
-         value = "135168";
+         value = "135280";
          type = "String";
       }
    }
@@ -109,7 +109,119 @@
    {
       datum baseAddress
       {
+         value = "135296";
+         type = "String";
+      }
+   }
+   element sev_seg_1
+   {
+      datum _sortIndex
+      {
+         value = "8";
+         type = "int";
+      }
+   }
+   element sev_seg_1.s1
+   {
+      datum baseAddress
+      {
+         value = "135264";
+         type = "String";
+      }
+   }
+   element sev_seg_2
+   {
+      datum _sortIndex
+      {
+         value = "9";
+         type = "int";
+      }
+   }
+   element sev_seg_2.s1
+   {
+      datum baseAddress
+      {
+         value = "135248";
+         type = "String";
+      }
+   }
+   element sev_seg_3
+   {
+      datum _sortIndex
+      {
+         value = "10";
+         type = "int";
+      }
+   }
+   element sev_seg_3.s1
+   {
+      datum baseAddress
+      {
+         value = "135232";
+         type = "String";
+      }
+   }
+   element sev_seg_4
+   {
+      datum _sortIndex
+      {
+         value = "11";
+         type = "int";
+      }
+   }
+   element sev_seg_4.s1
+   {
+      datum baseAddress
+      {
+         value = "135216";
+         type = "String";
+      }
+   }
+   element sev_seg_5
+   {
+      datum _sortIndex
+      {
+         value = "12";
+         type = "int";
+      }
+   }
+   element sev_seg_5.s1
+   {
+      datum baseAddress
+      {
+         value = "135200";
+         type = "String";
+      }
+   }
+   element sev_seg_6
+   {
+      datum _sortIndex
+      {
+         value = "13";
+         type = "int";
+      }
+   }
+   element sev_seg_6.s1
+   {
+      datum baseAddress
+      {
          value = "135184";
+         type = "String";
+      }
+   }
+   element sev_seg_7
+   {
+      datum _sortIndex
+      {
+         value = "14";
+         type = "int";
+      }
+   }
+   element sev_seg_7.s1
+   {
+      datum baseAddress
+      {
+         value = "135168";
          type = "String";
       }
    }
@@ -125,7 +237,7 @@
    {
       datum baseAddress
       {
-         value = "135216";
+         value = "135328";
          type = "String";
       }
    }
@@ -168,6 +280,41 @@
    type="conduit"
    dir="end" />
  <interface
+   name="sev_seg_1_external_connection"
+   internal="sev_seg_1.external_connection"
+   type="conduit"
+   dir="end" />
+ <interface
+   name="sev_seg_2_external_connection"
+   internal="sev_seg_2.external_connection"
+   type="conduit"
+   dir="end" />
+ <interface
+   name="sev_seg_3_external_connection"
+   internal="sev_seg_3.external_connection"
+   type="conduit"
+   dir="end" />
+ <interface
+   name="sev_seg_4_external_connection"
+   internal="sev_seg_4.external_connection"
+   type="conduit"
+   dir="end" />
+ <interface
+   name="sev_seg_5_external_connection"
+   internal="sev_seg_5.external_connection"
+   type="conduit"
+   dir="end" />
+ <interface
+   name="sev_seg_6_external_connection"
+   internal="sev_seg_6.external_connection"
+   type="conduit"
+   dir="end" />
+ <interface
+   name="sev_seg_7_external_connection"
+   internal="sev_seg_7.external_connection"
+   type="conduit"
+   dir="end" />
+ <interface
    name="switches_external_connection"
    internal="switches.external_connection"
    type="conduit"
@@ -198,7 +345,7 @@
   <parameter name="dataAddrWidth" value="18" />
   <parameter name="dataMasterHighPerformanceAddrWidth" value="1" />
   <parameter name="dataMasterHighPerformanceMapParam" value="" />
-  <parameter name="dataSlaveMapParam"><![CDATA[<address-map><slave name='onchip_ram.s1' start='0x10000' end='0x20000' type='altera_avalon_onchip_memory2.s1' /><slave name='cpu.debug_mem_slave' start='0x20800' end='0x21000' type='altera_nios2_gen2.debug_mem_slave' /><slave name='randoms.s1' start='0x21000' end='0x21010' type='altera_avalon_pio.s1' /><slave name='sev_seg_0.s1' start='0x21010' end='0x21020' type='altera_avalon_pio.s1' /><slave name='leds.s1' start='0x21020' end='0x21030' type='altera_avalon_pio.s1' /><slave name='switches.s1' start='0x21030' end='0x21040' type='altera_avalon_pio.s1' /><slave name='jtag_uart.avalon_jtag_slave' start='0x21040' end='0x21048' type='altera_avalon_jtag_uart.avalon_jtag_slave' /></address-map>]]></parameter>
+  <parameter name="dataSlaveMapParam"><![CDATA[<address-map><slave name='onchip_ram.s1' start='0x10000' end='0x20000' type='altera_avalon_onchip_memory2.s1' /><slave name='cpu.debug_mem_slave' start='0x20800' end='0x21000' type='altera_nios2_gen2.debug_mem_slave' /><slave name='sev_seg_7.s1' start='0x21000' end='0x21010' type='altera_avalon_pio.s1' /><slave name='sev_seg_6.s1' start='0x21010' end='0x21020' type='altera_avalon_pio.s1' /><slave name='sev_seg_5.s1' start='0x21020' end='0x21030' type='altera_avalon_pio.s1' /><slave name='sev_seg_4.s1' start='0x21030' end='0x21040' type='altera_avalon_pio.s1' /><slave name='sev_seg_3.s1' start='0x21040' end='0x21050' type='altera_avalon_pio.s1' /><slave name='sev_seg_2.s1' start='0x21050' end='0x21060' type='altera_avalon_pio.s1' /><slave name='sev_seg_1.s1' start='0x21060' end='0x21070' type='altera_avalon_pio.s1' /><slave name='randoms.s1' start='0x21070' end='0x21080' type='altera_avalon_pio.s1' /><slave name='sev_seg_0.s1' start='0x21080' end='0x21090' type='altera_avalon_pio.s1' /><slave name='leds.s1' start='0x21090' end='0x210A0' type='altera_avalon_pio.s1' /><slave name='switches.s1' start='0x210A0' end='0x210B0' type='altera_avalon_pio.s1' /><slave name='jtag_uart.avalon_jtag_slave' start='0x210B0' end='0x210B8' type='altera_avalon_jtag_uart.avalon_jtag_slave' /></address-map>]]></parameter>
   <parameter name="data_master_high_performance_paddr_base" value="0" />
   <parameter name="data_master_high_performance_paddr_size" value="0" />
   <parameter name="data_master_paddr_base" value="0" />
@@ -449,6 +596,104 @@
   <parameter name="simDrivenValue" value="0" />
   <parameter name="width" value="7" />
  </module>
+ <module name="sev_seg_1" kind="altera_avalon_pio" version="18.0" enabled="1">
+  <parameter name="bitClearingEdgeCapReg" value="false" />
+  <parameter name="bitModifyingOutReg" value="false" />
+  <parameter name="captureEdge" value="false" />
+  <parameter name="clockRate" value="50000000" />
+  <parameter name="direction" value="Output" />
+  <parameter name="edgeType" value="RISING" />
+  <parameter name="generateIRQ" value="false" />
+  <parameter name="irqType" value="LEVEL" />
+  <parameter name="resetValue" value="0" />
+  <parameter name="simDoTestBenchWiring" value="false" />
+  <parameter name="simDrivenValue" value="0" />
+  <parameter name="width" value="7" />
+ </module>
+ <module name="sev_seg_2" kind="altera_avalon_pio" version="18.0" enabled="1">
+  <parameter name="bitClearingEdgeCapReg" value="false" />
+  <parameter name="bitModifyingOutReg" value="false" />
+  <parameter name="captureEdge" value="false" />
+  <parameter name="clockRate" value="50000000" />
+  <parameter name="direction" value="Output" />
+  <parameter name="edgeType" value="RISING" />
+  <parameter name="generateIRQ" value="false" />
+  <parameter name="irqType" value="LEVEL" />
+  <parameter name="resetValue" value="0" />
+  <parameter name="simDoTestBenchWiring" value="false" />
+  <parameter name="simDrivenValue" value="0" />
+  <parameter name="width" value="7" />
+ </module>
+ <module name="sev_seg_3" kind="altera_avalon_pio" version="18.0" enabled="1">
+  <parameter name="bitClearingEdgeCapReg" value="false" />
+  <parameter name="bitModifyingOutReg" value="false" />
+  <parameter name="captureEdge" value="false" />
+  <parameter name="clockRate" value="50000000" />
+  <parameter name="direction" value="Output" />
+  <parameter name="edgeType" value="RISING" />
+  <parameter name="generateIRQ" value="false" />
+  <parameter name="irqType" value="LEVEL" />
+  <parameter name="resetValue" value="0" />
+  <parameter name="simDoTestBenchWiring" value="false" />
+  <parameter name="simDrivenValue" value="0" />
+  <parameter name="width" value="7" />
+ </module>
+ <module name="sev_seg_4" kind="altera_avalon_pio" version="18.0" enabled="1">
+  <parameter name="bitClearingEdgeCapReg" value="false" />
+  <parameter name="bitModifyingOutReg" value="false" />
+  <parameter name="captureEdge" value="false" />
+  <parameter name="clockRate" value="50000000" />
+  <parameter name="direction" value="Output" />
+  <parameter name="edgeType" value="RISING" />
+  <parameter name="generateIRQ" value="false" />
+  <parameter name="irqType" value="LEVEL" />
+  <parameter name="resetValue" value="0" />
+  <parameter name="simDoTestBenchWiring" value="false" />
+  <parameter name="simDrivenValue" value="0" />
+  <parameter name="width" value="7" />
+ </module>
+ <module name="sev_seg_5" kind="altera_avalon_pio" version="18.0" enabled="1">
+  <parameter name="bitClearingEdgeCapReg" value="false" />
+  <parameter name="bitModifyingOutReg" value="false" />
+  <parameter name="captureEdge" value="false" />
+  <parameter name="clockRate" value="50000000" />
+  <parameter name="direction" value="Output" />
+  <parameter name="edgeType" value="RISING" />
+  <parameter name="generateIRQ" value="false" />
+  <parameter name="irqType" value="LEVEL" />
+  <parameter name="resetValue" value="0" />
+  <parameter name="simDoTestBenchWiring" value="false" />
+  <parameter name="simDrivenValue" value="0" />
+  <parameter name="width" value="7" />
+ </module>
+ <module name="sev_seg_6" kind="altera_avalon_pio" version="18.0" enabled="1">
+  <parameter name="bitClearingEdgeCapReg" value="false" />
+  <parameter name="bitModifyingOutReg" value="false" />
+  <parameter name="captureEdge" value="false" />
+  <parameter name="clockRate" value="50000000" />
+  <parameter name="direction" value="Output" />
+  <parameter name="edgeType" value="RISING" />
+  <parameter name="generateIRQ" value="false" />
+  <parameter name="irqType" value="LEVEL" />
+  <parameter name="resetValue" value="0" />
+  <parameter name="simDoTestBenchWiring" value="false" />
+  <parameter name="simDrivenValue" value="0" />
+  <parameter name="width" value="7" />
+ </module>
+ <module name="sev_seg_7" kind="altera_avalon_pio" version="18.0" enabled="1">
+  <parameter name="bitClearingEdgeCapReg" value="false" />
+  <parameter name="bitModifyingOutReg" value="false" />
+  <parameter name="captureEdge" value="false" />
+  <parameter name="clockRate" value="50000000" />
+  <parameter name="direction" value="Output" />
+  <parameter name="edgeType" value="RISING" />
+  <parameter name="generateIRQ" value="false" />
+  <parameter name="irqType" value="LEVEL" />
+  <parameter name="resetValue" value="0" />
+  <parameter name="simDoTestBenchWiring" value="false" />
+  <parameter name="simDrivenValue" value="0" />
+  <parameter name="width" value="7" />
+ </module>
  <module name="switches" kind="altera_avalon_pio" version="18.0" enabled="1">
   <parameter name="bitClearingEdgeCapReg" value="false" />
   <parameter name="bitModifyingOutReg" value="false" />
@@ -469,7 +714,7 @@
    start="cpu.data_master"
    end="jtag_uart.avalon_jtag_slave">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x00021040" />
+  <parameter name="baseAddress" value="0x000210b0" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -496,12 +741,12 @@
    start="cpu.data_master"
    end="switches.s1">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x00021030" />
+  <parameter name="baseAddress" value="0x000210a0" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection kind="avalon" version="18.0" start="cpu.data_master" end="leds.s1">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x00021020" />
+  <parameter name="baseAddress" value="0x00021090" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -510,10 +755,73 @@
    start="cpu.data_master"
    end="sev_seg_0.s1">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x00021010" />
+  <parameter name="baseAddress" value="0x00021080" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection kind="avalon" version="18.0" start="cpu.data_master" end="randoms.s1">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x00021070" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="18.0"
+   start="cpu.data_master"
+   end="sev_seg_1.s1">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x00021060" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="18.0"
+   start="cpu.data_master"
+   end="sev_seg_2.s1">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x00021050" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="18.0"
+   start="cpu.data_master"
+   end="sev_seg_3.s1">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x00021040" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="18.0"
+   start="cpu.data_master"
+   end="sev_seg_4.s1">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x00021030" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="18.0"
+   start="cpu.data_master"
+   end="sev_seg_5.s1">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x00021020" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="18.0"
+   start="cpu.data_master"
+   end="sev_seg_6.s1">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x00021010" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="18.0"
+   start="cpu.data_master"
+   end="sev_seg_7.s1">
   <parameter name="arbitrationPriority" value="1" />
   <parameter name="baseAddress" value="0x00021000" />
   <parameter name="defaultConnection" value="false" />
@@ -542,6 +850,13 @@
  <connection kind="clock" version="18.0" start="clk_main.clk" end="leds.clk" />
  <connection kind="clock" version="18.0" start="clk_main.clk" end="sev_seg_0.clk" />
  <connection kind="clock" version="18.0" start="clk_main.clk" end="randoms.clk" />
+ <connection kind="clock" version="18.0" start="clk_main.clk" end="sev_seg_1.clk" />
+ <connection kind="clock" version="18.0" start="clk_main.clk" end="sev_seg_2.clk" />
+ <connection kind="clock" version="18.0" start="clk_main.clk" end="sev_seg_3.clk" />
+ <connection kind="clock" version="18.0" start="clk_main.clk" end="sev_seg_4.clk" />
+ <connection kind="clock" version="18.0" start="clk_main.clk" end="sev_seg_5.clk" />
+ <connection kind="clock" version="18.0" start="clk_main.clk" end="sev_seg_6.clk" />
+ <connection kind="clock" version="18.0" start="clk_main.clk" end="sev_seg_7.clk" />
  <connection
    kind="clock"
    version="18.0"
@@ -580,6 +895,41 @@
    version="18.0"
    start="clk_main.clk_reset"
    end="randoms.reset" />
+ <connection
+   kind="reset"
+   version="18.0"
+   start="clk_main.clk_reset"
+   end="sev_seg_1.reset" />
+ <connection
+   kind="reset"
+   version="18.0"
+   start="clk_main.clk_reset"
+   end="sev_seg_2.reset" />
+ <connection
+   kind="reset"
+   version="18.0"
+   start="clk_main.clk_reset"
+   end="sev_seg_3.reset" />
+ <connection
+   kind="reset"
+   version="18.0"
+   start="clk_main.clk_reset"
+   end="sev_seg_4.reset" />
+ <connection
+   kind="reset"
+   version="18.0"
+   start="clk_main.clk_reset"
+   end="sev_seg_5.reset" />
+ <connection
+   kind="reset"
+   version="18.0"
+   start="clk_main.clk_reset"
+   end="sev_seg_6.reset" />
+ <connection
+   kind="reset"
+   version="18.0"
+   start="clk_main.clk_reset"
+   end="sev_seg_7.reset" />
  <connection
    kind="reset"
    version="18.0"
