@@ -1,12 +1,198 @@
-19:57:01 **** Incremental Build of configuration Nios II for project blinky-sw ****
+13:33:38 **** Incremental Build of configuration Nios II for project blinky-sw ****
+make all 
+Info: Building ../blinky-sw_bsp/
+C:/intelFPGA/18.0/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../blinky-sw_bsp/
+[BSP build complete]
+Info: Compiling blinky.c to obj/default/blinky.o
+nios2-elf-gcc -xc -MP -MMD -c -I../blinky-sw_bsp//HAL/inc -I../blinky-sw_bsp/ -I../blinky-sw_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED    -O0 -g -Wall   -mno-hw-div -mno-hw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/blinky.o blinky.c
+blinky.c: In function 'generateRandomCard':
+blinky.c:238:9: warning: implicit declaration of function 'abs' [-Wimplicit-function-declaration]
+  return abs(random_num %52);
+         ^
+blinky.c: In function 'hit':
+blinky.c:360:2: warning: implicit declaration of function 'itoa' [-Wimplicit-function-declaration]
+  itoa(cardValue, msg, 10);
+  ^
+Info: Linking blinky-sw.elf
+nios2-elf-g++  -T'../blinky-sw_bsp//linker.x' -msys-crt0='../blinky-sw_bsp//obj/HAL/src/crt0.o' -msys-lib=hal_bsp -L../blinky-sw_bsp/   -Wl,-Map=blinky-sw.map   -O0 -g -Wall   -mno-hw-div -mno-hw-mul -mno-hw-mulx -mgpopt=global  -o blinky-sw.elf obj/default/blinky.o -lm -msys-lib=m
+nios2-elf-insert blinky-sw.elf --thread_model hal --cpu_name cpu --qsys true --simulation_enabled false --stderr_dev jtag_uart --stdin_dev jtag_uart --stdout_dev jtag_uart --sopc_system_name blinky --quartus_project_dir "C:/Users/jmacauley/Documents/CPEN_430L/NIOSII_Project_CPEN_430" --jdi ../..//output_files/chip.jdi --sopcinfo C:/Users/jmacauley/Documents/CPEN_430L/NIOSII_Project_CPEN_430/software/blinky-sw_bsp/../../blinky.sopcinfo
+Info: (blinky-sw.elf) 32 KBytes program size (code + initialized data).
+Info:                 25 KBytes free for stack + heap.
+Info: Creating blinky-sw.objdump
+nios2-elf-objdump --disassemble --syms --all-header --source blinky-sw.elf >blinky-sw.objdump
+[blinky-sw build complete]
+13:33:49 **** Incremental Build of configuration Nios II for project blinky-sw ****
 make all 
 Info: Building ../blinky-sw_bsp/
 C:/intelFPGA/18.0/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../blinky-sw_bsp/
 [BSP build complete]
 [blinky-sw build complete]
-19:57:09 **** Incremental Build of configuration Nios II for project blinky-sw ****
+13:35:05 **** Incremental Build of configuration Nios II for project blinky-sw ****
 make all 
 Info: Building ../blinky-sw_bsp/
 C:/intelFPGA/18.0/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../blinky-sw_bsp/
 [BSP build complete]
+Info: Compiling blinky.c to obj/default/blinky.o
+nios2-elf-gcc -xc -MP -MMD -c -I../blinky-sw_bsp//HAL/inc -I../blinky-sw_bsp/ -I../blinky-sw_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED    -O0 -g -Wall   -mno-hw-div -mno-hw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/blinky.o blinky.c
+blinky.c: In function 'generateRandomCard':
+blinky.c:238:9: warning: implicit declaration of function 'abs' [-Wimplicit-function-declaration]
+  return abs(random_num %52);
+         ^
+blinky.c: In function 'hit':
+blinky.c:360:2: warning: implicit declaration of function 'itoa' [-Wimplicit-function-declaration]
+  itoa(cardValue, msg, 10);
+  ^
+Info: Linking blinky-sw.elf
+nios2-elf-g++  -T'../blinky-sw_bsp//linker.x' -msys-crt0='../blinky-sw_bsp//obj/HAL/src/crt0.o' -msys-lib=hal_bsp -L../blinky-sw_bsp/   -Wl,-Map=blinky-sw.map   -O0 -g -Wall   -mno-hw-div -mno-hw-mul -mno-hw-mulx -mgpopt=global  -o blinky-sw.elf obj/default/blinky.o -lm -msys-lib=m
+nios2-elf-insert blinky-sw.elf --thread_model hal --cpu_name cpu --qsys true --simulation_enabled false --stderr_dev jtag_uart --stdin_dev jtag_uart --stdout_dev jtag_uart --sopc_system_name blinky --quartus_project_dir "C:/Users/jmacauley/Documents/CPEN_430L/NIOSII_Project_CPEN_430" --jdi ../..//output_files/chip.jdi --sopcinfo C:/Users/jmacauley/Documents/CPEN_430L/NIOSII_Project_CPEN_430/software/blinky-sw_bsp/../../blinky.sopcinfo
+Info: (blinky-sw.elf) 32 KBytes program size (code + initialized data).
+Info:                 25 KBytes free for stack + heap.
+Info: Creating blinky-sw.objdump
+nios2-elf-objdump --disassemble --syms --all-header --source blinky-sw.elf >blinky-sw.objdump
+[blinky-sw build complete]
+13:36:58 **** Incremental Build of configuration Nios II for project blinky-sw ****
+make all 
+Info: Building ../blinky-sw_bsp/
+C:/intelFPGA/18.0/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../blinky-sw_bsp/
+[BSP build complete]
+Info: Compiling blinky.c to obj/default/blinky.o
+nios2-elf-gcc -xc -MP -MMD -c -I../blinky-sw_bsp//HAL/inc -I../blinky-sw_bsp/ -I../blinky-sw_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED    -O0 -g -Wall   -mno-hw-div -mno-hw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/blinky.o blinky.c
+blinky.c: In function 'main':
+blinky.c:68:3: warning: implicit declaration of function 'itoa' [-Wimplicit-function-declaration]
+   itoa(KEY_PRESS, msg, 10);
+   ^
+blinky.c: In function 'generateRandomCard':
+blinky.c:244:9: warning: implicit declaration of function 'abs' [-Wimplicit-function-declaration]
+  return abs(random_num %52);
+         ^
+Info: Linking blinky-sw.elf
+nios2-elf-g++  -T'../blinky-sw_bsp//linker.x' -msys-crt0='../blinky-sw_bsp//obj/HAL/src/crt0.o' -msys-lib=hal_bsp -L../blinky-sw_bsp/   -Wl,-Map=blinky-sw.map   -O0 -g -Wall   -mno-hw-div -mno-hw-mul -mno-hw-mulx -mgpopt=global  -o blinky-sw.elf obj/default/blinky.o -lm -msys-lib=m
+nios2-elf-insert blinky-sw.elf --thread_model hal --cpu_name cpu --qsys true --simulation_enabled false --stderr_dev jtag_uart --stdin_dev jtag_uart --stdout_dev jtag_uart --sopc_system_name blinky --quartus_project_dir "C:/Users/jmacauley/Documents/CPEN_430L/NIOSII_Project_CPEN_430" --jdi ../..//output_files/chip.jdi --sopcinfo C:/Users/jmacauley/Documents/CPEN_430L/NIOSII_Project_CPEN_430/software/blinky-sw_bsp/../../blinky.sopcinfo
+Info: (blinky-sw.elf) 32 KBytes program size (code + initialized data).
+Info:                 25 KBytes free for stack + heap.
+Info: Creating blinky-sw.objdump
+nios2-elf-objdump --disassemble --syms --all-header --source blinky-sw.elf >blinky-sw.objdump
+[blinky-sw build complete]
+13:37:43 **** Incremental Build of configuration Nios II for project blinky-sw ****
+make all 
+Info: Building ../blinky-sw_bsp/
+C:/intelFPGA/18.0/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../blinky-sw_bsp/
+[BSP build complete]
+Info: Compiling blinky.c to obj/default/blinky.o
+nios2-elf-gcc -xc -MP -MMD -c -I../blinky-sw_bsp//HAL/inc -I../blinky-sw_bsp/ -I../blinky-sw_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED    -O0 -g -Wall   -mno-hw-div -mno-hw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/blinky.o blinky.c
+blinky.c: In function 'main':
+blinky.c:68:3: warning: implicit declaration of function 'itoa' [-Wimplicit-function-declaration]
+   itoa(KEY_PRESS, msg, 10);
+   ^
+blinky.c:76:2: error: expected ';' before '}' token
+  }
+  ^
+blinky.c: In function 'generateRandomCard':
+blinky.c:245:9: warning: implicit declaration of function 'abs' [-Wimplicit-function-declaration]
+  return abs(random_num %52);
+         ^
+make: *** [obj/default/blinky.o] Error 1
+13:38:06 **** Incremental Build of configuration Nios II for project blinky-sw ****
+make all 
+Info: Building ../blinky-sw_bsp/
+C:/intelFPGA/18.0/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../blinky-sw_bsp/
+[BSP build complete]
+Info: Compiling blinky.c to obj/default/blinky.o
+nios2-elf-gcc -xc -MP -MMD -c -I../blinky-sw_bsp//HAL/inc -I../blinky-sw_bsp/ -I../blinky-sw_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED    -O0 -g -Wall   -mno-hw-div -mno-hw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/blinky.o blinky.c
+blinky.c: In function 'main':
+blinky.c:68:3: warning: implicit declaration of function 'itoa' [-Wimplicit-function-declaration]
+   itoa(KEY_PRESS, msg, 10);
+   ^
+blinky.c: In function 'generateRandomCard':
+blinky.c:245:9: warning: implicit declaration of function 'abs' [-Wimplicit-function-declaration]
+  return abs(random_num %52);
+         ^
+Info: Linking blinky-sw.elf
+nios2-elf-g++  -T'../blinky-sw_bsp//linker.x' -msys-crt0='../blinky-sw_bsp//obj/HAL/src/crt0.o' -msys-lib=hal_bsp -L../blinky-sw_bsp/   -Wl,-Map=blinky-sw.map   -O0 -g -Wall   -mno-hw-div -mno-hw-mul -mno-hw-mulx -mgpopt=global  -o blinky-sw.elf obj/default/blinky.o -lm -msys-lib=m
+nios2-elf-insert blinky-sw.elf --thread_model hal --cpu_name cpu --qsys true --simulation_enabled false --stderr_dev jtag_uart --stdin_dev jtag_uart --stdout_dev jtag_uart --sopc_system_name blinky --quartus_project_dir "C:/Users/jmacauley/Documents/CPEN_430L/NIOSII_Project_CPEN_430" --jdi ../..//output_files/chip.jdi --sopcinfo C:/Users/jmacauley/Documents/CPEN_430L/NIOSII_Project_CPEN_430/software/blinky-sw_bsp/../../blinky.sopcinfo
+Info: (blinky-sw.elf) 32 KBytes program size (code + initialized data).
+Info:                 25 KBytes free for stack + heap.
+Info: Creating blinky-sw.objdump
+nios2-elf-objdump --disassemble --syms --all-header --source blinky-sw.elf >blinky-sw.objdump
+[blinky-sw build complete]
+13:39:25 **** Incremental Build of configuration Nios II for project blinky-sw ****
+make all 
+Info: Building ../blinky-sw_bsp/
+C:/intelFPGA/18.0/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../blinky-sw_bsp/
+[BSP build complete]
+Info: Compiling blinky.c to obj/default/blinky.o
+nios2-elf-gcc -xc -MP -MMD -c -I../blinky-sw_bsp//HAL/inc -I../blinky-sw_bsp/ -I../blinky-sw_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED    -O0 -g -Wall   -mno-hw-div -mno-hw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/blinky.o blinky.c
+blinky.c: In function 'main':
+blinky.c:64:7: warning: unused variable 'msg' [-Wunused-variable]
+  char msg[10];
+       ^
+blinky.c: In function 'generateRandomCard':
+blinky.c:245:9: warning: implicit declaration of function 'abs' [-Wimplicit-function-declaration]
+  return abs(random_num %52);
+         ^
+blinky.c: In function 'hit':
+blinky.c:367:2: warning: implicit declaration of function 'itoa' [-Wimplicit-function-declaration]
+  itoa(cardValue, msg, 10);
+  ^
+Info: Linking blinky-sw.elf
+nios2-elf-g++  -T'../blinky-sw_bsp//linker.x' -msys-crt0='../blinky-sw_bsp//obj/HAL/src/crt0.o' -msys-lib=hal_bsp -L../blinky-sw_bsp/   -Wl,-Map=blinky-sw.map   -O0 -g -Wall   -mno-hw-div -mno-hw-mul -mno-hw-mulx -mgpopt=global  -o blinky-sw.elf obj/default/blinky.o -lm -msys-lib=m
+nios2-elf-insert blinky-sw.elf --thread_model hal --cpu_name cpu --qsys true --simulation_enabled false --stderr_dev jtag_uart --stdin_dev jtag_uart --stdout_dev jtag_uart --sopc_system_name blinky --quartus_project_dir "C:/Users/jmacauley/Documents/CPEN_430L/NIOSII_Project_CPEN_430" --jdi ../..//output_files/chip.jdi --sopcinfo C:/Users/jmacauley/Documents/CPEN_430L/NIOSII_Project_CPEN_430/software/blinky-sw_bsp/../../blinky.sopcinfo
+Info: (blinky-sw.elf) 32 KBytes program size (code + initialized data).
+Info:                 25 KBytes free for stack + heap.
+Info: Creating blinky-sw.objdump
+nios2-elf-objdump --disassemble --syms --all-header --source blinky-sw.elf >blinky-sw.objdump
+[blinky-sw build complete]
+13:40:15 **** Incremental Build of configuration Nios II for project blinky-sw ****
+make all 
+Info: Building ../blinky-sw_bsp/
+C:/intelFPGA/18.0/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../blinky-sw_bsp/
+[BSP build complete]
+Info: Compiling blinky.c to obj/default/blinky.o
+nios2-elf-gcc -xc -MP -MMD -c -I../blinky-sw_bsp//HAL/inc -I../blinky-sw_bsp/ -I../blinky-sw_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED    -O0 -g -Wall   -mno-hw-div -mno-hw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/blinky.o blinky.c
+blinky.c: In function 'main':
+blinky.c:64:7: warning: unused variable 'msg' [-Wunused-variable]
+  char msg[10];
+       ^
+blinky.c: In function 'generateRandomCard':
+blinky.c:246:9: warning: implicit declaration of function 'abs' [-Wimplicit-function-declaration]
+  return abs(random_num %52);
+         ^
+blinky.c: In function 'hit':
+blinky.c:368:2: warning: implicit declaration of function 'itoa' [-Wimplicit-function-declaration]
+  itoa(cardValue, msg, 10);
+  ^
+Info: Linking blinky-sw.elf
+nios2-elf-g++  -T'../blinky-sw_bsp//linker.x' -msys-crt0='../blinky-sw_bsp//obj/HAL/src/crt0.o' -msys-lib=hal_bsp -L../blinky-sw_bsp/   -Wl,-Map=blinky-sw.map   -O0 -g -Wall   -mno-hw-div -mno-hw-mul -mno-hw-mulx -mgpopt=global  -o blinky-sw.elf obj/default/blinky.o -lm -msys-lib=m
+nios2-elf-insert blinky-sw.elf --thread_model hal --cpu_name cpu --qsys true --simulation_enabled false --stderr_dev jtag_uart --stdin_dev jtag_uart --stdout_dev jtag_uart --sopc_system_name blinky --quartus_project_dir "C:/Users/jmacauley/Documents/CPEN_430L/NIOSII_Project_CPEN_430" --jdi ../..//output_files/chip.jdi --sopcinfo C:/Users/jmacauley/Documents/CPEN_430L/NIOSII_Project_CPEN_430/software/blinky-sw_bsp/../../blinky.sopcinfo
+Info: (blinky-sw.elf) 32 KBytes program size (code + initialized data).
+Info:                 25 KBytes free for stack + heap.
+Info: Creating blinky-sw.objdump
+nios2-elf-objdump --disassemble --syms --all-header --source blinky-sw.elf >blinky-sw.objdump
+[blinky-sw build complete]
+13:46:41 **** Incremental Build of configuration Nios II for project blinky-sw ****
+make all 
+Info: Building ../blinky-sw_bsp/
+C:/intelFPGA/18.0/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../blinky-sw_bsp/
+[BSP build complete]
+Info: Compiling blinky.c to obj/default/blinky.o
+nios2-elf-gcc -xc -MP -MMD -c -I../blinky-sw_bsp//HAL/inc -I../blinky-sw_bsp/ -I../blinky-sw_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED    -O0 -g -Wall   -mno-hw-div -mno-hw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/blinky.o blinky.c
+blinky.c: In function 'main':
+blinky.c:64:7: warning: unused variable 'msg' [-Wunused-variable]
+  char msg[10];
+       ^
+blinky.c: In function 'generateRandomCard':
+blinky.c:249:9: warning: implicit declaration of function 'abs' [-Wimplicit-function-declaration]
+  return abs(random_num %52);
+         ^
+blinky.c: In function 'hit':
+blinky.c:371:2: warning: implicit declaration of function 'itoa' [-Wimplicit-function-declaration]
+  itoa(cardValue, msg, 10);
+  ^
+Info: Linking blinky-sw.elf
+nios2-elf-g++  -T'../blinky-sw_bsp//linker.x' -msys-crt0='../blinky-sw_bsp//obj/HAL/src/crt0.o' -msys-lib=hal_bsp -L../blinky-sw_bsp/   -Wl,-Map=blinky-sw.map   -O0 -g -Wall   -mno-hw-div -mno-hw-mul -mno-hw-mulx -mgpopt=global  -o blinky-sw.elf obj/default/blinky.o -lm -msys-lib=m
+nios2-elf-insert blinky-sw.elf --thread_model hal --cpu_name cpu --qsys true --simulation_enabled false --stderr_dev jtag_uart --stdin_dev jtag_uart --stdout_dev jtag_uart --sopc_system_name blinky --quartus_project_dir "C:/Users/jmacauley/Documents/CPEN_430L/NIOSII_Project_CPEN_430" --jdi ../..//output_files/chip.jdi --sopcinfo C:/Users/jmacauley/Documents/CPEN_430L/NIOSII_Project_CPEN_430/software/blinky-sw_bsp/../../blinky.sopcinfo
+Info: (blinky-sw.elf) 32 KBytes program size (code + initialized data).
+Info:                 25 KBytes free for stack + heap.
+Info: Creating blinky-sw.objdump
+nios2-elf-objdump --disassemble --syms --all-header --source blinky-sw.elf >blinky-sw.objdump
 [blinky-sw build complete]
