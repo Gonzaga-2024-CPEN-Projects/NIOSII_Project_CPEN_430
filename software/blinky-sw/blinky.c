@@ -22,13 +22,11 @@ void init_Switches(void);
 void init_Keys(void);
 void init_LCD(void); 
 
-
 // Game State
 void readSwitches(void); 
 void play(void); // SW0
 void dispInstructions(void); // SW1
 void dispBankroll(int); //SW2
-
 
 // Game Flow
 void gameInitialization(void); // set deck and 
@@ -39,7 +37,7 @@ int playerBust(int);
 void dealerTurn(void); 
 int dealerBust(int);
 int determineResult(int, int); 
-
+void delay(int); 
 
 // Game Functionality
 int generateRandomCard(void); // Hardware Random Number Generator
@@ -51,39 +49,35 @@ void displayDealerSum(int); // seven segment HEX5 and HEX4
 char* sevenSegmentConversion(int); 
 void endRound(int, int);
 
-
 // Player Actions
 void hit(void); // KEY3
 void stay(void); // KEY2
 
-
 int main()
 {
-	// int switch_data;
+	alt_putstr("Ciao from Nios II!\n");
+	printf("start program\n");
+	int KEY_PRESS;
 	// int delay;
 	// int led_pattern=0x0;
-	alt_putstr("Ciao from Nios II!\n");
-	int card_val;
-	printf("start program\n");
+	// int card_val;
+	
 	while(1) {
 		init_SevenSeg(); 
-		// switch_data = IORD_ALTERA_AVALON_PIO_DATA(SWITCHES_BASE);
+		KEY_PRESS = IORD_ALTERA_AVALON_PIO_DATA(SWITCHES_BASE);
+		// Test HIT
+		if (KEY_PRESS == "1000") {
+			hit(); 
+		}
 
-		// IOWR_ALTERA_AVALON_PIO_DATA(LEDS_BASE, switch_data & led_pattern);
-		// delay = 0;
-		// while(delay < 200000) {
-		// 	delay++;
-		// }
-		// led_pattern ^= switch_data; // toggle LEDs on selected switches
+		// Test STAY
+		if (KEY_PRESS == "0100") {
+			stay(); 
+		}
 
-		// IOWR_ALTERA_AVALON_PIO_DATA(SEV_SEG_0_BASE, random_num);
-
-		char msg[10];
-		card_val = generateRandomCard();
-		itoa(card_val, msg, 10);
-		alt_putstr(msg);
-		alt_putstr("\n");
-
+		if (KEY_PRESS == "0010") {
+			init_SevenSeg(); 
+		}
 	}
 	return 0;
 }
@@ -239,6 +233,13 @@ int determineResult(int playerSum, int dealerSum) {
 		return 0; 
 	}
 }
+void delay(int delay) {
+	int count = 0; 
+	while(count < delay) {
+		count++;
+	}
+	return; 
+}
 
 
 /************************************************************
@@ -370,6 +371,7 @@ void hit(void) {
 
 	// Update playerSum
 	playerSum = playerSum + cardValue;
+	displayPlayerSum(playerSum);
 	return;
 } 
 void stay(void) { // Nothing Happens
@@ -377,5 +379,6 @@ void stay(void) { // Nothing Happens
 	IOWR_ALTERA_AVALON_PIO_DATA(SEV_SEG_1_BASE, 0x88);
 	IOWR_ALTERA_AVALON_PIO_DATA(SEV_SEG_2_BASE, 0xC1);
 	IOWR_ALTERA_AVALON_PIO_DATA(SEV_SEG_3_BASE, 0x92);
+	displayPlayerSum(playerSum);
 	return;
 }
