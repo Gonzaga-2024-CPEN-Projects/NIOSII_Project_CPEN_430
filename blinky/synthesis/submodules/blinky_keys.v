@@ -18,32 +18,32 @@
 // altera message_level Level1 
 // altera message_off 10034 10035 10036 10037 10230 10240 10030 
 
-module blinky_switches (
-                         // inputs:
-                          address,
-                          clk,
-                          in_port,
-                          reset_n,
+module blinky_keys (
+                     // inputs:
+                      address,
+                      clk,
+                      in_port,
+                      reset_n,
 
-                         // outputs:
-                          readdata
-                       )
+                     // outputs:
+                      readdata
+                   )
 ;
 
   output  [ 31: 0] readdata;
   input   [  1: 0] address;
   input            clk;
-  input   [ 17: 0] in_port;
+  input   [  2: 0] in_port;
   input            reset_n;
 
 
 wire             clk_en;
-wire    [ 17: 0] data_in;
-wire    [ 17: 0] read_mux_out;
+wire    [  2: 0] data_in;
+wire    [  2: 0] read_mux_out;
 reg     [ 31: 0] readdata;
   assign clk_en = 1;
   //s1, which is an e_avalon_slave
-  assign read_mux_out = {18 {(address == 0)}} & data_in;
+  assign read_mux_out = {3 {(address == 0)}} & data_in;
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
