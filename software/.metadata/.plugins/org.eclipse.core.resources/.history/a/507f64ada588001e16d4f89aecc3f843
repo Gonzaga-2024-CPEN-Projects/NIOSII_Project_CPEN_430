@@ -1,0 +1,37 @@
+#include <sys/alt_stdio.h>
+#include "system.h"
+#include "altera_avalon_pio_regs.h"
+#include <stdio.h>
+int main()
+{
+	int switch_data;
+	int delay;
+	int led_pattern=0x0;
+	alt_putstr("Ciao from Nios II!\n");
+	int random_num;
+	int tmp;
+	printf("start program\n");
+	while(1) {
+			switch_data = IORD_ALTERA_AVALON_PIO_DATA(SWITCHES_BASE);
+
+			IOWR_ALTERA_AVALON_PIO_DATA(LEDS_BASE, switch_data & led_pattern);
+			delay = 0;
+			while(delay < 200000) {
+				delay++;
+			}
+			led_pattern ^= switch_data; // toggle LEDs on selected switches
+			random_num = IORD_ALTERA_AVALON_PIO_DATA(RANDOMS_BASE);
+			IOWR_ALTERA_AVALON_PIO_DATA(SEV_SEG_0_BASE, random_num);
+
+//			printf("Random Number: %d \n", tmp);
+//			string msg = to_string(random_num);
+//			char* buffer = malloc(sizeof(char)*32);
+			char msg[10];
+			itoa(random_num, msg, 10);
+			alt_putstr(msg);
+			alt_putstr("\n");
+
+
+	}
+	return 0;
+}

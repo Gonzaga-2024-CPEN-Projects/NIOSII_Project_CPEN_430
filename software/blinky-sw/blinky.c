@@ -59,6 +59,7 @@ void stay(void); // KEY2
 int main()
 {
 	int switch_data;
+	int key_data;
 	int delay;
 	int led_pattern=0x0;
 	alt_putstr("Ciao from Nios II!\n");
@@ -77,25 +78,57 @@ int main()
 //			IOWR_ALTERA_AVALON_PIO_DATA(SEV_SEG_0_BASE, random_num);
 
 
-			char msg[10];
-			card_val = generateRandomCard();
-			itoa(card_val, msg, 10);
-			alt_putstr(msg);
-			alt_putstr("\n");
+//			char msg[10];
+//			card_val = generateRandomCard();
+//			itoa(card_val, msg, 10);
+//			alt_putstr(msg);
+//			alt_putstr("\n");
+
+
+
+		update_GLED(IORD_ALTERA_AVALON_PIO_DATA(KEYS_BASE));
+		update_RLED(IORD_ALTERA_AVALON_PIO_DATA(SWITCHES_BASE));
+
+		//key_data = IORD_ALTERA_AVALON_PIO_DATA(KEYS_BASE);
+
+
+
+
 
 	}
 	return 0;
 }
 
 /************************************************************
- Hardware Initialization
+ Hardware Initialization and Updating
 *************************************************************/ 
-void init_GLED(void) {
+
+//key_data input is directly from reading
+//Example function call: update_GLED(IORD_ALTERA_AVALON_PIO_DATA(KEYS_BASE));
+void update_GLED(int key_data){
+	if(key_data == 3){
+		IOWR_ALTERA_AVALON_PIO_DATA(GRN_LEDS_BASE, 0x40);
+	}
+	else if(key_data == 5){
+		IOWR_ALTERA_AVALON_PIO_DATA(GRN_LEDS_BASE, 0x10);
+	}
+	else if(key_data == 6){
+		IOWR_ALTERA_AVALON_PIO_DATA(GRN_LEDS_BASE, 0x4);
+	}
+	else{
+		IOWR_ALTERA_AVALON_PIO_DATA(GRN_LEDS_BASE, 0x00);
+	}
+
 	return;
 } 
-void init_RLED(void) {
+
+//update the red leds with the switch states, pass in raw switch reading
+//Example function call: update_RLED(IORD_ALTERA_AVALON_PIO_DATA(SWITCHES_BASE));
+void update_RLED(int switch_data) {
+	IOWR_ALTERA_AVALON_PIO_DATA(RED_LEDS_BASE, switch_data);
 	return;
 }
+
 void init_SevenSeg(void) {
 	return;
 } 

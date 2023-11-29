@@ -2,9 +2,9 @@
 <sch:Settings xmlns:sch="http://www.altera.com/embeddedsw/bsp/schema">
         <BspType>hal</BspType>
         <BspVersion>default</BspVersion>
-        <BspGeneratedTimeStamp>Nov 28, 2023 7:56:44 PM</BspGeneratedTimeStamp>
-        <BspGeneratedUnixTimeStamp>1701230204401</BspGeneratedUnixTimeStamp>
-        <BspGeneratedLocation>C:\Users\jmacauley\Documents\CPEN_430L\NIOSII_Project_CPEN_430\software\blinky-sw_bsp</BspGeneratedLocation>
+        <BspGeneratedTimeStamp>Nov 29, 2023 1:31:10 PM</BspGeneratedTimeStamp>
+        <BspGeneratedUnixTimeStamp>1701293470940</BspGeneratedUnixTimeStamp>
+        <BspGeneratedLocation>C:\Users\nlinthacum\Desktop\NIOSII_Project_CPEN_430\software\blinky-sw_bsp</BspGeneratedLocation>
         <BspSettingsFile>settings.bsp</BspSettingsFile>
         <SopcDesignFile>..\..\blinky.sopcinfo</SopcDesignFile>
         <JdiFile>default</JdiFile>
