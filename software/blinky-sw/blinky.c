@@ -14,7 +14,8 @@ int bankRoll = 1000;
 int currentBet = 0; 
 int dealerSum = 0; 
 int playerSum = 0; 
-int gamesPlayed = 0;  
+int gamesPlayed = 0;
+int cardsDealt = 0;
 
 // Hardware Initialization 
 void update_GLED(int);
@@ -160,6 +161,8 @@ void playRound(void) {
 	// Update Bankroll
 	dispBankroll(); 
 
+	// Reset Deck every
+
 	return;
 } 
 void dispInstructions(void) {
@@ -220,7 +223,6 @@ void playerBet(void) {
 void dealInitialCards(void) {
 	int tempCard;
 	int cardValue;  
-	resetDeck();
 	// Player First Two Cards
 	for (int i = 0; i < 2; i++) {
 		tempCard = generateRandomCard(); 
@@ -378,12 +380,16 @@ void delay(int delay) {
  Game Functionality
 *************************************************************/ 
 int generateRandomCard(void) {
+	cardsDealt++;
 	int random_num = IORD_ALTERA_AVALON_PIO_DATA(RANDOMS_BASE);
 	return abs(random_num %52);
 } 
 void updateDeck(int cardIdx) {
 	// set 0 -> 1 in cardDeck array
 	cardDeck[cardIdx] = 1; 
+	if (cardsDealt == 47) {
+		resetDeck();
+	}
 	return;
 } 
 void resetDeck(void) {
