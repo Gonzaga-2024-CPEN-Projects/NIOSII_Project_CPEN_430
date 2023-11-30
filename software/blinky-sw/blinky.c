@@ -282,8 +282,15 @@ void resetDeck(void) {
 	return;
 } 
 int translateCardValue(int cardIdx) {
-	int cardValue = cardValues[cardIdx] - 50;
-	if (cardValue > 11) {
+	char msg[10];
+	itoa(cardIdx, msg, 10);
+	alt_putstr(msg);
+	alt_putstr(" <-- IDX\n");
+	int cardValue = cardValues[cardIdx] - 48;
+	if (cardValue == 17) {
+		cardValue = 11;
+	}
+	else if (cardValue > 11) {
 		cardValue = 10; 
 	}
 	return cardValue; 
