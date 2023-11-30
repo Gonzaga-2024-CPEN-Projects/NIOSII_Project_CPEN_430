@@ -2,8 +2,8 @@
 <sch:Settings xmlns:sch="http://www.altera.com/embeddedsw/bsp/schema">
         <BspType>hal</BspType>
         <BspVersion>default</BspVersion>
-        <BspGeneratedTimeStamp>Nov 9, 2023 1:02:49 PM</BspGeneratedTimeStamp>
-        <BspGeneratedUnixTimeStamp>1699563769958</BspGeneratedUnixTimeStamp>
+        <BspGeneratedTimeStamp>Nov 28, 2023 6:41:04 PM</BspGeneratedTimeStamp>
+        <BspGeneratedUnixTimeStamp>1701225664583</BspGeneratedUnixTimeStamp>
         <BspGeneratedLocation>D:\CPEN430\NIOSII_Project_CPEN_430\software\blinky-sw_bsp</BspGeneratedLocation>
         <BspSettingsFile>settings.bsp</BspSettingsFile>
         <SopcDesignFile>..\..\blinky.sopcinfo</SopcDesignFile>
@@ -900,27 +900,39 @@
         </Setting>
         <MemoryMap>
                 <slaveDescriptor>onchip_ram</slaveDescriptor>
-                <addressRange>0x00010000 - 0x0001FFFF</addressRange>
-                <addressSpan>65536</addressSpan>
+                <addressRange>0x00080000 - 0x000B0D3F</addressRange>
+                <addressSpan>200000</addressSpan>
                 <attributes>memory</attributes>
         </MemoryMap>
         <MemoryMap>
                 <slaveDescriptor>leds</slaveDescriptor>
-                <addressRange>0x00021000 - 0x0002100F</addressRange>
+                <addressRange>0x00101000 - 0x0010100F</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
                 <slaveDescriptor>switches</slaveDescriptor>
-                <addressRange>0x00021010 - 0x0002101F</addressRange>
+                <addressRange>0x00101010 - 0x0010101F</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
+                <slaveDescriptor>sysid_qsys_0</slaveDescriptor>
+                <addressRange>0x00101020 - 0x00101027</addressRange>
+                <addressSpan>8</addressSpan>
+                <attributes/>
+        </MemoryMap>
+        <MemoryMap>
                 <slaveDescriptor>jtag_uart</slaveDescriptor>
-                <addressRange>0x00021020 - 0x00021027</addressRange>
+                <addressRange>0x00101028 - 0x0010102F</addressRange>
                 <addressSpan>8</addressSpan>
                 <attributes>printable</attributes>
+        </MemoryMap>
+        <MemoryMap>
+                <slaveDescriptor>character_lcd</slaveDescriptor>
+                <addressRange>0x00101030 - 0x00101031</addressRange>
+                <addressSpan>2</addressSpan>
+                <attributes/>
         </MemoryMap>
         <LinkerSection>
                 <sectionName>.text</sectionName>

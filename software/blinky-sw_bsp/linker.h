@@ -4,7 +4,7 @@
  * Machine generated for CPU 'cpu' in SOPC Builder design 'blinky'
  * SOPC Builder design path: ../../blinky.sopcinfo
  *
- * Generated: Thu Nov 09 12:30:27 PST 2023
+ * Generated: Tue Nov 28 18:39:34 PST 2023
  */
 
 /*
@@ -65,9 +65,9 @@
  *
  */
 
-#define ONCHIP_RAM_REGION_BASE 0x10020
-#define ONCHIP_RAM_REGION_SPAN 65504
-#define RESET_REGION_BASE 0x10000
+#define ONCHIP_RAM_REGION_BASE 0x80020
+#define ONCHIP_RAM_REGION_SPAN 199968
+#define RESET_REGION_BASE 0x80000
 #define RESET_REGION_SPAN 32
 
 

@@ -3,7 +3,7 @@
 # Machine generated for CPU 'cpu' in SOPC Builder design 'blinky'
 # SOPC Builder design path: ../../blinky.sopcinfo
 #
-# Generated: Thu Nov 09 12:30:27 PST 2023
+# Generated: Tue Nov 28 18:39:34 PST 2023
 
 # DO NOT MODIFY THIS FILE
 #
@@ -47,4 +47,4 @@
 # by allowing GDB to cache memory contents on the host.
 
 # onchip_ram
-memory 0x10000 0x20000 cache
+memory 0x80000 0xb0d40 cache

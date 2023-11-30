@@ -2050,6 +2050,18 @@
 						<entry kind="macro" name="ALT_SINGLE_THREADED" value=""/>
 						<entry kind="macro" name="__hal__" value=""/>
 					</resource>
+					<resource project-relative-path="drivers/src/altera_up_avalon_character_lcd.c">
+						<entry kind="includePath" name="/${ProjName}/HAL/inc">
+							<flag value="VALUE_WORKSPACE_PATH"/>
+						</entry>
+						<entry kind="includePath" name="C:/CPEN430/NIOSII_Project_CPEN_430/software/blinky-sw_bsp"/>
+						<entry kind="includePath" name="/${ProjName}/drivers/inc">
+							<flag value="VALUE_WORKSPACE_PATH"/>
+						</entry>
+						<entry kind="macro" name="ALT_NO_INSTRUCTION_EMULATION" value=""/>
+						<entry kind="macro" name="ALT_SINGLE_THREADED" value=""/>
+						<entry kind="macro" name="__hal__" value=""/>
+					</resource>
 					<resource project-relative-path="HAL/src/alt_open.c">
 						<entry kind="includePath" name="/${ProjName}/HAL/inc">
 							<flag value="VALUE_WORKSPACE_PATH"/>

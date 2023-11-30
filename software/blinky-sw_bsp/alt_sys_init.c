@@ -4,7 +4,7 @@
  * Machine generated for CPU 'cpu' in SOPC Builder design 'blinky'
  * SOPC Builder design path: ../../blinky.sopcinfo
  *
- * Generated: Thu Nov 09 12:30:27 PST 2023
+ * Generated: Tue Nov 28 17:05:08 PST 2023
  */
 
 /*
@@ -60,6 +60,8 @@
 
 #include "altera_nios2_gen2_irq.h"
 #include "altera_avalon_jtag_uart.h"
+#include "altera_avalon_sysid_qsys.h"
+#include "altera_up_avalon_character_lcd.h"
 
 /*
  * Allocate the device storage
@@ -67,6 +69,8 @@
 
 ALTERA_NIOS2_GEN2_IRQ_INSTANCE ( CPU, cpu);
 ALTERA_AVALON_JTAG_UART_INSTANCE ( JTAG_UART, jtag_uart);
+ALTERA_AVALON_SYSID_QSYS_INSTANCE ( SYSID_QSYS_0, sysid_qsys_0);
+ALTERA_UP_AVALON_CHARACTER_LCD_INSTANCE ( CHARACTER_LCD, character_lcd);
 
 /*
  * Initialize the interrupt controller devices
@@ -90,4 +94,6 @@ void alt_irq_init ( const void* base )
 void alt_sys_init( void )
 {
     ALTERA_AVALON_JTAG_UART_INIT ( JTAG_UART, jtag_uart);
+    ALTERA_AVALON_SYSID_QSYS_INIT ( SYSID_QSYS_0, sysid_qsys_0);
+    ALTERA_UP_AVALON_CHARACTER_LCD_INIT ( CHARACTER_LCD, character_lcd);
 }

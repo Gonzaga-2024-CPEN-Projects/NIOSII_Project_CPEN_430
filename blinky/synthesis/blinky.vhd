@@ -22,12 +22,32 @@ entity blinky is
 end entity blinky;
 
 architecture rtl of blinky is
+	component blinky_character_lcd is
+		port (
+			clk         : in    std_logic                    := 'X';             -- clk
+			reset       : in    std_logic                    := 'X';             -- reset
+			address     : in    std_logic                    := 'X';             -- address
+			chipselect  : in    std_logic                    := 'X';             -- chipselect
+			read        : in    std_logic                    := 'X';             -- read
+			write       : in    std_logic                    := 'X';             -- write
+			writedata   : in    std_logic_vector(7 downto 0) := (others => 'X'); -- writedata
+			readdata    : out   std_logic_vector(7 downto 0);                    -- readdata
+			waitrequest : out   std_logic;                                       -- waitrequest
+			LCD_DATA    : inout std_logic_vector(7 downto 0) := (others => 'X'); -- export
+			LCD_ON      : out   std_logic;                                       -- export
+			LCD_BLON    : out   std_logic;                                       -- export
+			LCD_EN      : out   std_logic;                                       -- export
+			LCD_RS      : out   std_logic;                                       -- export
+			LCD_RW      : out   std_logic                                        -- export
+		);
+	end component blinky_character_lcd;
+
 	component blinky_cpu is
 		port (
 			clk                                 : in  std_logic                     := 'X';             -- clk
 			reset_n                             : in  std_logic                     := 'X';             -- reset_n
 			reset_req                           : in  std_logic                     := 'X';             -- reset_req
-			d_address                           : out std_logic_vector(17 downto 0);                    -- address
+			d_address                           : out std_logic_vector(20 downto 0);                    -- address
 			d_byteenable                        : out std_logic_vector(3 downto 0);                     -- byteenable
 			d_read                              : out std_logic;                                        -- read
 			d_readdata                          : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
@@ -35,7 +55,7 @@ architecture rtl of blinky is
 			d_write                             : out std_logic;                                        -- write
 			d_writedata                         : out std_logic_vector(31 downto 0);                    -- writedata
 			debug_mem_slave_debugaccess_to_roms : out std_logic;                                        -- debugaccess
-			i_address                           : out std_logic_vector(17 downto 0);                    -- address
+			i_address                           : out std_logic_vector(20 downto 0);                    -- address
 			i_read                              : out std_logic;                                        -- read
 			i_readdata                          : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
 			i_waitrequest                       : in  std_logic                     := 'X';             -- waitrequest
@@ -68,26 +88,6 @@ architecture rtl of blinky is
 		);
 	end component blinky_jtag_uart;
 
-	component blinky_lcd is
-		port (
-			clk         : in    std_logic                    := 'X';             -- clk
-			reset       : in    std_logic                    := 'X';             -- reset
-			address     : in    std_logic                    := 'X';             -- address
-			chipselect  : in    std_logic                    := 'X';             -- chipselect
-			read        : in    std_logic                    := 'X';             -- read
-			write       : in    std_logic                    := 'X';             -- write
-			writedata   : in    std_logic_vector(7 downto 0) := (others => 'X'); -- writedata
-			readdata    : out   std_logic_vector(7 downto 0);                    -- readdata
-			waitrequest : out   std_logic;                                       -- waitrequest
-			LCD_DATA    : inout std_logic_vector(7 downto 0) := (others => 'X'); -- export
-			LCD_ON      : out   std_logic;                                       -- export
-			LCD_BLON    : out   std_logic;                                       -- export
-			LCD_EN      : out   std_logic;                                       -- export
-			LCD_RS      : out   std_logic;                                       -- export
-			LCD_RW      : out   std_logic                                        -- export
-		);
-	end component blinky_lcd;
-
 	component blinky_leds is
 		port (
 			clk        : in  std_logic                     := 'X';             -- clk
@@ -104,7 +104,7 @@ architecture rtl of blinky is
 	component blinky_onchip_ram is
 		port (
 			clk        : in  std_logic                     := 'X';             -- clk
-			address    : in  std_logic_vector(13 downto 0) := (others => 'X'); -- address
+			address    : in  std_logic_vector(15 downto 0) := (others => 'X'); -- address
 			clken      : in  std_logic                     := 'X';             -- clken
 			chipselect : in  std_logic                     := 'X';             -- chipselect
 			write      : in  std_logic                     := 'X';             -- write
@@ -127,58 +127,69 @@ architecture rtl of blinky is
 		);
 	end component blinky_switches;
 
+	component blinky_sysid_qsys_0 is
+		port (
+			clock    : in  std_logic                     := 'X'; -- clk
+			reset_n  : in  std_logic                     := 'X'; -- reset_n
+			readdata : out std_logic_vector(31 downto 0);        -- readdata
+			address  : in  std_logic                     := 'X'  -- address
+		);
+	end component blinky_sysid_qsys_0;
+
 	component blinky_mm_interconnect_0 is
 		port (
-			clk_main_clk_clk                        : in  std_logic                     := 'X';             -- clk
-			cpu_reset_reset_bridge_in_reset_reset   : in  std_logic                     := 'X';             -- reset
-			cpu_data_master_address                 : in  std_logic_vector(17 downto 0) := (others => 'X'); -- address
-			cpu_data_master_waitrequest             : out std_logic;                                        -- waitrequest
-			cpu_data_master_byteenable              : in  std_logic_vector(3 downto 0)  := (others => 'X'); -- byteenable
-			cpu_data_master_read                    : in  std_logic                     := 'X';             -- read
-			cpu_data_master_readdata                : out std_logic_vector(31 downto 0);                    -- readdata
-			cpu_data_master_write                   : in  std_logic                     := 'X';             -- write
-			cpu_data_master_writedata               : in  std_logic_vector(31 downto 0) := (others => 'X'); -- writedata
-			cpu_data_master_debugaccess             : in  std_logic                     := 'X';             -- debugaccess
-			cpu_instruction_master_address          : in  std_logic_vector(17 downto 0) := (others => 'X'); -- address
-			cpu_instruction_master_waitrequest      : out std_logic;                                        -- waitrequest
-			cpu_instruction_master_read             : in  std_logic                     := 'X';             -- read
-			cpu_instruction_master_readdata         : out std_logic_vector(31 downto 0);                    -- readdata
-			cpu_debug_mem_slave_address             : out std_logic_vector(8 downto 0);                     -- address
-			cpu_debug_mem_slave_write               : out std_logic;                                        -- write
-			cpu_debug_mem_slave_read                : out std_logic;                                        -- read
-			cpu_debug_mem_slave_readdata            : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
-			cpu_debug_mem_slave_writedata           : out std_logic_vector(31 downto 0);                    -- writedata
-			cpu_debug_mem_slave_byteenable          : out std_logic_vector(3 downto 0);                     -- byteenable
-			cpu_debug_mem_slave_waitrequest         : in  std_logic                     := 'X';             -- waitrequest
-			cpu_debug_mem_slave_debugaccess         : out std_logic;                                        -- debugaccess
-			jtag_uart_avalon_jtag_slave_address     : out std_logic_vector(0 downto 0);                     -- address
-			jtag_uart_avalon_jtag_slave_write       : out std_logic;                                        -- write
-			jtag_uart_avalon_jtag_slave_read        : out std_logic;                                        -- read
-			jtag_uart_avalon_jtag_slave_readdata    : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
-			jtag_uart_avalon_jtag_slave_writedata   : out std_logic_vector(31 downto 0);                    -- writedata
-			jtag_uart_avalon_jtag_slave_waitrequest : in  std_logic                     := 'X';             -- waitrequest
-			jtag_uart_avalon_jtag_slave_chipselect  : out std_logic;                                        -- chipselect
-			lcd_avalon_lcd_slave_address            : out std_logic_vector(0 downto 0);                     -- address
-			lcd_avalon_lcd_slave_write              : out std_logic;                                        -- write
-			lcd_avalon_lcd_slave_read               : out std_logic;                                        -- read
-			lcd_avalon_lcd_slave_readdata           : in  std_logic_vector(7 downto 0)  := (others => 'X'); -- readdata
-			lcd_avalon_lcd_slave_writedata          : out std_logic_vector(7 downto 0);                     -- writedata
-			lcd_avalon_lcd_slave_waitrequest        : in  std_logic                     := 'X';             -- waitrequest
-			lcd_avalon_lcd_slave_chipselect         : out std_logic;                                        -- chipselect
-			leds_s1_address                         : out std_logic_vector(1 downto 0);                     -- address
-			leds_s1_write                           : out std_logic;                                        -- write
-			leds_s1_readdata                        : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
-			leds_s1_writedata                       : out std_logic_vector(31 downto 0);                    -- writedata
-			leds_s1_chipselect                      : out std_logic;                                        -- chipselect
-			onchip_ram_s1_address                   : out std_logic_vector(13 downto 0);                    -- address
-			onchip_ram_s1_write                     : out std_logic;                                        -- write
-			onchip_ram_s1_readdata                  : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
-			onchip_ram_s1_writedata                 : out std_logic_vector(31 downto 0);                    -- writedata
-			onchip_ram_s1_byteenable                : out std_logic_vector(3 downto 0);                     -- byteenable
-			onchip_ram_s1_chipselect                : out std_logic;                                        -- chipselect
-			onchip_ram_s1_clken                     : out std_logic;                                        -- clken
-			switches_s1_address                     : out std_logic_vector(1 downto 0);                     -- address
-			switches_s1_readdata                    : in  std_logic_vector(31 downto 0) := (others => 'X')  -- readdata
+			clk_main_clk_clk                           : in  std_logic                     := 'X';             -- clk
+			cpu_reset_reset_bridge_in_reset_reset      : in  std_logic                     := 'X';             -- reset
+			cpu_data_master_address                    : in  std_logic_vector(20 downto 0) := (others => 'X'); -- address
+			cpu_data_master_waitrequest                : out std_logic;                                        -- waitrequest
+			cpu_data_master_byteenable                 : in  std_logic_vector(3 downto 0)  := (others => 'X'); -- byteenable
+			cpu_data_master_read                       : in  std_logic                     := 'X';             -- read
+			cpu_data_master_readdata                   : out std_logic_vector(31 downto 0);                    -- readdata
+			cpu_data_master_write                      : in  std_logic                     := 'X';             -- write
+			cpu_data_master_writedata                  : in  std_logic_vector(31 downto 0) := (others => 'X'); -- writedata
+			cpu_data_master_debugaccess                : in  std_logic                     := 'X';             -- debugaccess
+			cpu_instruction_master_address             : in  std_logic_vector(20 downto 0) := (others => 'X'); -- address
+			cpu_instruction_master_waitrequest         : out std_logic;                                        -- waitrequest
+			cpu_instruction_master_read                : in  std_logic                     := 'X';             -- read
+			cpu_instruction_master_readdata            : out std_logic_vector(31 downto 0);                    -- readdata
+			character_lcd_avalon_lcd_slave_address     : out std_logic_vector(0 downto 0);                     -- address
+			character_lcd_avalon_lcd_slave_write       : out std_logic;                                        -- write
+			character_lcd_avalon_lcd_slave_read        : out std_logic;                                        -- read
+			character_lcd_avalon_lcd_slave_readdata    : in  std_logic_vector(7 downto 0)  := (others => 'X'); -- readdata
+			character_lcd_avalon_lcd_slave_writedata   : out std_logic_vector(7 downto 0);                     -- writedata
+			character_lcd_avalon_lcd_slave_waitrequest : in  std_logic                     := 'X';             -- waitrequest
+			character_lcd_avalon_lcd_slave_chipselect  : out std_logic;                                        -- chipselect
+			cpu_debug_mem_slave_address                : out std_logic_vector(8 downto 0);                     -- address
+			cpu_debug_mem_slave_write                  : out std_logic;                                        -- write
+			cpu_debug_mem_slave_read                   : out std_logic;                                        -- read
+			cpu_debug_mem_slave_readdata               : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
+			cpu_debug_mem_slave_writedata              : out std_logic_vector(31 downto 0);                    -- writedata
+			cpu_debug_mem_slave_byteenable             : out std_logic_vector(3 downto 0);                     -- byteenable
+			cpu_debug_mem_slave_waitrequest            : in  std_logic                     := 'X';             -- waitrequest
+			cpu_debug_mem_slave_debugaccess            : out std_logic;                                        -- debugaccess
+			jtag_uart_avalon_jtag_slave_address        : out std_logic_vector(0 downto 0);                     -- address
+			jtag_uart_avalon_jtag_slave_write          : out std_logic;                                        -- write
+			jtag_uart_avalon_jtag_slave_read           : out std_logic;                                        -- read
+			jtag_uart_avalon_jtag_slave_readdata       : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
+			jtag_uart_avalon_jtag_slave_writedata      : out std_logic_vector(31 downto 0);                    -- writedata
+			jtag_uart_avalon_jtag_slave_waitrequest    : in  std_logic                     := 'X';             -- waitrequest
+			jtag_uart_avalon_jtag_slave_chipselect     : out std_logic;                                        -- chipselect
+			leds_s1_address                            : out std_logic_vector(1 downto 0);                     -- address
+			leds_s1_write                              : out std_logic;                                        -- write
+			leds_s1_readdata                           : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
+			leds_s1_writedata                          : out std_logic_vector(31 downto 0);                    -- writedata
+			leds_s1_chipselect                         : out std_logic;                                        -- chipselect
+			onchip_ram_s1_address                      : out std_logic_vector(15 downto 0);                    -- address
+			onchip_ram_s1_write                        : out std_logic;                                        -- write
+			onchip_ram_s1_readdata                     : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
+			onchip_ram_s1_writedata                    : out std_logic_vector(31 downto 0);                    -- writedata
+			onchip_ram_s1_byteenable                   : out std_logic_vector(3 downto 0);                     -- byteenable
+			onchip_ram_s1_chipselect                   : out std_logic;                                        -- chipselect
+			onchip_ram_s1_clken                        : out std_logic;                                        -- clken
+			switches_s1_address                        : out std_logic_vector(1 downto 0);                     -- address
+			switches_s1_readdata                       : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
+			sysid_qsys_0_control_slave_address         : out std_logic_vector(0 downto 0);                     -- address
+			sysid_qsys_0_control_slave_readdata        : in  std_logic_vector(31 downto 0) := (others => 'X')  -- readdata
 		);
 	end component blinky_mm_interconnect_0;
 
@@ -260,14 +271,14 @@ architecture rtl of blinky is
 	signal cpu_data_master_readdata                                      : std_logic_vector(31 downto 0); -- mm_interconnect_0:cpu_data_master_readdata -> cpu:d_readdata
 	signal cpu_data_master_waitrequest                                   : std_logic;                     -- mm_interconnect_0:cpu_data_master_waitrequest -> cpu:d_waitrequest
 	signal cpu_data_master_debugaccess                                   : std_logic;                     -- cpu:debug_mem_slave_debugaccess_to_roms -> mm_interconnect_0:cpu_data_master_debugaccess
-	signal cpu_data_master_address                                       : std_logic_vector(17 downto 0); -- cpu:d_address -> mm_interconnect_0:cpu_data_master_address
+	signal cpu_data_master_address                                       : std_logic_vector(20 downto 0); -- cpu:d_address -> mm_interconnect_0:cpu_data_master_address
 	signal cpu_data_master_byteenable                                    : std_logic_vector(3 downto 0);  -- cpu:d_byteenable -> mm_interconnect_0:cpu_data_master_byteenable
 	signal cpu_data_master_read                                          : std_logic;                     -- cpu:d_read -> mm_interconnect_0:cpu_data_master_read
 	signal cpu_data_master_write                                         : std_logic;                     -- cpu:d_write -> mm_interconnect_0:cpu_data_master_write
 	signal cpu_data_master_writedata                                     : std_logic_vector(31 downto 0); -- cpu:d_writedata -> mm_interconnect_0:cpu_data_master_writedata
 	signal cpu_instruction_master_readdata                               : std_logic_vector(31 downto 0); -- mm_interconnect_0:cpu_instruction_master_readdata -> cpu:i_readdata
 	signal cpu_instruction_master_waitrequest                            : std_logic;                     -- mm_interconnect_0:cpu_instruction_master_waitrequest -> cpu:i_waitrequest
-	signal cpu_instruction_master_address                                : std_logic_vector(17 downto 0); -- cpu:i_address -> mm_interconnect_0:cpu_instruction_master_address
+	signal cpu_instruction_master_address                                : std_logic_vector(20 downto 0); -- cpu:i_address -> mm_interconnect_0:cpu_instruction_master_address
 	signal cpu_instruction_master_read                                   : std_logic;                     -- cpu:i_read -> mm_interconnect_0:cpu_instruction_master_read
 	signal mm_interconnect_0_jtag_uart_avalon_jtag_slave_chipselect      : std_logic;                     -- mm_interconnect_0:jtag_uart_avalon_jtag_slave_chipselect -> jtag_uart:av_chipselect
 	signal mm_interconnect_0_jtag_uart_avalon_jtag_slave_readdata        : std_logic_vector(31 downto 0); -- jtag_uart:av_readdata -> mm_interconnect_0:jtag_uart_avalon_jtag_slave_readdata
@@ -276,13 +287,15 @@ architecture rtl of blinky is
 	signal mm_interconnect_0_jtag_uart_avalon_jtag_slave_read            : std_logic;                     -- mm_interconnect_0:jtag_uart_avalon_jtag_slave_read -> mm_interconnect_0_jtag_uart_avalon_jtag_slave_read:in
 	signal mm_interconnect_0_jtag_uart_avalon_jtag_slave_write           : std_logic;                     -- mm_interconnect_0:jtag_uart_avalon_jtag_slave_write -> mm_interconnect_0_jtag_uart_avalon_jtag_slave_write:in
 	signal mm_interconnect_0_jtag_uart_avalon_jtag_slave_writedata       : std_logic_vector(31 downto 0); -- mm_interconnect_0:jtag_uart_avalon_jtag_slave_writedata -> jtag_uart:av_writedata
-	signal mm_interconnect_0_lcd_avalon_lcd_slave_chipselect             : std_logic;                     -- mm_interconnect_0:lcd_avalon_lcd_slave_chipselect -> lcd:chipselect
-	signal mm_interconnect_0_lcd_avalon_lcd_slave_readdata               : std_logic_vector(7 downto 0);  -- lcd:readdata -> mm_interconnect_0:lcd_avalon_lcd_slave_readdata
-	signal mm_interconnect_0_lcd_avalon_lcd_slave_waitrequest            : std_logic;                     -- lcd:waitrequest -> mm_interconnect_0:lcd_avalon_lcd_slave_waitrequest
-	signal mm_interconnect_0_lcd_avalon_lcd_slave_address                : std_logic_vector(0 downto 0);  -- mm_interconnect_0:lcd_avalon_lcd_slave_address -> lcd:address
-	signal mm_interconnect_0_lcd_avalon_lcd_slave_read                   : std_logic;                     -- mm_interconnect_0:lcd_avalon_lcd_slave_read -> lcd:read
-	signal mm_interconnect_0_lcd_avalon_lcd_slave_write                  : std_logic;                     -- mm_interconnect_0:lcd_avalon_lcd_slave_write -> lcd:write
-	signal mm_interconnect_0_lcd_avalon_lcd_slave_writedata              : std_logic_vector(7 downto 0);  -- mm_interconnect_0:lcd_avalon_lcd_slave_writedata -> lcd:writedata
+	signal mm_interconnect_0_character_lcd_avalon_lcd_slave_chipselect   : std_logic;                     -- mm_interconnect_0:character_lcd_avalon_lcd_slave_chipselect -> character_lcd:chipselect
+	signal mm_interconnect_0_character_lcd_avalon_lcd_slave_readdata     : std_logic_vector(7 downto 0);  -- character_lcd:readdata -> mm_interconnect_0:character_lcd_avalon_lcd_slave_readdata
+	signal mm_interconnect_0_character_lcd_avalon_lcd_slave_waitrequest  : std_logic;                     -- character_lcd:waitrequest -> mm_interconnect_0:character_lcd_avalon_lcd_slave_waitrequest
+	signal mm_interconnect_0_character_lcd_avalon_lcd_slave_address      : std_logic_vector(0 downto 0);  -- mm_interconnect_0:character_lcd_avalon_lcd_slave_address -> character_lcd:address
+	signal mm_interconnect_0_character_lcd_avalon_lcd_slave_read         : std_logic;                     -- mm_interconnect_0:character_lcd_avalon_lcd_slave_read -> character_lcd:read
+	signal mm_interconnect_0_character_lcd_avalon_lcd_slave_write        : std_logic;                     -- mm_interconnect_0:character_lcd_avalon_lcd_slave_write -> character_lcd:write
+	signal mm_interconnect_0_character_lcd_avalon_lcd_slave_writedata    : std_logic_vector(7 downto 0);  -- mm_interconnect_0:character_lcd_avalon_lcd_slave_writedata -> character_lcd:writedata
+	signal mm_interconnect_0_sysid_qsys_0_control_slave_readdata         : std_logic_vector(31 downto 0); -- sysid_qsys_0:readdata -> mm_interconnect_0:sysid_qsys_0_control_slave_readdata
+	signal mm_interconnect_0_sysid_qsys_0_control_slave_address          : std_logic_vector(0 downto 0);  -- mm_interconnect_0:sysid_qsys_0_control_slave_address -> sysid_qsys_0:address
 	signal mm_interconnect_0_cpu_debug_mem_slave_readdata                : std_logic_vector(31 downto 0); -- cpu:debug_mem_slave_readdata -> mm_interconnect_0:cpu_debug_mem_slave_readdata
 	signal mm_interconnect_0_cpu_debug_mem_slave_waitrequest             : std_logic;                     -- cpu:debug_mem_slave_waitrequest -> mm_interconnect_0:cpu_debug_mem_slave_waitrequest
 	signal mm_interconnect_0_cpu_debug_mem_slave_debugaccess             : std_logic;                     -- mm_interconnect_0:cpu_debug_mem_slave_debugaccess -> cpu:debug_mem_slave_debugaccess
@@ -293,7 +306,7 @@ architecture rtl of blinky is
 	signal mm_interconnect_0_cpu_debug_mem_slave_writedata               : std_logic_vector(31 downto 0); -- mm_interconnect_0:cpu_debug_mem_slave_writedata -> cpu:debug_mem_slave_writedata
 	signal mm_interconnect_0_onchip_ram_s1_chipselect                    : std_logic;                     -- mm_interconnect_0:onchip_ram_s1_chipselect -> onchip_ram:chipselect
 	signal mm_interconnect_0_onchip_ram_s1_readdata                      : std_logic_vector(31 downto 0); -- onchip_ram:readdata -> mm_interconnect_0:onchip_ram_s1_readdata
-	signal mm_interconnect_0_onchip_ram_s1_address                       : std_logic_vector(13 downto 0); -- mm_interconnect_0:onchip_ram_s1_address -> onchip_ram:address
+	signal mm_interconnect_0_onchip_ram_s1_address                       : std_logic_vector(15 downto 0); -- mm_interconnect_0:onchip_ram_s1_address -> onchip_ram:address
 	signal mm_interconnect_0_onchip_ram_s1_byteenable                    : std_logic_vector(3 downto 0);  -- mm_interconnect_0:onchip_ram_s1_byteenable -> onchip_ram:byteenable
 	signal mm_interconnect_0_onchip_ram_s1_write                         : std_logic;                     -- mm_interconnect_0:onchip_ram_s1_write -> onchip_ram:write
 	signal mm_interconnect_0_onchip_ram_s1_writedata                     : std_logic_vector(31 downto 0); -- mm_interconnect_0:onchip_ram_s1_writedata -> onchip_ram:writedata
@@ -307,15 +320,34 @@ architecture rtl of blinky is
 	signal mm_interconnect_0_leds_s1_writedata                           : std_logic_vector(31 downto 0); -- mm_interconnect_0:leds_s1_writedata -> leds:writedata
 	signal irq_mapper_receiver0_irq                                      : std_logic;                     -- jtag_uart:av_irq -> irq_mapper:receiver0_irq
 	signal cpu_irq_irq                                                   : std_logic_vector(31 downto 0); -- irq_mapper:sender_irq -> cpu:irq
-	signal rst_controller_reset_out_reset                                : std_logic;                     -- rst_controller:reset_out -> [irq_mapper:reset, lcd:reset, mm_interconnect_0:cpu_reset_reset_bridge_in_reset_reset, onchip_ram:reset, rst_controller_reset_out_reset:in, rst_translator:in_reset]
+	signal rst_controller_reset_out_reset                                : std_logic;                     -- rst_controller:reset_out -> [character_lcd:reset, irq_mapper:reset, mm_interconnect_0:cpu_reset_reset_bridge_in_reset_reset, onchip_ram:reset, rst_controller_reset_out_reset:in, rst_translator:in_reset]
 	signal rst_controller_reset_out_reset_req                            : std_logic;                     -- rst_controller:reset_req -> [cpu:reset_req, onchip_ram:reset_req, rst_translator:reset_req_in]
 	signal reset_reset_n_ports_inv                                       : std_logic;                     -- reset_reset_n:inv -> rst_controller:reset_in0
 	signal mm_interconnect_0_jtag_uart_avalon_jtag_slave_read_ports_inv  : std_logic;                     -- mm_interconnect_0_jtag_uart_avalon_jtag_slave_read:inv -> jtag_uart:av_read_n
 	signal mm_interconnect_0_jtag_uart_avalon_jtag_slave_write_ports_inv : std_logic;                     -- mm_interconnect_0_jtag_uart_avalon_jtag_slave_write:inv -> jtag_uart:av_write_n
 	signal mm_interconnect_0_leds_s1_write_ports_inv                     : std_logic;                     -- mm_interconnect_0_leds_s1_write:inv -> leds:write_n
-	signal rst_controller_reset_out_reset_ports_inv                      : std_logic;                     -- rst_controller_reset_out_reset:inv -> [cpu:reset_n, jtag_uart:rst_n, leds:reset_n, switches:reset_n]
+	signal rst_controller_reset_out_reset_ports_inv                      : std_logic;                     -- rst_controller_reset_out_reset:inv -> [cpu:reset_n, jtag_uart:rst_n, leds:reset_n, switches:reset_n, sysid_qsys_0:reset_n]
 
 begin
+
+	character_lcd : component blinky_character_lcd
+		port map (
+			clk         => clk_clk,                                                      --                clk.clk
+			reset       => rst_controller_reset_out_reset,                               --              reset.reset
+			address     => mm_interconnect_0_character_lcd_avalon_lcd_slave_address(0),  --   avalon_lcd_slave.address
+			chipselect  => mm_interconnect_0_character_lcd_avalon_lcd_slave_chipselect,  --                   .chipselect
+			read        => mm_interconnect_0_character_lcd_avalon_lcd_slave_read,        --                   .read
+			write       => mm_interconnect_0_character_lcd_avalon_lcd_slave_write,       --                   .write
+			writedata   => mm_interconnect_0_character_lcd_avalon_lcd_slave_writedata,   --                   .writedata
+			readdata    => mm_interconnect_0_character_lcd_avalon_lcd_slave_readdata,    --                   .readdata
+			waitrequest => mm_interconnect_0_character_lcd_avalon_lcd_slave_waitrequest, --                   .waitrequest
+			LCD_DATA    => lcd_external_interface_DATA,                                  -- external_interface.export
+			LCD_ON      => lcd_external_interface_ON,                                    --                   .export
+			LCD_BLON    => lcd_external_interface_BLON,                                  --                   .export
+			LCD_EN      => lcd_external_interface_EN,                                    --                   .export
+			LCD_RS      => lcd_external_interface_RS,                                    --                   .export
+			LCD_RW      => lcd_external_interface_RW                                     --                   .export
+		);
 
 	cpu : component blinky_cpu
 		port map (
@@ -361,25 +393,6 @@ begin
 			av_irq         => irq_mapper_receiver0_irq                                       --               irq.irq
 		);
 
-	lcd : component blinky_lcd
-		port map (
-			clk         => clk_clk,                                            --                clk.clk
-			reset       => rst_controller_reset_out_reset,                     --              reset.reset
-			address     => mm_interconnect_0_lcd_avalon_lcd_slave_address(0),  --   avalon_lcd_slave.address
-			chipselect  => mm_interconnect_0_lcd_avalon_lcd_slave_chipselect,  --                   .chipselect
-			read        => mm_interconnect_0_lcd_avalon_lcd_slave_read,        --                   .read
-			write       => mm_interconnect_0_lcd_avalon_lcd_slave_write,       --                   .write
-			writedata   => mm_interconnect_0_lcd_avalon_lcd_slave_writedata,   --                   .writedata
-			readdata    => mm_interconnect_0_lcd_avalon_lcd_slave_readdata,    --                   .readdata
-			waitrequest => mm_interconnect_0_lcd_avalon_lcd_slave_waitrequest, --                   .waitrequest
-			LCD_DATA    => lcd_external_interface_DATA,                        -- external_interface.export
-			LCD_ON      => lcd_external_interface_ON,                          --                   .export
-			LCD_BLON    => lcd_external_interface_BLON,                        --                   .export
-			LCD_EN      => lcd_external_interface_EN,                          --                   .export
-			LCD_RS      => lcd_external_interface_RS,                          --                   .export
-			LCD_RW      => lcd_external_interface_RW                           --                   .export
-		);
-
 	leds : component blinky_leds
 		port map (
 			clk        => clk_clk,                                   --                 clk.clk
@@ -416,58 +429,68 @@ begin
 			in_port  => switches_external_connection_export       -- external_connection.export
 		);
 
+	sysid_qsys_0 : component blinky_sysid_qsys_0
+		port map (
+			clock    => clk_clk,                                                 --           clk.clk
+			reset_n  => rst_controller_reset_out_reset_ports_inv,                --         reset.reset_n
+			readdata => mm_interconnect_0_sysid_qsys_0_control_slave_readdata,   -- control_slave.readdata
+			address  => mm_interconnect_0_sysid_qsys_0_control_slave_address(0)  --              .address
+		);
+
 	mm_interconnect_0 : component blinky_mm_interconnect_0
 		port map (
-			clk_main_clk_clk                        => clk_clk,                                                   --                    clk_main_clk.clk
-			cpu_reset_reset_bridge_in_reset_reset   => rst_controller_reset_out_reset,                            -- cpu_reset_reset_bridge_in_reset.reset
-			cpu_data_master_address                 => cpu_data_master_address,                                   --                 cpu_data_master.address
-			cpu_data_master_waitrequest             => cpu_data_master_waitrequest,                               --                                .waitrequest
-			cpu_data_master_byteenable              => cpu_data_master_byteenable,                                --                                .byteenable
-			cpu_data_master_read                    => cpu_data_master_read,                                      --                                .read
-			cpu_data_master_readdata                => cpu_data_master_readdata,                                  --                                .readdata
-			cpu_data_master_write                   => cpu_data_master_write,                                     --                                .write
-			cpu_data_master_writedata               => cpu_data_master_writedata,                                 --                                .writedata
-			cpu_data_master_debugaccess             => cpu_data_master_debugaccess,                               --                                .debugaccess
-			cpu_instruction_master_address          => cpu_instruction_master_address,                            --          cpu_instruction_master.address
-			cpu_instruction_master_waitrequest      => cpu_instruction_master_waitrequest,                        --                                .waitrequest
-			cpu_instruction_master_read             => cpu_instruction_master_read,                               --                                .read
-			cpu_instruction_master_readdata         => cpu_instruction_master_readdata,                           --                                .readdata
-			cpu_debug_mem_slave_address             => mm_interconnect_0_cpu_debug_mem_slave_address,             --             cpu_debug_mem_slave.address
-			cpu_debug_mem_slave_write               => mm_interconnect_0_cpu_debug_mem_slave_write,               --                                .write
-			cpu_debug_mem_slave_read                => mm_interconnect_0_cpu_debug_mem_slave_read,                --                                .read
-			cpu_debug_mem_slave_readdata            => mm_interconnect_0_cpu_debug_mem_slave_readdata,            --                                .readdata
-			cpu_debug_mem_slave_writedata           => mm_interconnect_0_cpu_debug_mem_slave_writedata,           --                                .writedata
-			cpu_debug_mem_slave_byteenable          => mm_interconnect_0_cpu_debug_mem_slave_byteenable,          --                                .byteenable
-			cpu_debug_mem_slave_waitrequest         => mm_interconnect_0_cpu_debug_mem_slave_waitrequest,         --                                .waitrequest
-			cpu_debug_mem_slave_debugaccess         => mm_interconnect_0_cpu_debug_mem_slave_debugaccess,         --                                .debugaccess
-			jtag_uart_avalon_jtag_slave_address     => mm_interconnect_0_jtag_uart_avalon_jtag_slave_address,     --     jtag_uart_avalon_jtag_slave.address
-			jtag_uart_avalon_jtag_slave_write       => mm_interconnect_0_jtag_uart_avalon_jtag_slave_write,       --                                .write
-			jtag_uart_avalon_jtag_slave_read        => mm_interconnect_0_jtag_uart_avalon_jtag_slave_read,        --                                .read
-			jtag_uart_avalon_jtag_slave_readdata    => mm_interconnect_0_jtag_uart_avalon_jtag_slave_readdata,    --                                .readdata
-			jtag_uart_avalon_jtag_slave_writedata   => mm_interconnect_0_jtag_uart_avalon_jtag_slave_writedata,   --                                .writedata
-			jtag_uart_avalon_jtag_slave_waitrequest => mm_interconnect_0_jtag_uart_avalon_jtag_slave_waitrequest, --                                .waitrequest
-			jtag_uart_avalon_jtag_slave_chipselect  => mm_interconnect_0_jtag_uart_avalon_jtag_slave_chipselect,  --                                .chipselect
-			lcd_avalon_lcd_slave_address            => mm_interconnect_0_lcd_avalon_lcd_slave_address,            --            lcd_avalon_lcd_slave.address
-			lcd_avalon_lcd_slave_write              => mm_interconnect_0_lcd_avalon_lcd_slave_write,              --                                .write
-			lcd_avalon_lcd_slave_read               => mm_interconnect_0_lcd_avalon_lcd_slave_read,               --                                .read
-			lcd_avalon_lcd_slave_readdata           => mm_interconnect_0_lcd_avalon_lcd_slave_readdata,           --                                .readdata
-			lcd_avalon_lcd_slave_writedata          => mm_interconnect_0_lcd_avalon_lcd_slave_writedata,          --                                .writedata
-			lcd_avalon_lcd_slave_waitrequest        => mm_interconnect_0_lcd_avalon_lcd_slave_waitrequest,        --                                .waitrequest
-			lcd_avalon_lcd_slave_chipselect         => mm_interconnect_0_lcd_avalon_lcd_slave_chipselect,         --                                .chipselect
-			leds_s1_address                         => mm_interconnect_0_leds_s1_address,                         --                         leds_s1.address
-			leds_s1_write                           => mm_interconnect_0_leds_s1_write,                           --                                .write
-			leds_s1_readdata                        => mm_interconnect_0_leds_s1_readdata,                        --                                .readdata
-			leds_s1_writedata                       => mm_interconnect_0_leds_s1_writedata,                       --                                .writedata
-			leds_s1_chipselect                      => mm_interconnect_0_leds_s1_chipselect,                      --                                .chipselect
-			onchip_ram_s1_address                   => mm_interconnect_0_onchip_ram_s1_address,                   --                   onchip_ram_s1.address
-			onchip_ram_s1_write                     => mm_interconnect_0_onchip_ram_s1_write,                     --                                .write
-			onchip_ram_s1_readdata                  => mm_interconnect_0_onchip_ram_s1_readdata,                  --                                .readdata
-			onchip_ram_s1_writedata                 => mm_interconnect_0_onchip_ram_s1_writedata,                 --                                .writedata
-			onchip_ram_s1_byteenable                => mm_interconnect_0_onchip_ram_s1_byteenable,                --                                .byteenable
-			onchip_ram_s1_chipselect                => mm_interconnect_0_onchip_ram_s1_chipselect,                --                                .chipselect
-			onchip_ram_s1_clken                     => mm_interconnect_0_onchip_ram_s1_clken,                     --                                .clken
-			switches_s1_address                     => mm_interconnect_0_switches_s1_address,                     --                     switches_s1.address
-			switches_s1_readdata                    => mm_interconnect_0_switches_s1_readdata                     --                                .readdata
+			clk_main_clk_clk                           => clk_clk,                                                      --                    clk_main_clk.clk
+			cpu_reset_reset_bridge_in_reset_reset      => rst_controller_reset_out_reset,                               -- cpu_reset_reset_bridge_in_reset.reset
+			cpu_data_master_address                    => cpu_data_master_address,                                      --                 cpu_data_master.address
+			cpu_data_master_waitrequest                => cpu_data_master_waitrequest,                                  --                                .waitrequest
+			cpu_data_master_byteenable                 => cpu_data_master_byteenable,                                   --                                .byteenable
+			cpu_data_master_read                       => cpu_data_master_read,                                         --                                .read
+			cpu_data_master_readdata                   => cpu_data_master_readdata,                                     --                                .readdata
+			cpu_data_master_write                      => cpu_data_master_write,                                        --                                .write
+			cpu_data_master_writedata                  => cpu_data_master_writedata,                                    --                                .writedata
+			cpu_data_master_debugaccess                => cpu_data_master_debugaccess,                                  --                                .debugaccess
+			cpu_instruction_master_address             => cpu_instruction_master_address,                               --          cpu_instruction_master.address
+			cpu_instruction_master_waitrequest         => cpu_instruction_master_waitrequest,                           --                                .waitrequest
+			cpu_instruction_master_read                => cpu_instruction_master_read,                                  --                                .read
+			cpu_instruction_master_readdata            => cpu_instruction_master_readdata,                              --                                .readdata
+			character_lcd_avalon_lcd_slave_address     => mm_interconnect_0_character_lcd_avalon_lcd_slave_address,     --  character_lcd_avalon_lcd_slave.address
+			character_lcd_avalon_lcd_slave_write       => mm_interconnect_0_character_lcd_avalon_lcd_slave_write,       --                                .write
+			character_lcd_avalon_lcd_slave_read        => mm_interconnect_0_character_lcd_avalon_lcd_slave_read,        --                                .read
+			character_lcd_avalon_lcd_slave_readdata    => mm_interconnect_0_character_lcd_avalon_lcd_slave_readdata,    --                                .readdata
+			character_lcd_avalon_lcd_slave_writedata   => mm_interconnect_0_character_lcd_avalon_lcd_slave_writedata,   --                                .writedata
+			character_lcd_avalon_lcd_slave_waitrequest => mm_interconnect_0_character_lcd_avalon_lcd_slave_waitrequest, --                                .waitrequest
+			character_lcd_avalon_lcd_slave_chipselect  => mm_interconnect_0_character_lcd_avalon_lcd_slave_chipselect,  --                                .chipselect
+			cpu_debug_mem_slave_address                => mm_interconnect_0_cpu_debug_mem_slave_address,                --             cpu_debug_mem_slave.address
+			cpu_debug_mem_slave_write                  => mm_interconnect_0_cpu_debug_mem_slave_write,                  --                                .write
+			cpu_debug_mem_slave_read                   => mm_interconnect_0_cpu_debug_mem_slave_read,                   --                                .read
+			cpu_debug_mem_slave_readdata               => mm_interconnect_0_cpu_debug_mem_slave_readdata,               --                                .readdata
+			cpu_debug_mem_slave_writedata              => mm_interconnect_0_cpu_debug_mem_slave_writedata,              --                                .writedata
+			cpu_debug_mem_slave_byteenable             => mm_interconnect_0_cpu_debug_mem_slave_byteenable,             --                                .byteenable
+			cpu_debug_mem_slave_waitrequest            => mm_interconnect_0_cpu_debug_mem_slave_waitrequest,            --                                .waitrequest
+			cpu_debug_mem_slave_debugaccess            => mm_interconnect_0_cpu_debug_mem_slave_debugaccess,            --                                .debugaccess
+			jtag_uart_avalon_jtag_slave_address        => mm_interconnect_0_jtag_uart_avalon_jtag_slave_address,        --     jtag_uart_avalon_jtag_slave.address
+			jtag_uart_avalon_jtag_slave_write          => mm_interconnect_0_jtag_uart_avalon_jtag_slave_write,          --                                .write
+			jtag_uart_avalon_jtag_slave_read           => mm_interconnect_0_jtag_uart_avalon_jtag_slave_read,           --                                .read
+			jtag_uart_avalon_jtag_slave_readdata       => mm_interconnect_0_jtag_uart_avalon_jtag_slave_readdata,       --                                .readdata
+			jtag_uart_avalon_jtag_slave_writedata      => mm_interconnect_0_jtag_uart_avalon_jtag_slave_writedata,      --                                .writedata
+			jtag_uart_avalon_jtag_slave_waitrequest    => mm_interconnect_0_jtag_uart_avalon_jtag_slave_waitrequest,    --                                .waitrequest
+			jtag_uart_avalon_jtag_slave_chipselect     => mm_interconnect_0_jtag_uart_avalon_jtag_slave_chipselect,     --                                .chipselect
+			leds_s1_address                            => mm_interconnect_0_leds_s1_address,                            --                         leds_s1.address
+			leds_s1_write                              => mm_interconnect_0_leds_s1_write,                              --                                .write
+			leds_s1_readdata                           => mm_interconnect_0_leds_s1_readdata,                           --                                .readdata
+			leds_s1_writedata                          => mm_interconnect_0_leds_s1_writedata,                          --                                .writedata
+			leds_s1_chipselect                         => mm_interconnect_0_leds_s1_chipselect,                         --                                .chipselect
+			onchip_ram_s1_address                      => mm_interconnect_0_onchip_ram_s1_address,                      --                   onchip_ram_s1.address
+			onchip_ram_s1_write                        => mm_interconnect_0_onchip_ram_s1_write,                        --                                .write
+			onchip_ram_s1_readdata                     => mm_interconnect_0_onchip_ram_s1_readdata,                     --                                .readdata
+			onchip_ram_s1_writedata                    => mm_interconnect_0_onchip_ram_s1_writedata,                    --                                .writedata
+			onchip_ram_s1_byteenable                   => mm_interconnect_0_onchip_ram_s1_byteenable,                   --                                .byteenable
+			onchip_ram_s1_chipselect                   => mm_interconnect_0_onchip_ram_s1_chipselect,                   --                                .chipselect
+			onchip_ram_s1_clken                        => mm_interconnect_0_onchip_ram_s1_clken,                        --                                .clken
+			switches_s1_address                        => mm_interconnect_0_switches_s1_address,                        --                     switches_s1.address
+			switches_s1_readdata                       => mm_interconnect_0_switches_s1_readdata,                       --                                .readdata
+			sysid_qsys_0_control_slave_address         => mm_interconnect_0_sysid_qsys_0_control_slave_address,         --      sysid_qsys_0_control_slave.address
+			sysid_qsys_0_control_slave_readdata        => mm_interconnect_0_sysid_qsys_0_control_slave_readdata         --                                .readdata
 		);
 
 	irq_mapper : component blinky_irq_mapper
