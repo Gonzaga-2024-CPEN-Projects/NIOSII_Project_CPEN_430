@@ -64,12 +64,17 @@ int main()
 		SWITCHES = IORD_ALTERA_AVALON_PIO_DATA(SWITCHES_BASE);
 
 		// PLAY State
-		while (SWITCHES == 1) {
-			currentBet = 0; 
-			playRound();
-			delay(2100000);
-			init_SevenSeg();
-			SWITCHES = IORD_ALTERA_AVALON_PIO_DATA(SWITCHES_BASE);
+		while ((SWITCHES & 0x01) == 1) {
+			if (bankRoll == 0) {
+				alt_putstr("Game Over...\n");
+				return 0;
+			} else {
+				currentBet = 0;
+				playRound();
+				delay(2100000);
+				init_SevenSeg();
+				SWITCHES = IORD_ALTERA_AVALON_PIO_DATA(SWITCHES_BASE);
+			}
 		}
 		update_GLED(KEY_PRESS); //keep to keep updating
 
@@ -196,6 +201,10 @@ void playerBet(void) {
 			// ACCOUNT FOR SW0 being on for "PLAY" --- > change latter
 			currentBet = IORD_ALTERA_AVALON_PIO_DATA(SWITCHES_BASE);
 
+			if (currentBet > bankRoll) {
+				currentBet = bankRoll;
+			}
+
 			if (currentBet != 0) {
 				char msg[10];
 				itoa(currentBet, msg, 10);
@@ -264,6 +273,7 @@ void playerTurn(void) {
 				KEY_PRESS = IORD_ALTERA_AVALON_PIO_DATA(KEYS_BASE);
 			}
 			update_GLED(KEY_PRESS);
+
 			hit();
 			if (playerSum >= 21) {
 				return;
@@ -272,8 +282,10 @@ void playerTurn(void) {
 		// STAY
 		if (KEY_PRESS == 5) {
 			while(KEY_PRESS == 5){
+				update_GLED(KEY_PRESS);
 				KEY_PRESS = IORD_ALTERA_AVALON_PIO_DATA(KEYS_BASE);
 			}
+			update_GLED(KEY_PRESS);
 			stay();
 			return;
 		}
