@@ -65,9 +65,10 @@ int main()
 		gameInitialization();
 		KEY_PRESS = IORD_ALTERA_AVALON_PIO_DATA(KEYS_BASE);
 		SWITCHES = IORD_ALTERA_AVALON_PIO_DATA(SWITCHES_BASE);
-		while (SWITCHES == 32769) {
-			init_SevenSeg();
+		while (SWITCHES == 1) {
 			playRound();
+			delay(2100000);
+			init_SevenSeg();
 			SWITCHES = IORD_ALTERA_AVALON_PIO_DATA(SWITCHES_BASE);
 		}
 
@@ -216,6 +217,9 @@ void dealInitialCards(void) {
 		alt_putstr(msg);
 		alt_putstr(" PLAYER CARD \n");
 		playerSum = playerSum + cardValue;
+		if (playerSum == 22) {
+			playerSum = 12;
+		}
 		displayPlayerSum();
 		delay(1200000);
 	}
@@ -292,15 +296,12 @@ int determineResult(void) {
 		IOWR_ALTERA_AVALON_PIO_DATA(SEV_SEG_1_BASE, 0x92); // S
 		IOWR_ALTERA_AVALON_PIO_DATA(SEV_SEG_2_BASE, 0xC0); // O
 		IOWR_ALTERA_AVALON_PIO_DATA(SEV_SEG_3_BASE, 0xC7); // L
-		delay(2300000);
-		return 0; 
 	}
-	else if (dealerBust() == 1 || playerSum > dealerSum) {
+	else if (dealerBust() == 1 || (playerSum > dealerSum)) {
 		IOWR_ALTERA_AVALON_PIO_DATA(SEV_SEG_0_BASE, 0xFF);
 		IOWR_ALTERA_AVALON_PIO_DATA(SEV_SEG_1_BASE, 0x80); // B
 		IOWR_ALTERA_AVALON_PIO_DATA(SEV_SEG_2_BASE, 0xC1); // U
 		IOWR_ALTERA_AVALON_PIO_DATA(SEV_SEG_3_BASE, 0xA1); // d
-		delay(2300000);
 		return 1;
 	}
 	else if (playerSum == dealerSum) {
@@ -308,8 +309,14 @@ int determineResult(void) {
 		IOWR_ALTERA_AVALON_PIO_DATA(SEV_SEG_1_BASE, 0x92); // S
 		IOWR_ALTERA_AVALON_PIO_DATA(SEV_SEG_2_BASE, 0xC1); // U
 		IOWR_ALTERA_AVALON_PIO_DATA(SEV_SEG_3_BASE, 0x8C); // P
-		delay(2300000);
 		return 2; 
+	}
+	else {
+		IOWR_ALTERA_AVALON_PIO_DATA(SEV_SEG_0_BASE, 0x92); // S
+		IOWR_ALTERA_AVALON_PIO_DATA(SEV_SEG_1_BASE, 0x92); // S
+		IOWR_ALTERA_AVALON_PIO_DATA(SEV_SEG_2_BASE, 0xC0); // O
+		IOWR_ALTERA_AVALON_PIO_DATA(SEV_SEG_3_BASE, 0xC7); // L
+		return 0;
 	}
 }
 void delay(int delay) {
