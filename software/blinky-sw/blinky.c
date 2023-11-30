@@ -176,13 +176,13 @@ void dispBankroll(void) {
  Game Flow
 *************************************************************/ 
 void gameInitialization(void) {
-	bankRoll = 1000;
 	dealerSum = 0; 
 	playerSum = 0; 
 	gamesPlayed = 0; 
 }  
 void playerBet(void) {
 	int KEY_PRESS; 
+	alt_putstr("PLACE YOUR BET TO BEGIN!\n");
 	while(1) {
 		KEY_PRESS = IORD_ALTERA_AVALON_PIO_DATA(KEYS_BASE);
 		if (KEY_PRESS == 3) {
@@ -192,6 +192,7 @@ void playerBet(void) {
 			// ACCOUNT FOR SW0 being on for "PLAY" --- > change latter
 			currentBet = IORD_ALTERA_AVALON_PIO_DATA(SWITCHES_BASE) - 1; 
 			if (currentBet != 0) {
+				char msg[10];
 				itoa(currentBet, msg, 10);
 				alt_putstr("PLACED BET: ");
 				alt_putstr(msg);
@@ -205,7 +206,7 @@ void playerBet(void) {
 void dealInitialCards(void) {
 	int tempCard;
 	int cardValue;  
-	restDeck(); 
+	resetDeck();
 	// Player First Two Cards
 	for (int i = 0; i < 2; i++) {
 		tempCard = generateRandomCard(); 
@@ -291,8 +292,9 @@ void dealerTurn(void) {
 		int cardValue = translateCardValue(card);
 		char msg[10];
 		itoa(cardValue, msg, 10);
+		alt_putstr("[DEALER] - ");
 		alt_putstr(msg);
-		alt_putstr(" DEALER CARD \n");
+		alt_putstr("\n");
 
 		// Update Dealer Sum
 		dealerSum = dealerSum + cardValue;
