@@ -71,9 +71,9 @@ int main()
 			init_SevenSeg();
 			SWITCHES = IORD_ALTERA_AVALON_PIO_DATA(SWITCHES_BASE);
 		}
+		update_GLED(KEY_PRESS); //keep to keep updating
 
-		update_GLED(KEY_PRESS);
-		update_RLED(SWITCHES);
+
 	}
 	return 0;
 }
@@ -185,12 +185,17 @@ void playerBet(void) {
 	alt_putstr("PLACE YOUR BET TO BEGIN!\n");
 	while(1) {
 		KEY_PRESS = IORD_ALTERA_AVALON_PIO_DATA(KEYS_BASE);
+		update_RLED(IORD_ALTERA_AVALON_PIO_DATA(SWITCHES_BASE));
 		if (KEY_PRESS == 3) {
 			while(KEY_PRESS == 3){
 				KEY_PRESS = IORD_ALTERA_AVALON_PIO_DATA(KEYS_BASE);
+				update_GLED(KEY_PRESS);
+
 			}
+			update_GLED(KEY_PRESS);
 			// ACCOUNT FOR SW0 being on for "PLAY" --- > change latter
-			currentBet = IORD_ALTERA_AVALON_PIO_DATA(SWITCHES_BASE) - 1; 
+			currentBet = IORD_ALTERA_AVALON_PIO_DATA(SWITCHES_BASE);
+
 			if (currentBet != 0) {
 				char msg[10];
 				itoa(currentBet, msg, 10);
@@ -255,8 +260,10 @@ void playerTurn(void) {
 		// HIT
 		if (KEY_PRESS == 3) {
 			while(KEY_PRESS == 3){
+				update_GLED(KEY_PRESS);
 				KEY_PRESS = IORD_ALTERA_AVALON_PIO_DATA(KEYS_BASE);
 			}
+			update_GLED(KEY_PRESS);
 			hit();
 			if (playerSum >= 21) {
 				return;
