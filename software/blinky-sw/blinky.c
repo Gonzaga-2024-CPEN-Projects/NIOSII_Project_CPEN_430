@@ -16,6 +16,7 @@ int dealerSum = 0;
 int playerSum = 0; 
 int gamesPlayed = 0;
 int cardsDealt = 0;
+int ace_flag = 0;
 
 // Hardware Initialization 
 void update_GLED(int);
@@ -161,7 +162,8 @@ void playRound(void) {
 	// Update Bankroll
 	dispBankroll(); 
 
-	// Reset Deck every
+	// Reset ace flag
+	ace_flag = 0;
 
 	return;
 } 
@@ -232,16 +234,24 @@ void dealInitialCards(void) {
 		updateDeck(tempCard);
 		cardValue = translateCardValue(tempCard);
 
+		if (cardValue == 11) {
+			ace_flag = 1;
+		}
+
 		char msg[10]; 
 		itoa(cardValue, msg, 10);
 		alt_putstr("[PLAYER] - ");
 		alt_putstr(msg);
 		alt_putstr("\n");
 
+
 		playerSum = playerSum + cardValue;
-		if (playerSum == 22) {
-			playerSum = 12;
+
+		if (ace_flag && (playerSum > 21)) {
+			playerSum -= 10;
+			ace_flag = 0;
 		}
+
 		displayPlayerSum();
 		delay(1200000);
 	}
@@ -497,8 +507,19 @@ void hit(void) {
 	alt_putstr(msg);
 	alt_putstr("\n");
 
+	if (cardValue == 11) {
+		ace_flag = 1;
+	}
+
+
 	// Update playerSum
 	playerSum = playerSum + cardValue;
+
+	if (playerSum > 21 && ace_flag) {
+		playerSum = playerSum - 10;
+		ace_flag = 0;
+	}
+
 	displayPlayerSum();
 	return;
 } 
