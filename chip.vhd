@@ -20,7 +20,9 @@ entity chip is
 		  sev_seg_4     : out std_logic_vector(6 downto 0);
 		  sev_seg_5  	 : out std_logic_vector(6 downto 0);
 		  sev_seg_6   	 : out std_logic_vector(6 downto 0);
-		  sev_seg_7     : out std_logic_vector(6 downto 0)
+		  sev_seg_7     : out std_logic_vector(6 downto 0);
+		  lcd_data : out std_logic_vector(7 downto 0);
+		  lcd_en, lcd_rw, lcd_rs, lcd_on, lcd_blon : out std_logic
     );
 end entity chip;
 
@@ -54,7 +56,8 @@ architecture rtl_and_struct of chip is
 				sev_seg_5_external_connection_export: out std_logic_vector(6 downto 0);
 				sev_seg_6_external_connection_export: out std_logic_vector(6 downto 0);
 				sev_seg_7_external_connection_export: out std_logic_vector(6 downto 0);
-				randoms_external_connection_export : in std_logic_vector(31 downto 0)
+				randoms_external_connection_export : in std_logic_vector(31 downto 0);
+				lcd_external_connection_export : out std_logic_vector(12 downto 0)
         );
     end component blinky;
 
@@ -75,7 +78,13 @@ begin
 				sev_seg_5_external_connection_export=> sev_seg_5,
 				sev_seg_6_external_connection_export=> sev_seg_6,
 				sev_seg_7_external_connection_export=> sev_seg_7,
-				randoms_external_connection_export => randoms
+				randoms_external_connection_export => randoms, 
+				lcd_external_connection_export(7 downto 0) => lcd_data(7 downto 0),
+				lcd_external_connection_export(8) => lcd_en,
+				lcd_external_connection_export(9) => lcd_rw,
+				lcd_external_connection_export(10) => lcd_rs,
+				lcd_external_connection_export(11) => lcd_on,
+				lcd_external_connection_export(12) => lcd_blon
         );
 
 --    -- begin custom hardware
@@ -99,6 +108,7 @@ begin
 	 begin
     if reset_n = '0' then
       lfsr_reg <= "01010111010101010101010101111001";
+		--lfsr_reg <= "00000000000000000000000000000000";
     elsif rising_edge(clk) then
       -- LFSR feedback polynomial: x^32 + x^22 + x^2 + x^1 + 1
       lfsr_reg(31 downto 1) <= lfsr_reg(30 downto 0);

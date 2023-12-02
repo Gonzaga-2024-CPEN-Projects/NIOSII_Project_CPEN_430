@@ -121,10 +121,10 @@
 					<entry kind="macro" name="__DEC32_MAX_EXP__" value="97">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="macro" name="__DEC32_MIN_EXP__" value="(-94)">
+					<entry kind="macro" name="__DEC32_MAX__" value="9.999999E96DF">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="macro" name="__DEC32_MIN_EXP__" value="9.999999E96DF">
+					<entry kind="macro" name="__DEC32_MIN_EXP__" value="(-94)">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
 					<entry kind="macro" name="__DEC32_MIN__" value="1E-95DF">
@@ -792,7 +792,7 @@
 					<entry kind="macro" name="__DEC128_SUBNORMAL_MIN__" value="0.000000000000000000000000000000001E-6143DL">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="macro" name="__DEC32_EPSILON__" value="1E-15DD">
+					<entry kind="macro" name="__DEC32_EPSILON__" value="1E-6DF">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
 					<entry kind="macro" name="__DEC32_MANT_DIG__" value="7">
@@ -838,6 +838,9 @@
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
 					<entry kind="macro" name="__DEC_EVAL_METHOD__" value="2">
+						<flag value="BUILTIN|READONLY"/>
+					</entry>
+					<entry kind="macro" name="__DEPRECATED" value="1">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
 					<entry kind="macro" name="__ELF__" value="1">
@@ -909,6 +912,9 @@
 					<entry kind="macro" name="__GCC_ATOMIC_CHAR32_T_LOCK_FREE" value="1">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
+					<entry kind="macro" name="__GCC_ATOMIC_CHAR_LOCK_FREE" value="1">
+						<flag value="BUILTIN|READONLY"/>
+					</entry>
 					<entry kind="macro" name="__GCC_ATOMIC_INT_LOCK_FREE" value="1">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
@@ -943,9 +949,6 @@
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
 					<entry kind="macro" name="__GNUC_PATCHLEVEL__" value="0">
-						<flag value="BUILTIN|READONLY"/>
-					</entry>
-					<entry kind="macro" name="__GNUC_PATCHLEVEL__" value="unsigned int">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
 					<entry kind="macro" name="__GNUC__" value="5">
@@ -1065,9 +1068,6 @@
 					<entry kind="macro" name="__INT_MAX__" value="0x7fffffff">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="macro" name="__INT_MAX__" value="0xffffffffffffffffULL">
-						<flag value="BUILTIN|READONLY"/>
-					</entry>
 					<entry kind="macro" name="__LDBL_DENORM_MIN__" value="4.9406564584124654e-324L">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
@@ -1165,9 +1165,6 @@
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
 					<entry kind="macro" name="__SIZEOF_INT__" value="4">
-						<flag value="BUILTIN|READONLY"/>
-					</entry>
-					<entry kind="macro" name="__SIZEOF_INT__" value="1">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
 					<entry kind="macro" name="__SIZEOF_LONG_DOUBLE__" value="8">
@@ -1269,7 +1266,16 @@
 					<entry kind="macro" name="__UINT_FAST32_MAX__" value="0xffffffffU">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
+					<entry kind="macro" name="__UINT_FAST32_TYPE__" value="unsigned int">
+						<flag value="BUILTIN|READONLY"/>
+					</entry>
+					<entry kind="macro" name="__UINT_FAST64_MAX__" value="0xffffffffffffffffULL">
+						<flag value="BUILTIN|READONLY"/>
+					</entry>
 					<entry kind="macro" name="__UINT_FAST64_TYPE__" value="long long unsigned int">
+						<flag value="BUILTIN|READONLY"/>
+					</entry>
+					<entry kind="macro" name="__UINT_FAST8_MAX__" value="0xffffffffU">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
 					<entry kind="macro" name="__UINT_FAST8_TYPE__" value="unsigned int">
@@ -1341,9 +1347,6 @@
 					<entry kind="macro" name="__cpp_runtime_arrays" value="198712">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="macro" name="__cpp_runtime_arrays" value="0xffffffffU">
-						<flag value="BUILTIN|READONLY"/>
-					</entry>
 					<entry kind="macro" name="__has_include(STR)" value="__has_include__(STR)">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
@@ -1379,9 +1382,7 @@
 						<entry kind="includePath" name="/blinky-sw_bsp/HAL/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
-						<entry kind="includePath" name="/blinky-sw_bsp">
-							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
-						</entry>
+						<entry kind="includePath" name="C:/CPEN430/NIOSII_Project_CPEN_430/software/blinky-sw_bsp"/>
 						<entry kind="includePath" name="/blinky-sw_bsp/drivers/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
@@ -1405,9 +1406,7 @@
 						<entry kind="includePath" name="/blinky-sw_bsp/HAL/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
-						<entry kind="includePath" name="/blinky-sw_bsp">
-							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
-						</entry>
+						<entry kind="includePath" name="C:/CPEN430/NIOSII_Project_CPEN_430/software/blinky-sw_bsp"/>
 						<entry kind="includePath" name="/blinky-sw_bsp/drivers/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
@@ -1419,9 +1418,7 @@
 						<entry kind="includePath" name="/blinky-sw_bsp/HAL/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
-						<entry kind="includePath" name="/blinky-sw_bsp">
-							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
-						</entry>
+						<entry kind="includePath" name="C:/CPEN430/NIOSII_Project_CPEN_430/software/blinky-sw_bsp"/>
 						<entry kind="includePath" name="/blinky-sw_bsp/drivers/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
@@ -1445,9 +1442,7 @@
 						<entry kind="includePath" name="/blinky-sw_bsp/HAL/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
-						<entry kind="includePath" name="/blinky-sw_bsp">
-							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
-						</entry>
+						<entry kind="includePath" name="C:/CPEN430/NIOSII_Project_CPEN_430/software/blinky-sw_bsp"/>
 						<entry kind="includePath" name="/blinky-sw_bsp/drivers/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
@@ -1459,9 +1454,7 @@
 						<entry kind="includePath" name="/blinky-sw_bsp/HAL/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
-						<entry kind="includePath" name="/blinky-sw_bsp">
-							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
-						</entry>
+						<entry kind="includePath" name="C:/CPEN430/NIOSII_Project_CPEN_430/software/blinky-sw_bsp"/>
 						<entry kind="includePath" name="/blinky-sw_bsp/drivers/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
@@ -1473,9 +1466,7 @@
 						<entry kind="includePath" name="/blinky-sw_bsp/HAL/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
-						<entry kind="includePath" name="/blinky-sw_bsp">
-							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
-						</entry>
+						<entry kind="includePath" name="C:/CPEN430/NIOSII_Project_CPEN_430/software/blinky-sw_bsp"/>
 						<entry kind="includePath" name="/blinky-sw_bsp/drivers/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
@@ -1501,9 +1492,7 @@
 						<entry kind="includePath" name="/blinky-sw_bsp/HAL/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
-						<entry kind="includePath" name="/blinky-sw_bsp">
-							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
-						</entry>
+						<entry kind="includePath" name="C:/CPEN430/NIOSII_Project_CPEN_430/software/blinky-sw_bsp"/>
 						<entry kind="includePath" name="/blinky-sw_bsp/drivers/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
@@ -1515,9 +1504,7 @@
 						<entry kind="includePath" name="/blinky-sw_bsp/HAL/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
-						<entry kind="includePath" name="/blinky-sw_bsp">
-							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
-						</entry>
+						<entry kind="includePath" name="C:/CPEN430/NIOSII_Project_CPEN_430/software/blinky-sw_bsp"/>
 						<entry kind="includePath" name="/blinky-sw_bsp/drivers/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
@@ -1529,9 +1516,7 @@
 						<entry kind="includePath" name="/blinky-sw_bsp/HAL/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
-						<entry kind="includePath" name="/blinky-sw_bsp">
-							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
-						</entry>
+						<entry kind="includePath" name="C:/CPEN430/NIOSII_Project_CPEN_430/software/blinky-sw_bsp"/>
 						<entry kind="includePath" name="/blinky-sw_bsp/drivers/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
@@ -1567,9 +1552,7 @@
 						<entry kind="includePath" name="/blinky-sw_bsp/HAL/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
-						<entry kind="includePath" name="/blinky-sw_bsp">
-							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
-						</entry>
+						<entry kind="includePath" name="C:/CPEN430/NIOSII_Project_CPEN_430/software/blinky-sw_bsp"/>
 						<entry kind="includePath" name="/blinky-sw_bsp/drivers/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
@@ -1605,9 +1588,7 @@
 						<entry kind="includePath" name="/blinky-sw_bsp/HAL/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
-						<entry kind="includePath" name="/blinky-sw_bsp">
-							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
-						</entry>
+						<entry kind="includePath" name="C:/CPEN430/NIOSII_Project_CPEN_430/software/blinky-sw_bsp"/>
 						<entry kind="includePath" name="/blinky-sw_bsp/drivers/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
@@ -1631,9 +1612,7 @@
 						<entry kind="includePath" name="/blinky-sw_bsp/HAL/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
-						<entry kind="includePath" name="/blinky-sw_bsp">
-							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
-						</entry>
+						<entry kind="includePath" name="C:/CPEN430/NIOSII_Project_CPEN_430/software/blinky-sw_bsp"/>
 						<entry kind="includePath" name="/blinky-sw_bsp/drivers/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
@@ -1645,9 +1624,7 @@
 						<entry kind="includePath" name="/blinky-sw_bsp/HAL/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
-						<entry kind="includePath" name="/blinky-sw_bsp">
-							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
-						</entry>
+						<entry kind="includePath" name="C:/CPEN430/NIOSII_Project_CPEN_430/software/blinky-sw_bsp"/>
 						<entry kind="includePath" name="/blinky-sw_bsp/drivers/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
@@ -1671,9 +1648,7 @@
 						<entry kind="includePath" name="/blinky-sw_bsp/HAL/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
-						<entry kind="includePath" name="/blinky-sw_bsp">
-							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
-						</entry>
+						<entry kind="includePath" name="C:/CPEN430/NIOSII_Project_CPEN_430/software/blinky-sw_bsp"/>
 						<entry kind="includePath" name="/blinky-sw_bsp/drivers/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
@@ -1685,9 +1660,7 @@
 						<entry kind="includePath" name="/blinky-sw_bsp/HAL/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
-						<entry kind="includePath" name="/blinky-sw_bsp">
-							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
-						</entry>
+						<entry kind="includePath" name="C:/CPEN430/NIOSII_Project_CPEN_430/software/blinky-sw_bsp"/>
 						<entry kind="includePath" name="/blinky-sw_bsp/drivers/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
@@ -1711,9 +1684,7 @@
 						<entry kind="includePath" name="/blinky-sw_bsp/HAL/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
-						<entry kind="includePath" name="/blinky-sw_bsp">
-							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
-						</entry>
+						<entry kind="includePath" name="C:/CPEN430/NIOSII_Project_CPEN_430/software/blinky-sw_bsp"/>
 						<entry kind="includePath" name="/blinky-sw_bsp/drivers/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
@@ -1725,9 +1696,7 @@
 						<entry kind="includePath" name="/blinky-sw_bsp/HAL/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
-						<entry kind="includePath" name="/blinky-sw_bsp">
-							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
-						</entry>
+						<entry kind="includePath" name="C:/CPEN430/NIOSII_Project_CPEN_430/software/blinky-sw_bsp"/>
 						<entry kind="includePath" name="/blinky-sw_bsp/drivers/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
@@ -1739,9 +1708,7 @@
 						<entry kind="includePath" name="/blinky-sw_bsp/HAL/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
-						<entry kind="includePath" name="/blinky-sw_bsp">
-							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
-						</entry>
+						<entry kind="includePath" name="C:/CPEN430/NIOSII_Project_CPEN_430/software/blinky-sw_bsp"/>
 						<entry kind="includePath" name="/blinky-sw_bsp/drivers/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
@@ -1753,9 +1720,7 @@
 						<entry kind="includePath" name="/blinky-sw_bsp/HAL/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
-						<entry kind="includePath" name="/blinky-sw_bsp">
-							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
-						</entry>
+						<entry kind="includePath" name="C:/CPEN430/NIOSII_Project_CPEN_430/software/blinky-sw_bsp"/>
 						<entry kind="includePath" name="/blinky-sw_bsp/drivers/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
@@ -1767,9 +1732,7 @@
 						<entry kind="includePath" name="/blinky-sw_bsp/HAL/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
-						<entry kind="includePath" name="/blinky-sw_bsp">
-							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
-						</entry>
+						<entry kind="includePath" name="C:/CPEN430/NIOSII_Project_CPEN_430/software/blinky-sw_bsp"/>
 						<entry kind="includePath" name="/blinky-sw_bsp/drivers/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
@@ -1781,9 +1744,7 @@
 						<entry kind="includePath" name="/blinky-sw_bsp/HAL/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
-						<entry kind="includePath" name="/blinky-sw_bsp">
-							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
-						</entry>
+						<entry kind="includePath" name="C:/CPEN430/NIOSII_Project_CPEN_430/software/blinky-sw_bsp"/>
 						<entry kind="includePath" name="/blinky-sw_bsp/drivers/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
@@ -1807,9 +1768,7 @@
 						<entry kind="includePath" name="/blinky-sw_bsp/HAL/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
-						<entry kind="includePath" name="/blinky-sw_bsp">
-							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
-						</entry>
+						<entry kind="includePath" name="C:/CPEN430/NIOSII_Project_CPEN_430/software/blinky-sw_bsp"/>
 						<entry kind="includePath" name="/blinky-sw_bsp/drivers/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
@@ -1821,9 +1780,7 @@
 						<entry kind="includePath" name="/blinky-sw_bsp/HAL/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
-						<entry kind="includePath" name="/blinky-sw_bsp">
-							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
-						</entry>
+						<entry kind="includePath" name="C:/CPEN430/NIOSII_Project_CPEN_430/software/blinky-sw_bsp"/>
 						<entry kind="includePath" name="/blinky-sw_bsp/drivers/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
@@ -1847,9 +1804,7 @@
 						<entry kind="includePath" name="/blinky-sw_bsp/HAL/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
-						<entry kind="includePath" name="/blinky-sw_bsp">
-							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
-						</entry>
+						<entry kind="includePath" name="C:/CPEN430/NIOSII_Project_CPEN_430/software/blinky-sw_bsp"/>
 						<entry kind="includePath" name="/blinky-sw_bsp/drivers/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
@@ -1861,9 +1816,7 @@
 						<entry kind="includePath" name="/blinky-sw_bsp/HAL/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
-						<entry kind="includePath" name="/blinky-sw_bsp">
-							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
-						</entry>
+						<entry kind="includePath" name="C:/CPEN430/NIOSII_Project_CPEN_430/software/blinky-sw_bsp"/>
 						<entry kind="includePath" name="/blinky-sw_bsp/drivers/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
@@ -1875,9 +1828,7 @@
 						<entry kind="includePath" name="/blinky-sw_bsp/HAL/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
-						<entry kind="includePath" name="/blinky-sw_bsp">
-							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
-						</entry>
+						<entry kind="includePath" name="C:/CPEN430/NIOSII_Project_CPEN_430/software/blinky-sw_bsp"/>
 						<entry kind="includePath" name="/blinky-sw_bsp/drivers/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
@@ -1889,9 +1840,7 @@
 						<entry kind="includePath" name="/blinky-sw_bsp/HAL/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
-						<entry kind="includePath" name="/blinky-sw_bsp">
-							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
-						</entry>
+						<entry kind="includePath" name="C:/CPEN430/NIOSII_Project_CPEN_430/software/blinky-sw_bsp"/>
 						<entry kind="includePath" name="/blinky-sw_bsp/drivers/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
@@ -1903,9 +1852,7 @@
 						<entry kind="includePath" name="/blinky-sw_bsp/HAL/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
-						<entry kind="includePath" name="/blinky-sw_bsp">
-							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
-						</entry>
+						<entry kind="includePath" name="C:/CPEN430/NIOSII_Project_CPEN_430/software/blinky-sw_bsp"/>
 						<entry kind="includePath" name="/blinky-sw_bsp/drivers/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
@@ -1929,9 +1876,7 @@
 						<entry kind="includePath" name="/blinky-sw_bsp/HAL/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
-						<entry kind="includePath" name="/blinky-sw_bsp">
-							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
-						</entry>
+						<entry kind="includePath" name="C:/CPEN430/NIOSII_Project_CPEN_430/software/blinky-sw_bsp"/>
 						<entry kind="includePath" name="/blinky-sw_bsp/drivers/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
@@ -1955,9 +1900,7 @@
 						<entry kind="includePath" name="/blinky-sw_bsp/HAL/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
-						<entry kind="includePath" name="/blinky-sw_bsp">
-							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
-						</entry>
+						<entry kind="includePath" name="C:/CPEN430/NIOSII_Project_CPEN_430/software/blinky-sw_bsp"/>
 						<entry kind="includePath" name="/blinky-sw_bsp/drivers/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
@@ -1969,9 +1912,7 @@
 						<entry kind="includePath" name="/blinky-sw_bsp/HAL/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
-						<entry kind="includePath" name="/blinky-sw_bsp">
-							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
-						</entry>
+						<entry kind="includePath" name="C:/CPEN430/NIOSII_Project_CPEN_430/software/blinky-sw_bsp"/>
 						<entry kind="includePath" name="/blinky-sw_bsp/drivers/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
@@ -1983,9 +1924,7 @@
 						<entry kind="includePath" name="/blinky-sw_bsp/HAL/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
-						<entry kind="includePath" name="/blinky-sw_bsp">
-							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
-						</entry>
+						<entry kind="includePath" name="C:/CPEN430/NIOSII_Project_CPEN_430/software/blinky-sw_bsp"/>
 						<entry kind="includePath" name="/blinky-sw_bsp/drivers/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
@@ -1997,9 +1936,7 @@
 						<entry kind="includePath" name="/blinky-sw_bsp/HAL/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
-						<entry kind="includePath" name="/blinky-sw_bsp">
-							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
-						</entry>
+						<entry kind="includePath" name="C:/CPEN430/NIOSII_Project_CPEN_430/software/blinky-sw_bsp"/>
 						<entry kind="includePath" name="/blinky-sw_bsp/drivers/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
@@ -2011,9 +1948,7 @@
 						<entry kind="includePath" name="/blinky-sw_bsp/HAL/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
-						<entry kind="includePath" name="/blinky-sw_bsp">
-							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
-						</entry>
+						<entry kind="includePath" name="C:/CPEN430/NIOSII_Project_CPEN_430/software/blinky-sw_bsp"/>
 						<entry kind="includePath" name="/blinky-sw_bsp/drivers/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
@@ -2025,9 +1960,7 @@
 						<entry kind="includePath" name="/blinky-sw_bsp/HAL/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
-						<entry kind="includePath" name="/blinky-sw_bsp">
-							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
-						</entry>
+						<entry kind="includePath" name="C:/CPEN430/NIOSII_Project_CPEN_430/software/blinky-sw_bsp"/>
 						<entry kind="includePath" name="/blinky-sw_bsp/drivers/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
@@ -2063,9 +1996,7 @@
 						<entry kind="includePath" name="/blinky-sw_bsp/HAL/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
-						<entry kind="includePath" name="/blinky-sw_bsp">
-							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
-						</entry>
+						<entry kind="includePath" name="C:/CPEN430/NIOSII_Project_CPEN_430/software/blinky-sw_bsp"/>
 						<entry kind="includePath" name="/blinky-sw_bsp/drivers/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
@@ -2077,9 +2008,7 @@
 						<entry kind="includePath" name="/blinky-sw_bsp/HAL/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
-						<entry kind="includePath" name="/blinky-sw_bsp">
-							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
-						</entry>
+						<entry kind="includePath" name="C:/CPEN430/NIOSII_Project_CPEN_430/software/blinky-sw_bsp"/>
 						<entry kind="includePath" name="/blinky-sw_bsp/drivers/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
@@ -2115,9 +2044,7 @@
 						<entry kind="includePath" name="/blinky-sw_bsp/HAL/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
-						<entry kind="includePath" name="/blinky-sw_bsp">
-							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
-						</entry>
+						<entry kind="includePath" name="C:/CPEN430/NIOSII_Project_CPEN_430/software/blinky-sw_bsp"/>
 						<entry kind="includePath" name="/blinky-sw_bsp/drivers/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
@@ -2129,9 +2056,7 @@
 						<entry kind="includePath" name="/blinky-sw_bsp/HAL/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
-						<entry kind="includePath" name="/blinky-sw_bsp">
-							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
-						</entry>
+						<entry kind="includePath" name="C:/CPEN430/NIOSII_Project_CPEN_430/software/blinky-sw_bsp"/>
 						<entry kind="includePath" name="/blinky-sw_bsp/drivers/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
@@ -2143,9 +2068,7 @@
 						<entry kind="includePath" name="/blinky-sw_bsp/HAL/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
-						<entry kind="includePath" name="/blinky-sw_bsp">
-							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
-						</entry>
+						<entry kind="includePath" name="C:/CPEN430/NIOSII_Project_CPEN_430/software/blinky-sw_bsp"/>
 						<entry kind="includePath" name="/blinky-sw_bsp/drivers/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
@@ -2157,9 +2080,7 @@
 						<entry kind="includePath" name="/blinky-sw_bsp/HAL/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
-						<entry kind="includePath" name="/blinky-sw_bsp">
-							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
-						</entry>
+						<entry kind="includePath" name="C:/CPEN430/NIOSII_Project_CPEN_430/software/blinky-sw_bsp"/>
 						<entry kind="includePath" name="/blinky-sw_bsp/drivers/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
@@ -2183,9 +2104,7 @@
 						<entry kind="includePath" name="/blinky-sw_bsp/HAL/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
-						<entry kind="includePath" name="/blinky-sw_bsp">
-							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
-						</entry>
+						<entry kind="includePath" name="C:/CPEN430/NIOSII_Project_CPEN_430/software/blinky-sw_bsp"/>
 						<entry kind="includePath" name="/blinky-sw_bsp/drivers/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
@@ -2197,9 +2116,7 @@
 						<entry kind="includePath" name="/blinky-sw_bsp/HAL/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
-						<entry kind="includePath" name="/blinky-sw_bsp">
-							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
-						</entry>
+						<entry kind="includePath" name="C:/CPEN430/NIOSII_Project_CPEN_430/software/blinky-sw_bsp"/>
 						<entry kind="includePath" name="/blinky-sw_bsp/drivers/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
@@ -2211,9 +2128,7 @@
 						<entry kind="includePath" name="/blinky-sw_bsp/HAL/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
-						<entry kind="includePath" name="/blinky-sw_bsp">
-							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
-						</entry>
+						<entry kind="includePath" name="C:/CPEN430/NIOSII_Project_CPEN_430/software/blinky-sw_bsp"/>
 						<entry kind="includePath" name="/blinky-sw_bsp/drivers/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
@@ -2249,9 +2164,7 @@
 						<entry kind="includePath" name="/blinky-sw_bsp/HAL/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
-						<entry kind="includePath" name="/blinky-sw_bsp">
-							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
-						</entry>
+						<entry kind="includePath" name="C:/CPEN430/NIOSII_Project_CPEN_430/software/blinky-sw_bsp"/>
 						<entry kind="includePath" name="/blinky-sw_bsp/drivers/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
@@ -2263,9 +2176,7 @@
 						<entry kind="includePath" name="/blinky-sw_bsp/HAL/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
-						<entry kind="includePath" name="/blinky-sw_bsp">
-							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
-						</entry>
+						<entry kind="includePath" name="C:/CPEN430/NIOSII_Project_CPEN_430/software/blinky-sw_bsp"/>
 						<entry kind="includePath" name="/blinky-sw_bsp/drivers/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
@@ -2277,9 +2188,7 @@
 						<entry kind="includePath" name="/blinky-sw_bsp/HAL/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
-						<entry kind="includePath" name="/blinky-sw_bsp">
-							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
-						</entry>
+						<entry kind="includePath" name="C:/CPEN430/NIOSII_Project_CPEN_430/software/blinky-sw_bsp"/>
 						<entry kind="includePath" name="/blinky-sw_bsp/drivers/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
@@ -2375,9 +2284,7 @@
 						<entry kind="includePath" name="/blinky-sw_bsp/HAL/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
-						<entry kind="includePath" name="/blinky-sw_bsp">
-							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
-						</entry>
+						<entry kind="includePath" name="C:/CPEN430/NIOSII_Project_CPEN_430/software/blinky-sw_bsp"/>
 						<entry kind="includePath" name="/blinky-sw_bsp/drivers/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
@@ -2389,9 +2296,7 @@
 						<entry kind="includePath" name="/blinky-sw_bsp/HAL/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
-						<entry kind="includePath" name="/blinky-sw_bsp">
-							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
-						</entry>
+						<entry kind="includePath" name="C:/CPEN430/NIOSII_Project_CPEN_430/software/blinky-sw_bsp"/>
 						<entry kind="includePath" name="/blinky-sw_bsp/drivers/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
@@ -2403,9 +2308,7 @@
 						<entry kind="includePath" name="/blinky-sw_bsp/HAL/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
-						<entry kind="includePath" name="/blinky-sw_bsp">
-							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
-						</entry>
+						<entry kind="includePath" name="C:/CPEN430/NIOSII_Project_CPEN_430/software/blinky-sw_bsp"/>
 						<entry kind="includePath" name="/blinky-sw_bsp/drivers/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
@@ -2417,9 +2320,7 @@
 						<entry kind="includePath" name="/blinky-sw_bsp/HAL/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
-						<entry kind="includePath" name="/blinky-sw_bsp">
-							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
-						</entry>
+						<entry kind="includePath" name="C:/CPEN430/NIOSII_Project_CPEN_430/software/blinky-sw_bsp"/>
 						<entry kind="includePath" name="/blinky-sw_bsp/drivers/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
@@ -2431,9 +2332,7 @@
 						<entry kind="includePath" name="/blinky-sw_bsp/HAL/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
-						<entry kind="includePath" name="/blinky-sw_bsp">
-							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
-						</entry>
+						<entry kind="includePath" name="C:/CPEN430/NIOSII_Project_CPEN_430/software/blinky-sw_bsp"/>
 						<entry kind="includePath" name="/blinky-sw_bsp/drivers/inc">
 							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
 						</entry>
