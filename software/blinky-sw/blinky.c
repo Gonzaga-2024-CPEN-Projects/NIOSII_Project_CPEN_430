@@ -81,7 +81,7 @@ int main()
 	LCDWriteString("Dler:", 5);
 	while (1)
 	{
-		gameInitialization();
+		resetGameVariables();
 		KEY_PRESS = IORD_ALTERA_AVALON_PIO_DATA(KEYS_BASE);
 		SWITCHES = IORD_ALTERA_AVALON_PIO_DATA(SWITCHES_BASE);
 		update_RLED(SWITCHES);
