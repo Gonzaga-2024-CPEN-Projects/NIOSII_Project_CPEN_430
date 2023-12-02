@@ -24,6 +24,8 @@ int gamesPlayed = 0;
 int cardsDealt = 0;
 int ace_flag = 0;
 int blackjack = 0;
+int num_player_cards = 0;
+int num_dealer_cards = 0;
 
 // Hardware Initialization
 void update_GLED(int);
@@ -61,11 +63,11 @@ void hit(void);	 // KEY3
 void stay(void); // KEY2
 
 // LCD
-void LCDWrite(uint8_t);
-void LCDInit();
-void LCDClear();
-void LCDWriteChar(char);
-void LCDWriteString(char *, int);
+void lcdWrite(uint8_t);
+void lcdInit();
+void lcdClear();
+void lcdWriteChar(char);
+void lcdWriteString(char *, int);
 void setPosition(int);
 void delay1ms(int ms);
 
@@ -75,10 +77,12 @@ int main()
 	int KEY_PRESS;
 	int SWITCHES;
 	init_SevenSeg();
-	LCDInit();
-	LCDWriteString("Plyr:", 5);
+	lcdInit();
+	lcdClear();
+	setPosition(0x00);
+	lcdWriteString("Plyr:", 5);
 	setPosition(0x40);
-	LCDWriteString("Dler:", 5);
+	lcdWriteString("Dler:", 5);
 	while (1)
 	{
 		resetGameVariables();
@@ -92,10 +96,13 @@ int main()
 		{
 			if (bankRoll == 0)
 			{
-				alt_putstr("Game Over...\n");
-				LCDClear();
+				lcdClear();
 				setPosition(0x00);
-        alt_putstr("Game Over...\nPress RESET to play again!\n");
+				lcdWriteString("Game Over", 9);
+				setPosition(0x40);
+				lcdWriteString("Press Reset", 11);
+				delay1ms(1);
+				alt_putstr("Game Over...\nPress RESET to play again!\n");
 				return 0;
 			} else {
 				playRound();
@@ -169,14 +176,20 @@ void playRound(void)
 {
 	int result;
 
-	gamesPlayed++; 
+	gamesPlayed++;
+
+
+
 	playerBet(); 
 	// Display 2 Player Cards, 1 Dealer Card
+
+	lcdClear();
 	dealInitialCards();
 	playerTurn();
 
 	if (playerBust() == 0) {
 		dealerTurn();
+		delay(2500000);
 	}
 	// Compare playerSum and dealerSum. Update bankRoll.
 	result = determineResult();
@@ -200,6 +213,12 @@ void dispBankroll(void)
 		alt_putstr("BANKROLL: ");
 		alt_putstr(msg);
 		alt_putstr("\n");
+
+		lcdClear();
+		setPosition(0x00);
+		lcdWriteString("BANKROLL:$", 10);
+		setPosition(0x40);
+		lcdWriteString(msg, 10);
 		return;
 } 
 
@@ -212,11 +231,19 @@ void resetGameVariables(void) {
 	ace_flag = 0;
 	blackjack = 0;
 	currentBet = 0;
+	num_player_cards = 0;
+	num_dealer_cards = 0;
 }  
 void playerBet(void) {
 	int KEY_PRESS; 
 	// DISPLAY TO LCD
 	alt_putstr("\nPLACE YOUR BET TO BEGIN!\n");
+	lcdClear();
+	setPosition(0x00);
+	lcdWriteString("PLACE BET", 9);
+	setPosition(0x40);
+	lcdWriteString("TO BEGIN", 8);
+
 	while(1) {
 		KEY_PRESS = IORD_ALTERA_AVALON_PIO_DATA(KEYS_BASE);
 		update_RLED(IORD_ALTERA_AVALON_PIO_DATA(SWITCHES_BASE));
@@ -248,6 +275,12 @@ void dealInitialCards(void)
 	int tempCard;
 	int cardValue;
 	// Player First Two Cards
+
+	setPosition(0x00);
+	lcdWriteString("Plyr:", 5);
+	setPosition(0x40);
+	lcdWriteString("Dler:", 5);
+
 	for (int i = 0; i < 2; i++)
 	{
 		tempCard = generateRandomCard();
@@ -266,6 +299,9 @@ void dealInitialCards(void)
 		// DISPLAY TO LCD
 		char msg[10]; 
 		// itoa(cardValues[tempCard], msg, 10);
+		setPosition(0x05 + num_player_cards);
+		lcdWriteString(&cardValues[tempCard], 1);
+		num_player_cards++;
 		alt_putstr("[PLAYER] - ");
 		alt_putchar(cardValues[tempCard]);
 		alt_putstr("\n");
@@ -297,6 +333,9 @@ void dealInitialCards(void)
 	// DISPLAY TO LCD
 	char msg[10];
 	// itoa(cardValues[tempCard], msg, 10);
+	setPosition(0x45 + num_dealer_cards);
+	lcdWriteString(&cardValues[tempCard], 1);
+	num_dealer_cards++;
 	alt_putstr("[DEALER] - ");
 	alt_putchar(cardValues[tempCard]);
 	alt_putstr("\n");
@@ -367,6 +406,9 @@ void dealerTurn(void)
 		// DISPLAY TO LCD
 		char msg[10];
 		// itoa(cardValue, msg, 10);
+		setPosition(0x45 + num_dealer_cards);
+		lcdWriteString(&cardValues[card], 1);
+		num_dealer_cards++;
 		alt_putstr("[DEALER] - ");
 		alt_putchar(cardValues[card]);
 		alt_putstr("\n");
@@ -568,6 +610,9 @@ void hit(void) {
 	// DISPLAY TO LCD
 	char msg[10];
 	// itoa(cardValue, msg, 10);
+	setPosition(0x05 + num_player_cards);
+	lcdWriteString(&cardValues[card], 1);
+	num_player_cards++;
 	alt_putstr("[PLAYER] - ");
 	alt_putchar(cardValues[card]);
 	alt_putstr("\n");
@@ -606,11 +651,11 @@ void stay(void) {
 int charCount = 0;
 int bits;
 
-void LCDInit()
+void lcdInit()
 {
 	// IOWR_ALTERA_AVALON_PIO_DATA(LCD_BASE, 0);
 	//  Turn on LCD and wait more than 15 ms
-	LCDWrite(0x800);
+	lcdWrite(0x800);
 	delay1ms(15);
 
 	// Function set (Interface is 8 bits long) then more than 4.1ms delay
@@ -618,22 +663,22 @@ void LCDInit()
 	//  0  0   0   0   1   1   *   *   *   *
 	for( int i = 0; i < 4; i++)
 	{
-		LCDWrite(0x83B);
+		lcdWrite(0x83B);
 	}
-	LCDWrite(0x801);
+	lcdWrite(0x801);
 	delay1ms(1);
 
-	LCDWrite(0x80C);
+	lcdWrite(0x80C);
 	delay1ms(1);
 
-	LCDWrite(0x806);
+	lcdWrite(0x806);
 	delay1ms(1);
 
-	LCDWrite(0x880);
+	lcdWrite(0x880);
 	delay1ms(1);
 }
 
-void LCDWrite(int data)
+void lcdWrite(int data)
 {
 	data = data & 0x0EFF;
 
@@ -654,35 +699,19 @@ void LCDWrite(int data)
 	//   neorv32_cpu_delay_ms(1);
 }
 
-void LCDClear()
+void lcdClear()
 {
 	charCount = 0;
-	LCDWrite(0x801);
+	lcdWrite(0x801);
 	delay1ms(2);
 }
 
-void LCDWriteChar(char c)
+void lcdWriteChar(char c)
 {
-	charCount++;
-
-	// If the amount of characters overrides the first line, move to second
-	if (charCount == 17)
-	{
-		LCDWrite(0x8C0); // move DDRAM to 0x40 which is the first character of second line
-	}
-	else if (charCount == 33)
-	{
-		LCDWrite(0x880); // move DDRAM to 0x00 which is first character first line
-		charCount = 0;
-	}
-
-	// Write character to the screen, the data lines gets the ascii value of the character
-	// RS RW DB7-DB0
-	// 1  0   Char
-	LCDWrite(0xC00 | (int)c);
+	lcdWrite(0xC00 | (int)c);
 }
 
-void LCDWriteString(char *str, int length)
+void lcdWriteString(char *str, int length)
 {
 	int i;
 
@@ -691,13 +720,13 @@ void LCDWriteString(char *str, int length)
 		if (str[i] == '\0')
 			i = length;
 		else
-			LCDWriteChar(str[i]);
+			lcdWriteChar(str[i]);
 	}
 }
 
 void setPosition(int pos)
 {
-	LCDWrite(0x880 | pos);
+	lcdWrite(0x880 | pos);
 	delay1ms(1);
 }
 
