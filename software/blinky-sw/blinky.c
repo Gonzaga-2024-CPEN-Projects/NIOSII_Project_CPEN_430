@@ -29,6 +29,7 @@ int blackjack = 0;
 void update_GLED(int);
 void update_RLED(int);
 void init_SevenSeg(void);
+void gameInitialization(void);
 
 // Game State
 void play(void);			 // SW0
@@ -117,12 +118,7 @@ int main()
  Hardware Initialization
 *************************************************************/
 // GREEN LEDs reflect KEY input
-void update_GLED(int key_data)
-{
-	if (key_data == 3)
-	{
-*************************************************************/ 
-// GREEN LEDS reflect KEY input
+
 void update_GLED(int key_data){
 	if(key_data == 3){
 		IOWR_ALTERA_AVALON_PIO_DATA(GRN_LEDS_BASE, 0x40);
