@@ -4,7 +4,7 @@
  * Machine generated for CPU 'cpu' in SOPC Builder design 'blinky'
  * SOPC Builder design path: ../../blinky.sopcinfo
  *
- * Generated: Wed Nov 29 11:56:40 PST 2023
+ * Generated: Thu Nov 30 18:17:11 PST 2023
  */
 
 /*
@@ -155,19 +155,19 @@
 #define ALT_NUM_INTERNAL_INTERRUPT_CONTROLLERS 1
 #define ALT_NUM_INTERRUPT_CONTROLLERS 1
 #define ALT_STDERR "/dev/jtag_uart"
-#define ALT_STDERR_BASE 0x210d0
+#define ALT_STDERR_BASE 0x210f0
 #define ALT_STDERR_DEV jtag_uart
 #define ALT_STDERR_IS_JTAG_UART
 #define ALT_STDERR_PRESENT
 #define ALT_STDERR_TYPE "altera_avalon_jtag_uart"
 #define ALT_STDIN "/dev/jtag_uart"
-#define ALT_STDIN_BASE 0x210d0
+#define ALT_STDIN_BASE 0x210f0
 #define ALT_STDIN_DEV jtag_uart
 #define ALT_STDIN_IS_JTAG_UART
 #define ALT_STDIN_PRESENT
 #define ALT_STDIN_TYPE "altera_avalon_jtag_uart"
 #define ALT_STDOUT "/dev/jtag_uart"
-#define ALT_STDOUT_BASE 0x210d0
+#define ALT_STDOUT_BASE 0x210f0
 #define ALT_STDOUT_DEV jtag_uart
 #define ALT_STDOUT_IS_JTAG_UART
 #define ALT_STDOUT_PRESENT
@@ -181,7 +181,7 @@
  */
 
 #define ALT_MODULE_CLASS_grn_leds altera_avalon_pio
-#define GRN_LEDS_BASE 0x21020
+#define GRN_LEDS_BASE 0x21040
 #define GRN_LEDS_BIT_CLEARING_EDGE_REGISTER 0
 #define GRN_LEDS_BIT_MODIFYING_OUTPUT_REGISTER 0
 #define GRN_LEDS_CAPTURE 0
@@ -219,7 +219,7 @@
  */
 
 #define ALT_MODULE_CLASS_jtag_uart altera_avalon_jtag_uart
-#define JTAG_UART_BASE 0x210d0
+#define JTAG_UART_BASE 0x210f0
 #define JTAG_UART_IRQ 0
 #define JTAG_UART_IRQ_INTERRUPT_CONTROLLER_ID 0
 #define JTAG_UART_NAME "/dev/jtag_uart"
@@ -237,7 +237,7 @@
  */
 
 #define ALT_MODULE_CLASS_keys altera_avalon_pio
-#define KEYS_BASE 0x21000
+#define KEYS_BASE 0x21020
 #define KEYS_BIT_CLEARING_EDGE_REGISTER 0
 #define KEYS_BIT_MODIFYING_OUTPUT_REGISTER 0
 #define KEYS_CAPTURE 0
@@ -256,6 +256,33 @@
 #define KEYS_RESET_VALUE 0
 #define KEYS_SPAN 16
 #define KEYS_TYPE "altera_avalon_pio"
+
+
+/*
+ * lcd configuration
+ *
+ */
+
+#define ALT_MODULE_CLASS_lcd altera_avalon_pio
+#define LCD_BASE 0x21000
+#define LCD_BIT_CLEARING_EDGE_REGISTER 0
+#define LCD_BIT_MODIFYING_OUTPUT_REGISTER 1
+#define LCD_CAPTURE 0
+#define LCD_DATA_WIDTH 13
+#define LCD_DO_TEST_BENCH_WIRING 0
+#define LCD_DRIVEN_SIM_VALUE 0
+#define LCD_EDGE_TYPE "NONE"
+#define LCD_FREQ 50000000
+#define LCD_HAS_IN 0
+#define LCD_HAS_OUT 1
+#define LCD_HAS_TRI 0
+#define LCD_IRQ -1
+#define LCD_IRQ_INTERRUPT_CONTROLLER_ID -1
+#define LCD_IRQ_TYPE "NONE"
+#define LCD_NAME "/dev/lcd"
+#define LCD_RESET_VALUE 0
+#define LCD_SPAN 32
+#define LCD_TYPE "altera_avalon_pio"
 
 
 /*
@@ -293,7 +320,7 @@
  */
 
 #define ALT_MODULE_CLASS_randoms altera_avalon_pio
-#define RANDOMS_BASE 0x210a0
+#define RANDOMS_BASE 0x210c0
 #define RANDOMS_BIT_CLEARING_EDGE_REGISTER 0
 #define RANDOMS_BIT_MODIFYING_OUTPUT_REGISTER 0
 #define RANDOMS_CAPTURE 0
@@ -320,7 +347,7 @@
  */
 
 #define ALT_MODULE_CLASS_red_leds altera_avalon_pio
-#define RED_LEDS_BASE 0x21010
+#define RED_LEDS_BASE 0x21030
 #define RED_LEDS_BIT_CLEARING_EDGE_REGISTER 0
 #define RED_LEDS_BIT_MODIFYING_OUTPUT_REGISTER 0
 #define RED_LEDS_CAPTURE 0
@@ -347,7 +374,7 @@
  */
 
 #define ALT_MODULE_CLASS_sev_seg_0 altera_avalon_pio
-#define SEV_SEG_0_BASE 0x210b0
+#define SEV_SEG_0_BASE 0x210d0
 #define SEV_SEG_0_BIT_CLEARING_EDGE_REGISTER 0
 #define SEV_SEG_0_BIT_MODIFYING_OUTPUT_REGISTER 0
 #define SEV_SEG_0_CAPTURE 0
@@ -374,7 +401,7 @@
  */
 
 #define ALT_MODULE_CLASS_sev_seg_1 altera_avalon_pio
-#define SEV_SEG_1_BASE 0x21090
+#define SEV_SEG_1_BASE 0x210b0
 #define SEV_SEG_1_BIT_CLEARING_EDGE_REGISTER 0
 #define SEV_SEG_1_BIT_MODIFYING_OUTPUT_REGISTER 0
 #define SEV_SEG_1_CAPTURE 0
@@ -401,7 +428,7 @@
  */
 
 #define ALT_MODULE_CLASS_sev_seg_2 altera_avalon_pio
-#define SEV_SEG_2_BASE 0x21080
+#define SEV_SEG_2_BASE 0x210a0
 #define SEV_SEG_2_BIT_CLEARING_EDGE_REGISTER 0
 #define SEV_SEG_2_BIT_MODIFYING_OUTPUT_REGISTER 0
 #define SEV_SEG_2_CAPTURE 0
@@ -428,7 +455,7 @@
  */
 
 #define ALT_MODULE_CLASS_sev_seg_3 altera_avalon_pio
-#define SEV_SEG_3_BASE 0x21070
+#define SEV_SEG_3_BASE 0x21090
 #define SEV_SEG_3_BIT_CLEARING_EDGE_REGISTER 0
 #define SEV_SEG_3_BIT_MODIFYING_OUTPUT_REGISTER 0
 #define SEV_SEG_3_CAPTURE 0
@@ -455,7 +482,7 @@
  */
 
 #define ALT_MODULE_CLASS_sev_seg_4 altera_avalon_pio
-#define SEV_SEG_4_BASE 0x21060
+#define SEV_SEG_4_BASE 0x21080
 #define SEV_SEG_4_BIT_CLEARING_EDGE_REGISTER 0
 #define SEV_SEG_4_BIT_MODIFYING_OUTPUT_REGISTER 0
 #define SEV_SEG_4_CAPTURE 0
@@ -482,7 +509,7 @@
  */
 
 #define ALT_MODULE_CLASS_sev_seg_5 altera_avalon_pio
-#define SEV_SEG_5_BASE 0x21050
+#define SEV_SEG_5_BASE 0x21070
 #define SEV_SEG_5_BIT_CLEARING_EDGE_REGISTER 0
 #define SEV_SEG_5_BIT_MODIFYING_OUTPUT_REGISTER 0
 #define SEV_SEG_5_CAPTURE 0
@@ -509,7 +536,7 @@
  */
 
 #define ALT_MODULE_CLASS_sev_seg_6 altera_avalon_pio
-#define SEV_SEG_6_BASE 0x21040
+#define SEV_SEG_6_BASE 0x21060
 #define SEV_SEG_6_BIT_CLEARING_EDGE_REGISTER 0
 #define SEV_SEG_6_BIT_MODIFYING_OUTPUT_REGISTER 0
 #define SEV_SEG_6_CAPTURE 0
@@ -536,7 +563,7 @@
  */
 
 #define ALT_MODULE_CLASS_sev_seg_7 altera_avalon_pio
-#define SEV_SEG_7_BASE 0x21030
+#define SEV_SEG_7_BASE 0x21050
 #define SEV_SEG_7_BIT_CLEARING_EDGE_REGISTER 0
 #define SEV_SEG_7_BIT_MODIFYING_OUTPUT_REGISTER 0
 #define SEV_SEG_7_CAPTURE 0
@@ -563,7 +590,7 @@
  */
 
 #define ALT_MODULE_CLASS_switches altera_avalon_pio
-#define SWITCHES_BASE 0x210c0
+#define SWITCHES_BASE 0x210e0
 #define SWITCHES_BIT_CLEARING_EDGE_REGISTER 0
 #define SWITCHES_BIT_MODIFYING_OUTPUT_REGISTER 0
 #define SWITCHES_CAPTURE 0

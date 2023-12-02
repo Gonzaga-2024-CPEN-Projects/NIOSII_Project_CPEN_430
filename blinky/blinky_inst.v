@@ -2,6 +2,7 @@
 		.clk_clk                              (<connected-to-clk_clk>),                              //                           clk.clk
 		.grn_leds_external_connection_export  (<connected-to-grn_leds_external_connection_export>),  //  grn_leds_external_connection.export
 		.keys_external_connection_export      (<connected-to-keys_external_connection_export>),      //      keys_external_connection.export
+		.lcd_external_connection_export       (<connected-to-lcd_external_connection_export>),       //       lcd_external_connection.export
 		.randoms_external_connection_export   (<connected-to-randoms_external_connection_export>),   //   randoms_external_connection.export
 		.red_leds_external_connection_export  (<connected-to-red_leds_external_connection_export>),  //  red_leds_external_connection.export
 		.reset_reset_n                        (<connected-to-reset_reset_n>),                        //                         reset.reset_n

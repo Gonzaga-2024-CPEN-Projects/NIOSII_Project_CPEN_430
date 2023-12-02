@@ -3,7 +3,7 @@
 # Machine generated for CPU 'cpu' in SOPC Builder design 'blinky'
 # SOPC Builder design path: ../../blinky.sopcinfo
 #
-# Generated: Wed Nov 29 11:56:40 PST 2023
+# Generated: Thu Nov 30 13:42:31 PST 2023
 
 # DO NOT MODIFY THIS FILE
 #

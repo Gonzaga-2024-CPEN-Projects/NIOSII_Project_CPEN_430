@@ -3,6 +3,7 @@ module blinky (
 	clk_clk,
 	grn_leds_external_connection_export,
 	keys_external_connection_export,
+	lcd_external_connection_export,
 	randoms_external_connection_export,
 	red_leds_external_connection_export,
 	reset_reset_n,
@@ -19,6 +20,7 @@ module blinky (
 	input		clk_clk;
 	output	[7:0]	grn_leds_external_connection_export;
 	input	[2:0]	keys_external_connection_export;
+	output	[12:0]	lcd_external_connection_export;
 	input	[31:0]	randoms_external_connection_export;
 	output	[16:0]	red_leds_external_connection_export;
 	input		reset_reset_n;

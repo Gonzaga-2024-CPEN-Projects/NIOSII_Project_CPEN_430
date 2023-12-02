@@ -214,4 +214,17 @@ set_instance_assignment -name IO_STANDARD "2.5 V" -to switches[14]
 set_instance_assignment -name IO_STANDARD "2.5 V" -to switches[15]
 set_instance_assignment -name IO_STANDARD "2.5 V" -to switches[16]
 set_instance_assignment -name IO_STANDARD "2.5 V" -to switches[17]
+set_location_assignment PIN_M5 -to lcd_data[7]
+set_location_assignment PIN_M3 -to lcd_data[6]
+set_location_assignment PIN_K2 -to lcd_data[5]
+set_location_assignment PIN_K1 -to lcd_data[4]
+set_location_assignment PIN_K7 -to lcd_data[3]
+set_location_assignment PIN_L2 -to lcd_data[2]
+set_location_assignment PIN_L1 -to lcd_data[1]
+set_location_assignment PIN_L3 -to lcd_data[0]
+set_location_assignment PIN_L4 -to lcd_en
+set_location_assignment PIN_M1 -to lcd_rw
+set_location_assignment PIN_M2 -to lcd_rs
+set_location_assignment PIN_L5 -to lcd_on
+set_location_assignment PIN_L6 -to lcd_blon
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

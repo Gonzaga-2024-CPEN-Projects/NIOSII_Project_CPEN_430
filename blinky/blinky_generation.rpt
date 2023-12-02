@@ -1,5 +1,5 @@
 Info: Starting: Create block symbol file (.bsf)
-Info: qsys-generate C:\Users\jmacauley\Documents\CPEN_430L\NIOSII_Project_CPEN_430\blinky.qsys --block-symbol-file --output-directory=C:\Users\jmacauley\Documents\CPEN_430L\NIOSII_Project_CPEN_430\blinky --family="Cyclone IV E" --part=EP4CE115F29C7
+Info: qsys-generate D:\CPEN430\NIOSII_Project_CPEN_430\blinky.qsys --block-symbol-file --output-directory=D:\CPEN430\NIOSII_Project_CPEN_430\blinky --family="Cyclone IV E" --part=EP4CE115F29C7
 Progress: Loading NIOSII_Project_CPEN_430/blinky.qsys
 Progress: Reading input file
 Progress: Adding clk_main [clock_source 18.0]
@@ -12,6 +12,8 @@ Progress: Adding jtag_uart [altera_avalon_jtag_uart 18.0]
 Progress: Parameterizing module jtag_uart
 Progress: Adding keys [altera_avalon_pio 18.0]
 Progress: Parameterizing module keys
+Progress: Adding lcd [altera_avalon_pio 18.0]
+Progress: Parameterizing module lcd
 Progress: Adding onchip_ram [altera_avalon_onchip_memory2 18.0]
 Progress: Parameterizing module onchip_ram
 Progress: Adding randoms [altera_avalon_pio 18.0]
@@ -48,7 +50,7 @@ Info: qsys-generate succeeded.
 Info: Finished: Create block symbol file (.bsf)
 Info: 
 Info: Starting: Create HDL design files for synthesis
-Info: qsys-generate C:\Users\jmacauley\Documents\CPEN_430L\NIOSII_Project_CPEN_430\blinky.qsys --synthesis=VHDL --output-directory=C:\Users\jmacauley\Documents\CPEN_430L\NIOSII_Project_CPEN_430\blinky\synthesis --family="Cyclone IV E" --part=EP4CE115F29C7
+Info: qsys-generate D:\CPEN430\NIOSII_Project_CPEN_430\blinky.qsys --synthesis=VHDL --output-directory=D:\CPEN430\NIOSII_Project_CPEN_430\blinky\synthesis --family="Cyclone IV E" --part=EP4CE115F29C7
 Progress: Loading NIOSII_Project_CPEN_430/blinky.qsys
 Progress: Reading input file
 Progress: Adding clk_main [clock_source 18.0]
@@ -61,6 +63,8 @@ Progress: Adding jtag_uart [altera_avalon_jtag_uart 18.0]
 Progress: Parameterizing module jtag_uart
 Progress: Adding keys [altera_avalon_pio 18.0]
 Progress: Parameterizing module keys
+Progress: Adding lcd [altera_avalon_pio 18.0]
+Progress: Parameterizing module lcd
 Progress: Adding onchip_ram [altera_avalon_onchip_memory2 18.0]
 Progress: Parameterizing module onchip_ram
 Progress: Adding randoms [altera_avalon_pio 18.0]
@@ -96,35 +100,39 @@ Info: blinky.switches: PIO inputs are not hardwired in test bench. Undefined val
 Info: blinky: Generating blinky "blinky" for QUARTUS_SYNTH
 Info: cpu: "blinky" instantiated altera_nios2_gen2 "cpu"
 Info: grn_leds: Starting RTL generation for module 'blinky_grn_leds'
-Info: grn_leds:   Generation command is [exec C:/intelfpga/18.0/quartus/bin64/perl/bin/perl.exe -I C:/intelfpga/18.0/quartus/bin64/perl/lib -I C:/intelfpga/18.0/quartus/sopc_builder/bin/europa -I C:/intelfpga/18.0/quartus/sopc_builder/bin/perl_lib -I C:/intelfpga/18.0/quartus/sopc_builder/bin -I C:/intelfpga/18.0/quartus/../ip/altera/sopc_builder_ip/common -I C:/intelfpga/18.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- C:/intelfpga/18.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=blinky_grn_leds --dir=C:/Users/JMACAU~1/AppData/Local/Temp/alt9690_2109050888025286880.dir/0002_grn_leds_gen/ --quartus_dir=C:/intelfpga/18.0/quartus --verilog --config=C:/Users/JMACAU~1/AppData/Local/Temp/alt9690_2109050888025286880.dir/0002_grn_leds_gen//blinky_grn_leds_component_configuration.pl  --do_build_sim=0  ]
+Info: grn_leds:   Generation command is [exec C:/intelfpga/18.0/quartus/bin64/perl/bin/perl.exe -I C:/intelfpga/18.0/quartus/bin64/perl/lib -I C:/intelfpga/18.0/quartus/sopc_builder/bin/europa -I C:/intelfpga/18.0/quartus/sopc_builder/bin/perl_lib -I C:/intelfpga/18.0/quartus/sopc_builder/bin -I C:/intelfpga/18.0/quartus/../ip/altera/sopc_builder_ip/common -I C:/intelfpga/18.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- C:/intelfpga/18.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=blinky_grn_leds --dir=C:/Users/eosgood/AppData/Local/Temp/alt9692_541860123615397877.dir/0002_grn_leds_gen/ --quartus_dir=C:/intelfpga/18.0/quartus --verilog --config=C:/Users/eosgood/AppData/Local/Temp/alt9692_541860123615397877.dir/0002_grn_leds_gen//blinky_grn_leds_component_configuration.pl  --do_build_sim=0  ]
 Info: grn_leds: Done RTL generation for module 'blinky_grn_leds'
 Info: grn_leds: "blinky" instantiated altera_avalon_pio "grn_leds"
 Info: jtag_uart: Starting RTL generation for module 'blinky_jtag_uart'
-Info: jtag_uart:   Generation command is [exec C:/intelfpga/18.0/quartus/bin64/perl/bin/perl.exe -I C:/intelfpga/18.0/quartus/bin64/perl/lib -I C:/intelfpga/18.0/quartus/sopc_builder/bin/europa -I C:/intelfpga/18.0/quartus/sopc_builder/bin/perl_lib -I C:/intelfpga/18.0/quartus/sopc_builder/bin -I C:/intelfpga/18.0/quartus/../ip/altera/sopc_builder_ip/common -I C:/intelfpga/18.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_jtag_uart -- C:/intelfpga/18.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_jtag_uart/generate_rtl.pl --name=blinky_jtag_uart --dir=C:/Users/JMACAU~1/AppData/Local/Temp/alt9690_2109050888025286880.dir/0003_jtag_uart_gen/ --quartus_dir=C:/intelfpga/18.0/quartus --verilog --config=C:/Users/JMACAU~1/AppData/Local/Temp/alt9690_2109050888025286880.dir/0003_jtag_uart_gen//blinky_jtag_uart_component_configuration.pl  --do_build_sim=0  ]
+Info: jtag_uart:   Generation command is [exec C:/intelfpga/18.0/quartus/bin64/perl/bin/perl.exe -I C:/intelfpga/18.0/quartus/bin64/perl/lib -I C:/intelfpga/18.0/quartus/sopc_builder/bin/europa -I C:/intelfpga/18.0/quartus/sopc_builder/bin/perl_lib -I C:/intelfpga/18.0/quartus/sopc_builder/bin -I C:/intelfpga/18.0/quartus/../ip/altera/sopc_builder_ip/common -I C:/intelfpga/18.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_jtag_uart -- C:/intelfpga/18.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_jtag_uart/generate_rtl.pl --name=blinky_jtag_uart --dir=C:/Users/eosgood/AppData/Local/Temp/alt9692_541860123615397877.dir/0003_jtag_uart_gen/ --quartus_dir=C:/intelfpga/18.0/quartus --verilog --config=C:/Users/eosgood/AppData/Local/Temp/alt9692_541860123615397877.dir/0003_jtag_uart_gen//blinky_jtag_uart_component_configuration.pl  --do_build_sim=0  ]
 Info: jtag_uart: Done RTL generation for module 'blinky_jtag_uart'
 Info: jtag_uart: "blinky" instantiated altera_avalon_jtag_uart "jtag_uart"
 Info: keys: Starting RTL generation for module 'blinky_keys'
-Info: keys:   Generation command is [exec C:/intelfpga/18.0/quartus/bin64/perl/bin/perl.exe -I C:/intelfpga/18.0/quartus/bin64/perl/lib -I C:/intelfpga/18.0/quartus/sopc_builder/bin/europa -I C:/intelfpga/18.0/quartus/sopc_builder/bin/perl_lib -I C:/intelfpga/18.0/quartus/sopc_builder/bin -I C:/intelfpga/18.0/quartus/../ip/altera/sopc_builder_ip/common -I C:/intelfpga/18.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- C:/intelfpga/18.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=blinky_keys --dir=C:/Users/JMACAU~1/AppData/Local/Temp/alt9690_2109050888025286880.dir/0004_keys_gen/ --quartus_dir=C:/intelfpga/18.0/quartus --verilog --config=C:/Users/JMACAU~1/AppData/Local/Temp/alt9690_2109050888025286880.dir/0004_keys_gen//blinky_keys_component_configuration.pl  --do_build_sim=0  ]
+Info: keys:   Generation command is [exec C:/intelfpga/18.0/quartus/bin64/perl/bin/perl.exe -I C:/intelfpga/18.0/quartus/bin64/perl/lib -I C:/intelfpga/18.0/quartus/sopc_builder/bin/europa -I C:/intelfpga/18.0/quartus/sopc_builder/bin/perl_lib -I C:/intelfpga/18.0/quartus/sopc_builder/bin -I C:/intelfpga/18.0/quartus/../ip/altera/sopc_builder_ip/common -I C:/intelfpga/18.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- C:/intelfpga/18.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=blinky_keys --dir=C:/Users/eosgood/AppData/Local/Temp/alt9692_541860123615397877.dir/0004_keys_gen/ --quartus_dir=C:/intelfpga/18.0/quartus --verilog --config=C:/Users/eosgood/AppData/Local/Temp/alt9692_541860123615397877.dir/0004_keys_gen//blinky_keys_component_configuration.pl  --do_build_sim=0  ]
 Info: keys: Done RTL generation for module 'blinky_keys'
 Info: keys: "blinky" instantiated altera_avalon_pio "keys"
+Info: lcd: Starting RTL generation for module 'blinky_lcd'
+Info: lcd:   Generation command is [exec C:/intelfpga/18.0/quartus/bin64/perl/bin/perl.exe -I C:/intelfpga/18.0/quartus/bin64/perl/lib -I C:/intelfpga/18.0/quartus/sopc_builder/bin/europa -I C:/intelfpga/18.0/quartus/sopc_builder/bin/perl_lib -I C:/intelfpga/18.0/quartus/sopc_builder/bin -I C:/intelfpga/18.0/quartus/../ip/altera/sopc_builder_ip/common -I C:/intelfpga/18.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- C:/intelfpga/18.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=blinky_lcd --dir=C:/Users/eosgood/AppData/Local/Temp/alt9692_541860123615397877.dir/0005_lcd_gen/ --quartus_dir=C:/intelfpga/18.0/quartus --verilog --config=C:/Users/eosgood/AppData/Local/Temp/alt9692_541860123615397877.dir/0005_lcd_gen//blinky_lcd_component_configuration.pl  --do_build_sim=0  ]
+Info: lcd: Done RTL generation for module 'blinky_lcd'
+Info: lcd: "blinky" instantiated altera_avalon_pio "lcd"
 Info: onchip_ram: Starting RTL generation for module 'blinky_onchip_ram'
-Info: onchip_ram:   Generation command is [exec C:/intelfpga/18.0/quartus/bin64/perl/bin/perl.exe -I C:/intelfpga/18.0/quartus/bin64/perl/lib -I C:/intelfpga/18.0/quartus/sopc_builder/bin/europa -I C:/intelfpga/18.0/quartus/sopc_builder/bin/perl_lib -I C:/intelfpga/18.0/quartus/sopc_builder/bin -I C:/intelfpga/18.0/quartus/../ip/altera/sopc_builder_ip/common -I C:/intelfpga/18.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_onchip_memory2 -- C:/intelfpga/18.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_onchip_memory2/generate_rtl.pl --name=blinky_onchip_ram --dir=C:/Users/JMACAU~1/AppData/Local/Temp/alt9690_2109050888025286880.dir/0005_onchip_ram_gen/ --quartus_dir=C:/intelfpga/18.0/quartus --verilog --config=C:/Users/JMACAU~1/AppData/Local/Temp/alt9690_2109050888025286880.dir/0005_onchip_ram_gen//blinky_onchip_ram_component_configuration.pl  --do_build_sim=0  ]
+Info: onchip_ram:   Generation command is [exec C:/intelfpga/18.0/quartus/bin64/perl/bin/perl.exe -I C:/intelfpga/18.0/quartus/bin64/perl/lib -I C:/intelfpga/18.0/quartus/sopc_builder/bin/europa -I C:/intelfpga/18.0/quartus/sopc_builder/bin/perl_lib -I C:/intelfpga/18.0/quartus/sopc_builder/bin -I C:/intelfpga/18.0/quartus/../ip/altera/sopc_builder_ip/common -I C:/intelfpga/18.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_onchip_memory2 -- C:/intelfpga/18.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_onchip_memory2/generate_rtl.pl --name=blinky_onchip_ram --dir=C:/Users/eosgood/AppData/Local/Temp/alt9692_541860123615397877.dir/0006_onchip_ram_gen/ --quartus_dir=C:/intelfpga/18.0/quartus --verilog --config=C:/Users/eosgood/AppData/Local/Temp/alt9692_541860123615397877.dir/0006_onchip_ram_gen//blinky_onchip_ram_component_configuration.pl  --do_build_sim=0  ]
 Info: onchip_ram: Done RTL generation for module 'blinky_onchip_ram'
 Info: onchip_ram: "blinky" instantiated altera_avalon_onchip_memory2 "onchip_ram"
 Info: randoms: Starting RTL generation for module 'blinky_randoms'
-Info: randoms:   Generation command is [exec C:/intelfpga/18.0/quartus/bin64/perl/bin/perl.exe -I C:/intelfpga/18.0/quartus/bin64/perl/lib -I C:/intelfpga/18.0/quartus/sopc_builder/bin/europa -I C:/intelfpga/18.0/quartus/sopc_builder/bin/perl_lib -I C:/intelfpga/18.0/quartus/sopc_builder/bin -I C:/intelfpga/18.0/quartus/../ip/altera/sopc_builder_ip/common -I C:/intelfpga/18.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- C:/intelfpga/18.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=blinky_randoms --dir=C:/Users/JMACAU~1/AppData/Local/Temp/alt9690_2109050888025286880.dir/0006_randoms_gen/ --quartus_dir=C:/intelfpga/18.0/quartus --verilog --config=C:/Users/JMACAU~1/AppData/Local/Temp/alt9690_2109050888025286880.dir/0006_randoms_gen//blinky_randoms_component_configuration.pl  --do_build_sim=0  ]
+Info: randoms:   Generation command is [exec C:/intelfpga/18.0/quartus/bin64/perl/bin/perl.exe -I C:/intelfpga/18.0/quartus/bin64/perl/lib -I C:/intelfpga/18.0/quartus/sopc_builder/bin/europa -I C:/intelfpga/18.0/quartus/sopc_builder/bin/perl_lib -I C:/intelfpga/18.0/quartus/sopc_builder/bin -I C:/intelfpga/18.0/quartus/../ip/altera/sopc_builder_ip/common -I C:/intelfpga/18.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- C:/intelfpga/18.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=blinky_randoms --dir=C:/Users/eosgood/AppData/Local/Temp/alt9692_541860123615397877.dir/0007_randoms_gen/ --quartus_dir=C:/intelfpga/18.0/quartus --verilog --config=C:/Users/eosgood/AppData/Local/Temp/alt9692_541860123615397877.dir/0007_randoms_gen//blinky_randoms_component_configuration.pl  --do_build_sim=0  ]
 Info: randoms: Done RTL generation for module 'blinky_randoms'
 Info: randoms: "blinky" instantiated altera_avalon_pio "randoms"
 Info: red_leds: Starting RTL generation for module 'blinky_red_leds'
-Info: red_leds:   Generation command is [exec C:/intelfpga/18.0/quartus/bin64/perl/bin/perl.exe -I C:/intelfpga/18.0/quartus/bin64/perl/lib -I C:/intelfpga/18.0/quartus/sopc_builder/bin/europa -I C:/intelfpga/18.0/quartus/sopc_builder/bin/perl_lib -I C:/intelfpga/18.0/quartus/sopc_builder/bin -I C:/intelfpga/18.0/quartus/../ip/altera/sopc_builder_ip/common -I C:/intelfpga/18.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- C:/intelfpga/18.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=blinky_red_leds --dir=C:/Users/JMACAU~1/AppData/Local/Temp/alt9690_2109050888025286880.dir/0007_red_leds_gen/ --quartus_dir=C:/intelfpga/18.0/quartus --verilog --config=C:/Users/JMACAU~1/AppData/Local/Temp/alt9690_2109050888025286880.dir/0007_red_leds_gen//blinky_red_leds_component_configuration.pl  --do_build_sim=0  ]
+Info: red_leds:   Generation command is [exec C:/intelfpga/18.0/quartus/bin64/perl/bin/perl.exe -I C:/intelfpga/18.0/quartus/bin64/perl/lib -I C:/intelfpga/18.0/quartus/sopc_builder/bin/europa -I C:/intelfpga/18.0/quartus/sopc_builder/bin/perl_lib -I C:/intelfpga/18.0/quartus/sopc_builder/bin -I C:/intelfpga/18.0/quartus/../ip/altera/sopc_builder_ip/common -I C:/intelfpga/18.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- C:/intelfpga/18.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=blinky_red_leds --dir=C:/Users/eosgood/AppData/Local/Temp/alt9692_541860123615397877.dir/0008_red_leds_gen/ --quartus_dir=C:/intelfpga/18.0/quartus --verilog --config=C:/Users/eosgood/AppData/Local/Temp/alt9692_541860123615397877.dir/0008_red_leds_gen//blinky_red_leds_component_configuration.pl  --do_build_sim=0  ]
 Info: red_leds: Done RTL generation for module 'blinky_red_leds'
 Info: red_leds: "blinky" instantiated altera_avalon_pio "red_leds"
 Info: sev_seg_0: Starting RTL generation for module 'blinky_sev_seg_0'
-Info: sev_seg_0:   Generation command is [exec C:/intelfpga/18.0/quartus/bin64/perl/bin/perl.exe -I C:/intelfpga/18.0/quartus/bin64/perl/lib -I C:/intelfpga/18.0/quartus/sopc_builder/bin/europa -I C:/intelfpga/18.0/quartus/sopc_builder/bin/perl_lib -I C:/intelfpga/18.0/quartus/sopc_builder/bin -I C:/intelfpga/18.0/quartus/../ip/altera/sopc_builder_ip/common -I C:/intelfpga/18.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- C:/intelfpga/18.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=blinky_sev_seg_0 --dir=C:/Users/JMACAU~1/AppData/Local/Temp/alt9690_2109050888025286880.dir/0008_sev_seg_0_gen/ --quartus_dir=C:/intelfpga/18.0/quartus --verilog --config=C:/Users/JMACAU~1/AppData/Local/Temp/alt9690_2109050888025286880.dir/0008_sev_seg_0_gen//blinky_sev_seg_0_component_configuration.pl  --do_build_sim=0  ]
+Info: sev_seg_0:   Generation command is [exec C:/intelfpga/18.0/quartus/bin64/perl/bin/perl.exe -I C:/intelfpga/18.0/quartus/bin64/perl/lib -I C:/intelfpga/18.0/quartus/sopc_builder/bin/europa -I C:/intelfpga/18.0/quartus/sopc_builder/bin/perl_lib -I C:/intelfpga/18.0/quartus/sopc_builder/bin -I C:/intelfpga/18.0/quartus/../ip/altera/sopc_builder_ip/common -I C:/intelfpga/18.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- C:/intelfpga/18.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=blinky_sev_seg_0 --dir=C:/Users/eosgood/AppData/Local/Temp/alt9692_541860123615397877.dir/0009_sev_seg_0_gen/ --quartus_dir=C:/intelfpga/18.0/quartus --verilog --config=C:/Users/eosgood/AppData/Local/Temp/alt9692_541860123615397877.dir/0009_sev_seg_0_gen//blinky_sev_seg_0_component_configuration.pl  --do_build_sim=0  ]
 Info: sev_seg_0: Done RTL generation for module 'blinky_sev_seg_0'
 Info: sev_seg_0: "blinky" instantiated altera_avalon_pio "sev_seg_0"
 Info: switches: Starting RTL generation for module 'blinky_switches'
-Info: switches:   Generation command is [exec C:/intelfpga/18.0/quartus/bin64/perl/bin/perl.exe -I C:/intelfpga/18.0/quartus/bin64/perl/lib -I C:/intelfpga/18.0/quartus/sopc_builder/bin/europa -I C:/intelfpga/18.0/quartus/sopc_builder/bin/perl_lib -I C:/intelfpga/18.0/quartus/sopc_builder/bin -I C:/intelfpga/18.0/quartus/../ip/altera/sopc_builder_ip/common -I C:/intelfpga/18.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- C:/intelfpga/18.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=blinky_switches --dir=C:/Users/JMACAU~1/AppData/Local/Temp/alt9690_2109050888025286880.dir/0009_switches_gen/ --quartus_dir=C:/intelfpga/18.0/quartus --verilog --config=C:/Users/JMACAU~1/AppData/Local/Temp/alt9690_2109050888025286880.dir/0009_switches_gen//blinky_switches_component_configuration.pl  --do_build_sim=0  ]
+Info: switches:   Generation command is [exec C:/intelfpga/18.0/quartus/bin64/perl/bin/perl.exe -I C:/intelfpga/18.0/quartus/bin64/perl/lib -I C:/intelfpga/18.0/quartus/sopc_builder/bin/europa -I C:/intelfpga/18.0/quartus/sopc_builder/bin/perl_lib -I C:/intelfpga/18.0/quartus/sopc_builder/bin -I C:/intelfpga/18.0/quartus/../ip/altera/sopc_builder_ip/common -I C:/intelfpga/18.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- C:/intelfpga/18.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=blinky_switches --dir=C:/Users/eosgood/AppData/Local/Temp/alt9692_541860123615397877.dir/0010_switches_gen/ --quartus_dir=C:/intelfpga/18.0/quartus --verilog --config=C:/Users/eosgood/AppData/Local/Temp/alt9692_541860123615397877.dir/0010_switches_gen//blinky_switches_component_configuration.pl  --do_build_sim=0  ]
 Info: switches: Done RTL generation for module 'blinky_switches'
 Info: switches: "blinky" instantiated altera_avalon_pio "switches"
 Info: avalon_st_adapter: Inserting error_adapter: error_adapter_0
@@ -143,20 +151,21 @@ Info: avalon_st_adapter_012: Inserting error_adapter: error_adapter_0
 Info: avalon_st_adapter_013: Inserting error_adapter: error_adapter_0
 Info: avalon_st_adapter_014: Inserting error_adapter: error_adapter_0
 Info: avalon_st_adapter_015: Inserting error_adapter: error_adapter_0
+Info: avalon_st_adapter_016: Inserting error_adapter: error_adapter_0
 Info: mm_interconnect_0: "blinky" instantiated altera_mm_interconnect "mm_interconnect_0"
 Info: irq_mapper: "blinky" instantiated altera_irq_mapper "irq_mapper"
 Info: rst_controller: "blinky" instantiated altera_reset_controller "rst_controller"
 Info: cpu: Starting RTL generation for module 'blinky_cpu_cpu'
-Info: cpu:   Generation command is [exec C:/intelFPGA/18.0/quartus/bin64//eperlcmd.exe -I C:/intelFPGA/18.0/quartus/bin64//perl/lib -I C:/intelfpga/18.0/quartus/sopc_builder/bin/europa -I C:/intelfpga/18.0/quartus/sopc_builder/bin/perl_lib -I C:/intelfpga/18.0/quartus/sopc_builder/bin -I C:/intelfpga/18.0/quartus/../ip/altera/nios2_ip/altera_nios2_gen2/cpu_lib -I C:/intelfpga/18.0/quartus/../ip/altera/nios2_ip/altera_nios2_gen2/nios_lib -I C:/intelfpga/18.0/quartus/../ip/altera/nios2_ip/altera_nios2_gen2 -I C:/intelfpga/18.0/quartus/../ip/altera/nios2_ip/altera_nios2_gen2 -- C:/intelfpga/18.0/quartus/../ip/altera/nios2_ip/altera_nios2_gen2/generate_rtl.epl --name=blinky_cpu_cpu --dir=C:/Users/JMACAU~1/AppData/Local/Temp/alt9690_2109050888025286880.dir/0012_cpu_gen/ --quartus_bindir=C:/intelFPGA/18.0/quartus/bin64/ --verilog --config=C:/Users/JMACAU~1/AppData/Local/Temp/alt9690_2109050888025286880.dir/0012_cpu_gen//blinky_cpu_cpu_processor_configuration.pl  --do_build_sim=0  ]
-Info: cpu: # 2023.11.28 19:51:40 (*) Starting Nios II generation
-Info: cpu: # 2023.11.28 19:51:40 (*)   Checking for plaintext license.
-Info: cpu: # 2023.11.28 19:51:40 (*)   Plaintext license not found.
-Info: cpu: # 2023.11.28 19:51:40 (*)   No license required to generate encrypted Nios II/e.
-Info: cpu: # 2023.11.28 19:51:40 (*)   Elaborating CPU configuration settings
-Info: cpu: # 2023.11.28 19:51:40 (*)   Creating all objects for CPU
-Info: cpu: # 2023.11.28 19:51:41 (*)   Generating RTL from CPU objects
-Info: cpu: # 2023.11.28 19:51:41 (*)   Creating plain-text RTL
-Info: cpu: # 2023.11.28 19:51:42 (*) Done Nios II generation
+Info: cpu:   Generation command is [exec C:/intelFPGA/18.0/quartus/bin64//eperlcmd.exe -I C:/intelFPGA/18.0/quartus/bin64//perl/lib -I C:/intelfpga/18.0/quartus/sopc_builder/bin/europa -I C:/intelfpga/18.0/quartus/sopc_builder/bin/perl_lib -I C:/intelfpga/18.0/quartus/sopc_builder/bin -I C:/intelfpga/18.0/quartus/../ip/altera/nios2_ip/altera_nios2_gen2/cpu_lib -I C:/intelfpga/18.0/quartus/../ip/altera/nios2_ip/altera_nios2_gen2/nios_lib -I C:/intelfpga/18.0/quartus/../ip/altera/nios2_ip/altera_nios2_gen2 -I C:/intelfpga/18.0/quartus/../ip/altera/nios2_ip/altera_nios2_gen2 -- C:/intelfpga/18.0/quartus/../ip/altera/nios2_ip/altera_nios2_gen2/generate_rtl.epl --name=blinky_cpu_cpu --dir=C:/Users/eosgood/AppData/Local/Temp/alt9692_541860123615397877.dir/0013_cpu_gen/ --quartus_bindir=C:/intelFPGA/18.0/quartus/bin64/ --verilog --config=C:/Users/eosgood/AppData/Local/Temp/alt9692_541860123615397877.dir/0013_cpu_gen//blinky_cpu_cpu_processor_configuration.pl  --do_build_sim=0  ]
+Info: cpu: # 2023.11.30 18:13:42 (*) Starting Nios II generation
+Info: cpu: # 2023.11.30 18:13:42 (*)   Checking for plaintext license.
+Info: cpu: # 2023.11.30 18:13:43 (*)   Plaintext license not found.
+Info: cpu: # 2023.11.30 18:13:43 (*)   No license required to generate encrypted Nios II/e.
+Info: cpu: # 2023.11.30 18:13:43 (*)   Elaborating CPU configuration settings
+Info: cpu: # 2023.11.30 18:13:43 (*)   Creating all objects for CPU
+Info: cpu: # 2023.11.30 18:13:44 (*)   Generating RTL from CPU objects
+Info: cpu: # 2023.11.30 18:13:44 (*)   Creating plain-text RTL
+Info: cpu: # 2023.11.30 18:13:45 (*) Done Nios II generation
 Info: cpu: Done RTL generation for module 'blinky_cpu_cpu'
 Info: cpu: "cpu" instantiated altera_nios2_gen2_unit "cpu"
 Info: cpu_data_master_translator: "mm_interconnect_0" instantiated altera_merlin_master_translator "cpu_data_master_translator"
@@ -172,14 +181,14 @@ Info: cmd_demux: "mm_interconnect_0" instantiated altera_merlin_demultiplexer "c
 Info: cmd_demux_001: "mm_interconnect_0" instantiated altera_merlin_demultiplexer "cmd_demux_001"
 Info: cmd_mux: "mm_interconnect_0" instantiated altera_merlin_multiplexer "cmd_mux"
 Info: cmd_mux_001: "mm_interconnect_0" instantiated altera_merlin_multiplexer "cmd_mux_001"
-Info: Reusing file C:/Users/jmacauley/Documents/CPEN_430L/NIOSII_Project_CPEN_430/blinky/synthesis/submodules/altera_merlin_arbitrator.sv
+Info: Reusing file D:/CPEN430/NIOSII_Project_CPEN_430/blinky/synthesis/submodules/altera_merlin_arbitrator.sv
 Info: rsp_demux: "mm_interconnect_0" instantiated altera_merlin_demultiplexer "rsp_demux"
 Info: rsp_mux: "mm_interconnect_0" instantiated altera_merlin_multiplexer "rsp_mux"
-Info: Reusing file C:/Users/jmacauley/Documents/CPEN_430L/NIOSII_Project_CPEN_430/blinky/synthesis/submodules/altera_merlin_arbitrator.sv
+Info: Reusing file D:/CPEN430/NIOSII_Project_CPEN_430/blinky/synthesis/submodules/altera_merlin_arbitrator.sv
 Info: rsp_mux_001: "mm_interconnect_0" instantiated altera_merlin_multiplexer "rsp_mux_001"
-Info: Reusing file C:/Users/jmacauley/Documents/CPEN_430L/NIOSII_Project_CPEN_430/blinky/synthesis/submodules/altera_merlin_arbitrator.sv
+Info: Reusing file D:/CPEN430/NIOSII_Project_CPEN_430/blinky/synthesis/submodules/altera_merlin_arbitrator.sv
 Info: avalon_st_adapter: "mm_interconnect_0" instantiated altera_avalon_st_adapter "avalon_st_adapter"
 Info: error_adapter_0: "avalon_st_adapter" instantiated error_adapter "error_adapter_0"
-Info: blinky: Done "blinky" with 32 modules, 44 files
+Info: blinky: Done "blinky" with 33 modules, 45 files
 Info: qsys-generate succeeded.
 Info: Finished: Create HDL design files for synthesis
