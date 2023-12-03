@@ -23,6 +23,7 @@ int playerSum = 0;
 int gamesPlayed = 0;
 int cardsDealt = 0;
 int ace_flag = 0;
+int dealer_ace = 0;
 int blackjack = 0;
 int num_player_cards = 0;
 int num_dealer_cards = 0;
@@ -73,16 +74,16 @@ void delay1ms(int ms);
 
 int main()
 {
-	alt_putstr("WELCOME TO NIOS II BLACKJACK\n");
 	int KEY_PRESS;
 	int SWITCHES;
 	init_SevenSeg();
 	lcdInit();
 	lcdClear();
+	alt_putstr("WELCOME TO NIOS II BLACKJACK\n");
 	setPosition(0x00);
-	lcdWriteString("Plyr:", 5);
+	lcdWriteString("WELCOME TO", 10);
 	setPosition(0x40);
-	lcdWriteString("Dler:", 5);
+	lcdWriteString("NIOSII BLACKJACK", 16);
 	while (1)
 	{
 		resetGameVariables();
@@ -114,6 +115,7 @@ int main()
 		// Instruction State
 		while (SWITCHES == 2) {
 			// DISPLAY TO LCD
+			lcdClear();
 			dispInstructions();
 			return 0;
 		}
@@ -201,13 +203,14 @@ void playRound(void)
 void dispInstructions(void)
 {
 	// DISPLAY TO LCD
-	alt_putstr("BLACKJACK PAYS 3 to 2\nDEALER MUST HIT ON SOFT 17\n");
+	setPosition(0x00);
+	lcdWriteString("BLACKJACK PAYS", 14);
+	setPosition(0x40);
+	lcdWriteString("3 to 2", 6);
 	return;
 }
 void dispBankroll(void)
 {
-	// DISPLAY TO LCD
-
 		char msg[10];
 		itoa(bankRoll, msg, 10);
 		alt_putstr("BANKROLL: ");
@@ -219,6 +222,7 @@ void dispBankroll(void)
 		lcdWriteString("BANKROLL:$", 10);
 		setPosition(0x40);
 		lcdWriteString(msg, 10);
+		delay(75000);
 		return;
 } 
 
@@ -229,6 +233,7 @@ void resetGameVariables(void) {
 	dealerSum = 0; 
 	playerSum = 0; 
 	ace_flag = 0;
+	dealer_ace = 0;
 	blackjack = 0;
 	currentBet = 0;
 	num_player_cards = 0;
@@ -236,8 +241,8 @@ void resetGameVariables(void) {
 }  
 void playerBet(void) {
 	int KEY_PRESS; 
-	// DISPLAY TO LCD
 	alt_putstr("\nPLACE YOUR BET TO BEGIN!\n");
+
 	lcdClear();
 	setPosition(0x00);
 	lcdWriteString("PLACE BET", 9);
@@ -259,12 +264,21 @@ void playerBet(void) {
 			if (currentBet > bankRoll) {
 				currentBet = bankRoll;
 			}
-			// DISPLAY TO LCD
+
 			char msg[10];
 			itoa(currentBet, msg, 10);
 			alt_putstr("PLACED BET: ");
 			alt_putstr(msg);
 			alt_putstr("\n\n");
+
+			char bet[16];
+			itoa(currentBet, bet, 10);
+			lcdClear();
+			setPosition(0x00);
+			lcdWriteString("PLACED BET: ", 12);
+			setPosition(0x40);
+			lcdWriteString(&bet, 16);
+			delay(1000000);
 			return;
 		}
 	}
@@ -274,12 +288,12 @@ void dealInitialCards(void)
 {
 	int tempCard;
 	int cardValue;
-	// Player First Two Cards
 
+	// Player First Two Cards
 	setPosition(0x00);
 	lcdWriteString("Plyr:", 5);
 	setPosition(0x40);
-	lcdWriteString("Dler:", 5);
+	lcdWriteString("Dlr :", 5);
 
 	for (int i = 0; i < 2; i++)
 	{
@@ -295,16 +309,13 @@ void dealInitialCards(void)
 			ace_flag = 1;
 		}
 
-
-		// DISPLAY TO LCD
 		char msg[10]; 
-		// itoa(cardValues[tempCard], msg, 10);
-		setPosition(0x05 + num_player_cards);
-		lcdWriteString(&cardValues[tempCard], 1);
-		num_player_cards++;
 		alt_putstr("[PLAYER] - ");
 		alt_putchar(cardValues[tempCard]);
 		alt_putstr("\n");
+		setPosition(0x05 + num_player_cards);
+		lcdWriteString(&cardValues[tempCard], 1);
+		num_player_cards++;
 
 		// Ace Low
 		playerSum = playerSum + cardValue;
@@ -318,6 +329,8 @@ void dealInitialCards(void)
 	// Check for Player blackjack
 	if (playerSum == 21) {
 		blackjack = 1;
+		setPosition(0x05);
+		lcdWriteString(" BLACKJACK! ", 12);
 		alt_putstr("\n!!! BLACKJACK !!!\n\n");
 	}
 
@@ -329,16 +342,17 @@ void dealInitialCards(void)
 	}
 	updateDeck(tempCard);
 	cardValue = translateCardValue(tempCard);
-
+	if (cardValue == 11) {
+		dealer_ace = 1;
+	}
 	// DISPLAY TO LCD
 	char msg[10];
-	// itoa(cardValues[tempCard], msg, 10);
-	setPosition(0x45 + num_dealer_cards);
-	lcdWriteString(&cardValues[tempCard], 1);
-	num_dealer_cards++;
 	alt_putstr("[DEALER] - ");
 	alt_putchar(cardValues[tempCard]);
 	alt_putstr("\n");
+	setPosition(0x45 + num_dealer_cards);
+	lcdWriteString(&cardValues[tempCard], 1);
+	num_dealer_cards++;
 
 	dealerSum = dealerSum + cardValue;
 	displayDealerSum();
@@ -402,19 +416,24 @@ void dealerTurn(void)
 		}
 		updateDeck(card);
 		cardValue = translateCardValue(card);
-
+		if (cardValue == 11) {
+			dealer_ace = 1;
+		}
 		// DISPLAY TO LCD
 		char msg[10];
-		// itoa(cardValue, msg, 10);
-		setPosition(0x45 + num_dealer_cards);
-		lcdWriteString(&cardValues[card], 1);
-		num_dealer_cards++;
 		alt_putstr("[DEALER] - ");
 		alt_putchar(cardValues[card]);
 		alt_putstr("\n");
+		setPosition(0x45 + num_dealer_cards);
+		lcdWriteString(&cardValues[card], 1);
+		num_dealer_cards++;
 
 		// Update Dealer Sum
 		dealerSum = dealerSum + cardValue;
+		if (dealerSum > 21 && dealer_ace){
+			dealer_ace = 0;
+			dealerSum -= 10;
+		}
 		displayDealerSum();
 		if (dealerSum >= 17)
 		{
@@ -609,13 +628,12 @@ void hit(void) {
 
 	// DISPLAY TO LCD
 	char msg[10];
-	// itoa(cardValue, msg, 10);
-	setPosition(0x05 + num_player_cards);
-	lcdWriteString(&cardValues[card], 1);
-	num_player_cards++;
 	alt_putstr("[PLAYER] - ");
 	alt_putchar(cardValues[card]);
 	alt_putstr("\n");
+	setPosition(0x05 + num_player_cards);
+	lcdWriteString(&cardValues[card], 1);
+	num_player_cards++;
 
 	// Ace Check
 	if (cardValue == 11) {
