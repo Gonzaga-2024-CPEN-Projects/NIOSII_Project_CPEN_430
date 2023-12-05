@@ -180,6 +180,11 @@ void playRound(void)
 
 	gamesPlayed++;
 
+	// reset deck
+	if (cardsDealt > 40) {
+		resetDeck();
+	}
+
 	playerBet(); 
 	// Display 2 Player Cards, 1 Dealer Card
 
@@ -362,6 +367,9 @@ void playerTurn(void)
 	while (1)
 	{
 		KEY_PRESS = IORD_ALTERA_AVALON_PIO_DATA(KEYS_BASE);
+		if (playerSum == 21){
+			return;
+		}
 		// HIT
 		if (KEY_PRESS == 3)
 		{
@@ -519,15 +527,18 @@ int generateRandomCard(void)
 } 
 void updateDeck(int cardIdx) {
 	cardDeck[cardIdx] = 1; 
-	if (cardsDealt == 47) {
-		resetDeck();
-	}
 	return;
 } 
 void resetDeck(void) {
 	for (int i = 0; i < 52; i++) {
 		cardDeck[i] = 0; 
 	}
+	cardsDealt = 0;
+
+	lcdClear();
+	setPosition(0x00);
+	lcdWriteString("   DECK RESET   ", 16);
+	delay(1000000);
 	return;
 }
 int translateCardValue(int cardIdx)
