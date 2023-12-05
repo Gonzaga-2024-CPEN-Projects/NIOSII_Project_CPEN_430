@@ -107,7 +107,7 @@ int main()
 				return 0;
 			} else {
 				playRound();
-				delay(2500000);
+				delay(1000000);
 				init_SevenSeg();
 				SWITCHES = IORD_ALTERA_AVALON_PIO_DATA(SWITCHES_BASE);
 			}
@@ -180,8 +180,6 @@ void playRound(void)
 
 	gamesPlayed++;
 
-
-
 	playerBet(); 
 	// Display 2 Player Cards, 1 Dealer Card
 
@@ -191,7 +189,7 @@ void playRound(void)
 
 	if (playerBust() == 0) {
 		dealerTurn();
-		delay(2500000);
+		delay(1000000);
 	}
 	// Compare playerSum and dealerSum. Update bankRoll.
 	result = determineResult();
@@ -222,7 +220,7 @@ void dispBankroll(void)
 		lcdWriteString("BANKROLL:$", 10);
 		setPosition(0x40);
 		lcdWriteString(msg, 10);
-		delay(75000);
+		delay(1000000);
 		return;
 } 
 
@@ -324,13 +322,13 @@ void dealInitialCards(void)
 			ace_flag = 0;
 		}
 		displayPlayerSum();
-		delay(1200000);
+		delay(1000000);
 	}
 	// Check for Player blackjack
 	if (playerSum == 21) {
 		blackjack = 1;
 		setPosition(0x05);
-		lcdWriteString(" BLACKJACK! ", 12);
+		lcdWriteString("BLACKJACK! ", 11);
 		alt_putstr("\n!!! BLACKJACK !!!\n\n");
 	}
 
