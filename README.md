@@ -13,7 +13,7 @@
 
 ### To build and flash the hardware:
 
-5. In Quartus, select `tools>Tcl Scripts`, then select `chip.tcl` and click `run`.
+5. You should not have to run a .tcl script In Quartus, the pin assignments are saved in the .qsf file, but if you get errors for some reason: Select `tools>Tcl Scripts`, then select `chip.tcl` and click `run`.
 6. Compile the hardware project in Quartus.
 7. Once the build is complete, select `tools>programmer`. After selecting the correct hardware, select `output_files/chip.sof` and flash the hardware.
 
