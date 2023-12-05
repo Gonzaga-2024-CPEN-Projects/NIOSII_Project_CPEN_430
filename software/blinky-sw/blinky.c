@@ -194,9 +194,9 @@ void playRound(void)
 
 	if (playerBust() == 0) {
 		dealerTurn();
-		delay(1000000);
 	}
 	// Compare playerSum and dealerSum. Update bankRoll.
+	delay(1000000);
 	result = determineResult();
 
 	dispBankroll(); 
